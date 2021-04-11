@@ -1,9 +1,9 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 10:18:19
- * @LastEditTime: 2021-04-09 15:21:59
+ * @LastEditTime: 2021-04-11 16:35:03
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 登陆页面
  * @FilePath: /MusicProject/src/pages/Login/index.tsx
  */
 
@@ -80,6 +80,7 @@ const Login = (props: IProps) => {
           <Input
             placeholder="Password"
             errorStyle={styles.errorInputStyle}
+            errorMessage={errMsgs.password}
             leftIcon={{type: 'ionicon', name: 'lock-closed-outline'}}
             onChangeText={handleChange('password')}
             value={values.password}

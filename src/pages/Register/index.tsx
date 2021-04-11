@@ -1,9 +1,9 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 10:18:26
- * @LastEditTime: 2021-04-09 15:20:50
+ * @LastEditTime: 2021-04-11 16:35:12
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 注册页面
  * @FilePath: /MusicProject/src/pages/Register/index.tsx
  */
 
@@ -68,7 +68,7 @@ const Register = (props: IProps) => {
       提交注册用户信息到数据库中进行存储
       成功之后跳转到登陆页面进行登陆操作
     */
-    navigation.navigate('Home');
+    navigation.navigate('Login');
   };
 
   return (

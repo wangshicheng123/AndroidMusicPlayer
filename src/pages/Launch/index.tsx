@@ -1,9 +1,9 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:57:02
- * @LastEditTime: 2021-04-08 19:14:16
+ * @LastEditTime: 2021-04-11 16:41:03
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: app初始化页面
  * @FilePath: /MusicProject/src/pages/InitLoading/index.tsx
  */
 import React from 'react';
@@ -14,7 +14,7 @@ interface IProps {
   navigation: any;
 }
 
-const InitLoading = (props: IProps) => {
+const Launch = (props: IProps) => {
   const {navigation} = props;
   return (
     <View style={styles.container}>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InitLoading;
+export default Launch;
