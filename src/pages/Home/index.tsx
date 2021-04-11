@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:35:41
- * @LastEditTime: 2021-04-11 16:39:40
+ * @LastEditTime: 2021-04-12 00:37:56
  * @LastEditors: Please set LastEditors
  * @Description: 首页
  * @FilePath: /MusicProject/src/pages/Home/index.tsx
@@ -49,7 +49,7 @@ const DATA = [
   },
 ];
 
-const SONG_LIST = [
+export const SONG_LIST = [
   {
     id: 298317,
     name: '屋顶',

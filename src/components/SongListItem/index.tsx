@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-11 09:47:08
- * @LastEditTime: 2021-04-11 16:32:24
+ * @LastEditTime: 2021-04-12 00:26:40
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表单项组件
  * @FilePath: /MusicProject/src/components/SongListItem/index.tsx
@@ -50,7 +50,7 @@ const SongListItem = (props: IProps) => {
             handlePressSonglistItem(id);
           }}>
           <View style={styles.songOperation}>
-            <Icon name="play-circle-outline" type="ionicons" color="#49afcd" />
+            <Icon name="play-circle-outline" type="ionicon" color="#49afcd" />
           </View>
         </TouchableWithoutFeedback>
       </View>
