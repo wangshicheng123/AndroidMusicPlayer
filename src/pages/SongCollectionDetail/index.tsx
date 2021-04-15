@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-11 15:41:31
- * @LastEditTime: 2021-04-12 00:49:11
+ * @LastEditTime: 2021-04-13 17:02:58
  * @LastEditors: Please set LastEditors
  * @Description: 歌单详情页面
  * @FilePath: /MusicProject/src/pages/Songlist/index.tsx
@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import {Image, Icon} from 'react-native-elements';
 import SongListItem from '../../components/SongListItem/index';
-import {SONG_LIST} from '../Home/index';
+import {SONG_LIST} from '../Home2/index';
 
 interface IProps {
   navigation: any;
