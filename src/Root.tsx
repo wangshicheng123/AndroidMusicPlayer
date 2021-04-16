@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-13 16:13:35
- * @LastEditTime: 2021-04-15 18:42:17
+ * @LastEditTime: 2021-04-16 23:27:24
  * @LastEditors: Please set LastEditors
  * @Description: app全局的配置管理【主题/APP初始化配置】
  * @FilePath: /MusicProject/Root.tsx
@@ -14,16 +14,17 @@ import {useSelector} from 'react-redux';
 import {DarkTheme, DefaultTheme} from './utils/theme';
 import AppNavigator from './router/index';
 import CustomIcon from './components/CustomIcon/index';
+import {IAppState} from './reducers/index';
 
 const Root = () => {
-  const themeType = useSelector((state: any) => state.config.themeType);
+  const themeType = useSelector((state: IAppState) => state.config.themeType);
 
   /**
    * @description: 获取APP主题样式
    * @param {string} type
    * @return {*}
    */
-  const getAppTheme = (type: string) => {
+  const getAppTheme = (type: string | null | undefined) => {
     if (type === 'dark') {
       return DarkTheme;
     }

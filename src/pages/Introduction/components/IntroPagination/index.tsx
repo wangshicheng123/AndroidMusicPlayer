@@ -1,9 +1,9 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-15 15:48:55
- * @LastEditTime: 2021-04-15 15:57:39
+ * @LastEditTime: 2021-04-15 22:14:16
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 初始化页面的分页组件
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroPagination/index.tsx
  */
 import React from 'react';
@@ -11,13 +11,14 @@ import {View, Animated, StyleSheet} from 'react-native';
 import {scrollConfig} from '../../config';
 
 const DOT_SIZE = 40;
-const IntroPagination = ({
-  scrollOffsetAnimatedValue,
-  positionAnimatedValue,
-}: {
+
+interface IIntroPagination {
   scrollOffsetAnimatedValue: Animated.Value;
   positionAnimatedValue: Animated.Value;
-}) => {
+}
+const IntroPagination = (props: IIntroPagination) => {
+  const {scrollOffsetAnimatedValue, positionAnimatedValue} = props;
+
   const inputRange = [0, scrollConfig.length];
   const translateX = Animated.add(
     scrollOffsetAnimatedValue,

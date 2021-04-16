@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-15 15:48:42
- * @LastEditTime: 2021-04-15 15:55:21
+ * @LastEditTime: 2021-04-15 22:12:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroTitle/index.tsx
@@ -11,13 +11,14 @@ import {View, Text, Animated, StyleSheet} from 'react-native';
 import {scrollConfig} from '../../config';
 
 const TITLE_HEIGHT = 40;
-const IntroTitle = ({
-  scrollOffsetAnimatedValue,
-  positionAnimatedValue,
-}: {
+
+interface IIntroTitle {
   scrollOffsetAnimatedValue: Animated.Value;
   positionAnimatedValue: Animated.Value;
-}) => {
+}
+const IntroTitle = (props: IIntroTitle) => {
+  const {scrollOffsetAnimatedValue, positionAnimatedValue} = props;
+
   const inputRange = [0, scrollConfig.length];
   const translateY = Animated.add(
     scrollOffsetAnimatedValue,

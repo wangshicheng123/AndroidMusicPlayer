@@ -1,9 +1,9 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-15 15:49:08
- * @LastEditTime: 2021-04-15 17:45:55
+ * @LastEditTime: 2021-04-16 12:22:18
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 操作登陆/授权等组件集合
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroContent/index.tsx
  */
 import React from 'react';
@@ -14,10 +14,18 @@ import {
   Dimensions,
   ImageRequireSource,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import {useTheme, Button} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import LocalLibraryAccess from '../LocalLibraryAccess/index';
+import GoogleLogin from '../GoogleLogin/index';
+import {visitIntroductionPage} from '../../../../reducers/userSlice';
 
-interface IIntroContent {
+const {width, height} = Dimensions.get('window');
+const LOGO_WIDTH = 220;
+const LOGO_HEIGHT = 40;
+
+interface IIntroContentProps {
   type: string;
   imageUri: ImageRequireSource;
   description: string;
@@ -27,12 +35,9 @@ interface IIntroContent {
   handleNavigate2nextPage: () => void;
 }
 
-const {width, height} = Dimensions.get('window');
-const LOGO_WIDTH = 220;
-const LOGO_HEIGHT = 40;
-const IntroContent = (props: IIntroContent) => {
+const IntroContent = (props: IIntroContentProps) => {
   const navigation = useNavigation();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const {colors} = useTheme();
 
   const {
@@ -56,17 +61,23 @@ const IntroContent = (props: IIntroContent) => {
     outputRange: [1, 0, 1],
   });
 
-  const launchApp = () => {
-    // dispatch(appIntroduction(true));
+  /**
+   * @description: 记录APP初始化的状态
+   * @param {*}
+   * @return {*}
+   */
+  const handleLaunchApp = () => {
+    dispatch(visitIntroductionPage(true));
     navigation.navigate('App');
   };
 
-  function renderAction() {
+  /**
+   * @description: 根据当前用户的状态执行不同的动作
+   * @param {*}
+   * @return {*}
+   */
+  const renderUserActions = () => {
     switch (type) {
-      case 'Grant Access':
-      // return <LocalLibraryAccess color={color} next={next} />;
-      case 'Youtube':
-      // return <GoogleLogin next={next} color={color} />;
       case 'Welcome':
         return (
           <Button
@@ -77,18 +88,32 @@ const IntroContent = (props: IIntroContent) => {
             Start
           </Button>
         );
+      case 'Grant Access':
+        return (
+          <LocalLibraryAccess
+            color={color}
+            handleNavigate2nextPage={handleNavigate2nextPage}
+          />
+        );
+      case 'Google':
+        return (
+          <GoogleLogin
+            handleNavigate2nextPage={handleNavigate2nextPage}
+            color={color}
+          />
+        );
       default:
         return (
           <Button
             mode="contained"
             icon="home"
             color={color}
-            onPress={launchApp}>
+            onPress={handleLaunchApp}>
             Go to Home
           </Button>
         );
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -126,7 +151,7 @@ const IntroContent = (props: IIntroContent) => {
             {description}
           </Animated.Text>
         </View>
-        <View style={styles.btnStyle}>{renderAction()}</View>
+        <View style={styles.btnStyle}>{renderUserActions()}</View>
       </View>
     </View>
   );

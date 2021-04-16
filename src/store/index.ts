@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 16:23:46
- * @LastEditTime: 2021-04-14 21:45:41
+ * @LastEditTime: 2021-04-15 21:52:10
  * @LastEditors: Please set LastEditors
  * @Description: APP状态容器
  * @FilePath: /MusicProject/src/store/index.ts
  */
 
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 /* 处理reducer中可能存在异步操作 */
 import thunk from 'redux-thunk';
 /* 异步存储【只能存储字符串】 */
@@ -15,15 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 /* redux状态发生变化的时候，能够持久化存储 */
 import {persistStore, persistReducer} from 'redux-persist';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import homeReducer from '../pages/Home/homeSlice';
-import configReducer from '../reducers/configSlice';
-import userReducer from '../reducers/userSlice';
-
-const reducers = combineReducers({
-  home: homeReducer,
-  config: configReducer,
-  user: userReducer,
-});
+import {reducers} from '../reducers/index';
 
 const persistConfig = {
   key: 'root',

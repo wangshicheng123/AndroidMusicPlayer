@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 14:37:41
- * @LastEditTime: 2021-04-15 14:51:01
+ * @LastEditTime: 2021-04-16 12:22:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Introduction/config.ts
@@ -28,9 +28,9 @@ export const scrollConfig = [
     color: '#F9A826',
   },
   {
-    type: 'Youtube',
+    type: 'Google',
     imageUri: Images.youtubeImage,
-    heading: 'Youtube Music',
+    heading: 'Google Login',
     description:
       'Serenity Needs Access to your YouTube library to list playlist you have created in YouTube. (Optional)',
     key: 'third',

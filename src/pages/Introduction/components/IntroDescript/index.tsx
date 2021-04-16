@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-15 15:48:36
- * @LastEditTime: 2021-04-15 15:52:27
+ * @LastEditTime: 2021-04-15 22:09:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroDecript/index.tsx
@@ -14,7 +14,12 @@ import {scrollConfig} from '../../config';
 const {width} = Dimensions.get('window');
 const CIRCLE_SIZE = width * 0.6;
 
-const IntroDecript = ({scrollOffsetAnimatedValue}) => {
+interface IIntroDescriptProps {
+  scrollOffsetAnimatedValue: Animated.Value;
+}
+
+const IntroDescript = (props: IIntroDescriptProps) => {
+  const {scrollOffsetAnimatedValue} = props;
   return (
     <View style={styles.introDescriptContainer}>
       {scrollConfig.map(({color}, index) => {
@@ -68,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IntroDecript;
+export default IntroDescript;

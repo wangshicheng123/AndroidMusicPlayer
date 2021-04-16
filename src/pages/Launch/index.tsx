@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:37:27
- * @LastEditTime: 2021-04-14 21:50:41
+ * @LastEditTime: 2021-04-15 21:46:10
  * @LastEditors: Please set LastEditors
  * @Description: APP 初始化页面
  * @FilePath: /MusicProject/src/pages/Launch/index.tsx
@@ -15,7 +15,7 @@ import {useNavigation} from '@react-navigation/native';
 const Launch = () => {
   const {colors} = useTheme();
   const navigation = useNavigation();
-  const {introSlidesShown} = useSelector((state: any) => state.user);
+  const {introductionVisited} = useSelector((state: any) => state.user);
 
   /**
    * @description: 判断用户是否已经登陆
@@ -23,7 +23,7 @@ const Launch = () => {
    * @return {*}
    */
   const isSignedIn = async () => {
-    if (introSlidesShown) {
+    if (introductionVisited) {
       navigation.navigate('App');
     } else {
       navigation.navigate('Intro');

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:54:35
- * @LastEditTime: 2021-04-15 16:08:10
+ * @LastEditTime: 2021-04-15 22:10:34
  * @LastEditors: Please set LastEditors
  * @Description: 用户第一次进入APP时候的展示页面【包括注册/登陆/授权等操作】
  * @FilePath: /MusicProject/src/pages/introduction/index.tsx
@@ -12,7 +12,7 @@ import Screen from '../../components/Screen/index';
 import PagerView, {
   PagerViewOnPageScrollEventData,
 } from 'react-native-pager-view';
-import IntroDecript from './components/IntroDecript/index';
+import IntroDescript from './components/IntroDescript/index';
 import IntroTitle from './components/IntroTitle/index';
 import IntroPagination from './components/IntroPagination/index';
 import IntroContent from './components/IntroContent/index';
@@ -36,7 +36,7 @@ const Introduction = () => {
         scrollOffsetAnimatedValue={scrollOffsetAnimatedValue}
         positionAnimatedValue={positionAnimatedValue}
       />
-      <IntroDecript scrollOffsetAnimatedValue={scrollOffsetAnimatedValue} />
+      <IntroDescript scrollOffsetAnimatedValue={scrollOffsetAnimatedValue} />
       <AnimatedPagerView
         ref={ref}
         initialPage={page}
