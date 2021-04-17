@@ -1,9 +1,9 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-04 10:44:20
- * @LastEditTime: 2021-04-17 17:08:13
+ * @LastEditTime: 2021-04-17 17:20:47
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: babel相关配置
  * @FilePath: /MusicProject/babel.config.js
  */
 module.exports = {
@@ -16,15 +16,15 @@ module.exports = {
         extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],
         alias: {
           tests: ["./tests/"],
-          // '@/components': './src/components',
-          // '@/pages': './src/pages',
+          "@/components": ["./src/components"],
+          "@/pages": ["./src/pages"],
           "@/reducers": ["./src/reducers"],
-          // '@/router': './src/router',
-          // '@/utils': './src/utils',
-          // '@/store': './src/store',
-          // '@/assets': './src/assets',
-          // '@/api': './src/api',
-          // '@/config': './src/config',
+          "@/router": ["./src/router"],
+          "@/utils": ["./src/utils"],
+          "@/store": ["./src/store"],
+          "@/assets": ["./src/assets"],
+          "@/api": ["./src/api"],
+          "@/config": ["./src/config"],
         },
       },
     ],
