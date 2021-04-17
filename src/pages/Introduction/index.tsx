@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:54:35
- * @LastEditTime: 2021-04-15 22:10:34
+ * @LastEditTime: 2021-04-17 09:34:58
  * @LastEditors: Please set LastEditors
  * @Description: 用户第一次进入APP时候的展示页面【包括注册/登陆/授权等操作】
  * @FilePath: /MusicProject/src/pages/introduction/index.tsx
@@ -29,7 +29,6 @@ const Introduction = () => {
     const nextPageIndex = page + 1;
     ref.current?.setPage(nextPageIndex);
   };
-
   return (
     <Screen>
       <IntroTitle

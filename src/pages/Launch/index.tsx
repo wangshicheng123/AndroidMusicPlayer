@@ -1,21 +1,21 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:37:27
- * @LastEditTime: 2021-04-15 21:46:10
+ * @LastEditTime: 2021-04-17 14:15:08
  * @LastEditors: Please set LastEditors
  * @Description: APP 初始化页面
  * @FilePath: /MusicProject/src/pages/Launch/index.tsx
  */
-import React, {useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {useTheme} from 'react-native-paper';
-import {useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const Launch = () => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   const navigation = useNavigation();
-  const {introductionVisited} = useSelector((state: any) => state.user);
+  const { introductionVisited } = useSelector((state: any) => state.user);
 
   /**
    * @description: 判断用户是否已经登陆
@@ -34,7 +34,7 @@ const Launch = () => {
     isSignedIn();
   });
   return (
-    <View style={{backgroundColor: colors.background, ...styles.container}} />
+    <View style={{ backgroundColor: colors.background, ...styles.container }} />
   );
 };
 

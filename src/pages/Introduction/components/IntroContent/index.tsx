@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 15:49:08
- * @LastEditTime: 2021-04-16 12:22:18
+ * @LastEditTime: 2021-04-17 13:38:00
  * @LastEditors: Please set LastEditors
  * @Description: 操作登陆/授权等组件集合
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroContent/index.tsx
@@ -62,7 +62,7 @@ const IntroContent = (props: IIntroContentProps) => {
   });
 
   /**
-   * @description: 记录APP初始化的状态
+   * @description: 记录APP初始化的授权/登陆成功的状态，用于下一次i进入APP直接进入首页
    * @param {*}
    * @return {*}
    */

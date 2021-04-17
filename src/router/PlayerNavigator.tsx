@@ -1,15 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-04-14 21:11:15
- * @LastEditTime: 2021-04-14 21:29:43
+ * @LastEditTime: 2021-04-17 14:16:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/router/PlayerNavigator.ts
  */
-import React from 'react';
-import {View, Text} from 'react-native';
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import {useTheme} from 'react-native-paper';
+import React from "react";
+import { View, Text } from "react-native";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+import { useTheme } from "react-native-paper";
 
 const PlayScreen = () => {
   return (
@@ -29,7 +29,7 @@ const QueueScreen = () => {
 
 const NativeStack = createNativeStackNavigator();
 const PlayerNavigator = () => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   return (
     <NativeStack.Navigator
       initialRouteName="Active"
@@ -39,11 +39,12 @@ const PlayerNavigator = () => {
         },
         headerTintColor: colors.text,
         headerTopInsetEnabled: false,
-      }}>
+      }}
+    >
       <NativeStack.Screen
         name="Active"
         component={PlayScreen}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <NativeStack.Screen name="Queue" component={QueueScreen} />
     </NativeStack.Navigator>
