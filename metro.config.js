@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-04 10:44:20
- * @LastEditTime: 2021-04-17 14:33:26
+ * @LastEditTime: 2021-04-17 17:17:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/metro.config.js
@@ -14,7 +14,7 @@
  */
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-const { getDefaultConfig } = require('metro-config');
+const { getDefaultConfig } = require("metro-config");
 
 module.exports = (async () => {
   const {
@@ -28,11 +28,11 @@ module.exports = (async () => {
           inlineRequires: false,
         },
       }),
-      babelTransformerPath: require.resolve('react-native-svg-transformer'),
+      babelTransformerPath: require.resolve("react-native-svg-transformer"),
     },
     resolver: {
-      assetExts: assetExts.filter((ext) => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
+      assetExts: assetExts.filter((ext) => ext !== "svg"),
+      sourceExts: [...sourceExts, "svg"],
     },
   };
 })();
