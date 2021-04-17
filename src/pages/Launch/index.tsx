@@ -1,16 +1,16 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:37:27
- * @LastEditTime: 2021-04-17 14:15:08
+ * @LastEditTime: 2021-04-17 16:21:14
  * @LastEditors: Please set LastEditors
  * @Description: APP 初始化页面
  * @FilePath: /MusicProject/src/pages/Launch/index.tsx
  */
-import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useTheme } from 'react-native-paper';
-import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from "react";
+import { View, StyleSheet } from "react-native";
+import { useTheme } from "react-native-paper";
+import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const Launch = () => {
   const { colors } = useTheme();
@@ -24,9 +24,9 @@ const Launch = () => {
    */
   const isSignedIn = async () => {
     if (introductionVisited) {
-      navigation.navigate('App');
+      navigation.navigate("App");
     } else {
-      navigation.navigate('Intro');
+      navigation.navigate("Intro");
     }
   };
 
