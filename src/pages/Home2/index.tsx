@@ -7,12 +7,12 @@
  * @FilePath: /MusicProject/src/pages/Home/index.tsx
  */
 
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList, RefreshControl} from 'react-native';
-import CustomSearch from '../../components/CustomInput/index';
-import Divider from '../../components/CustomDivider/index';
-import SongCollectionItem from '../../components/SongCollectionItem';
-import SongListItem from '../../components/SongListItem/index';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, FlatList, RefreshControl } from "react-native";
+import CustomSearch from "../../components/CustomInput/index";
+import Divider from "../../components/CustomDivider/index";
+import SongCollectionItem from "../../components/SongCollectionItem";
+import SongListItem from "../../components/SongListItem/index";
 
 interface IProps {
   navigation: any;
@@ -20,196 +20,196 @@ interface IProps {
 
 const DATA = [
   {
-    id: '914087134',
-    name: '这些声音里藏着故事（粤语男声篇）',
+    id: "914087134",
+    name: "这些声音里藏着故事（粤语男声篇）",
     playCount: 1655732,
     coverImgUrl:
-      'http://p3.music.126.net/Eq48ldWWhHgbpq6RWFwAnA==/109951163022545586.jpg',
+      "http://p3.music.126.net/Eq48ldWWhHgbpq6RWFwAnA==/109951163022545586.jpg",
   },
   {
-    id: '3191867342',
-    name: '全网最全：老干妈配什么最好吃？',
+    id: "3191867342",
+    name: "全网最全：老干妈配什么最好吃？",
     playCount: 2896795,
     coverImgUrl:
-      'http://p3.music.126.net/PJKPUyr18ZVnpFoEuCKvhA==/109951165104489226.jpg',
+      "http://p3.music.126.net/PJKPUyr18ZVnpFoEuCKvhA==/109951165104489226.jpg",
   },
   {
-    id: '3222869790',
-    name: '国产纯音集 | 八百位音乐人，一人一曲',
+    id: "3222869790",
+    name: "国产纯音集 | 八百位音乐人，一人一曲",
     playCount: 1162828,
     coverImgUrl:
-      'http://p4.music.126.net/zA3f-Brv5WP5-1V4g-6t7Q==/109951164666312667.jpg',
+      "http://p4.music.126.net/zA3f-Brv5WP5-1V4g-6t7Q==/109951164666312667.jpg",
   },
   {
-    id: '914087131',
-    name: '这些声音里藏着故事（粤语男声篇）',
+    id: "914087131",
+    name: "这些声音里藏着故事（粤语男声篇）",
     playCount: 16557310,
     coverImgUrl:
-      'http://p3.music.126.net/Eq48ldWWhHgbpq6RWFwAnA==/109951163022545586.jpg',
+      "http://p3.music.126.net/Eq48ldWWhHgbpq6RWFwAnA==/109951163022545586.jpg",
   },
 ];
 
 export const SONG_LIST = [
   {
     id: 298317,
-    name: '屋顶',
+    name: "屋顶",
     artists: [
       {
         id: 9612,
-        name: '温岚',
+        name: "温岚",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 29597,
-      name: '有点野',
+      name: "有点野",
     },
   },
   {
     id: 255020,
-    name: '刀马旦',
+    name: "刀马旦",
     artists: [
       {
         id: 8331,
-        name: '李玟',
+        name: "李玟",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 25475,
-      name: 'Promise',
+      name: "Promise",
     },
   },
   {
     id: 5257138,
-    name: '屋顶',
+    name: "屋顶",
     artists: [
       {
         id: 9612,
-        name: '温岚',
+        name: "温岚",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 512175,
-      name: '男女情歌对唱冠军全记录',
+      name: "男女情歌对唱冠军全记录",
     },
   },
   {
     id: 2983171,
-    name: '屋顶',
+    name: "屋顶",
     artists: [
       {
         id: 9612,
-        name: '温岚',
+        name: "温岚",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 29597,
-      name: '有点野',
+      name: "有点野",
     },
   },
   {
     id: 2550201,
-    name: '刀马旦',
+    name: "刀马旦",
     artists: [
       {
         id: 8331,
-        name: '李玟',
+        name: "李玟",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 25475,
-      name: 'Promise',
+      name: "Promise",
     },
   },
   {
     id: 52571381,
-    name: '屋顶',
+    name: "屋顶",
     artists: [
       {
         id: 9612,
-        name: '温岚',
+        name: "温岚",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 512175,
-      name: '男女情歌对唱冠军全记录',
+      name: "男女情歌对唱冠军全记录",
     },
   },
   {
     id: 2983172,
-    name: '屋顶',
+    name: "屋顶",
     artists: [
       {
         id: 9612,
-        name: '温岚',
+        name: "温岚",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 29597,
-      name: '有点野',
+      name: "有点野",
     },
   },
   {
     id: 2550202,
-    name: '刀马旦',
+    name: "刀马旦",
     artists: [
       {
         id: 8331,
-        name: '李玟',
+        name: "李玟",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 25475,
-      name: 'Promise',
+      name: "Promise",
     },
   },
   {
     id: 52571382,
-    name: '屋顶',
+    name: "屋顶",
     artists: [
       {
         id: 9612,
-        name: '温岚',
+        name: "温岚",
       },
       {
         id: 6452,
-        name: '周杰伦',
+        name: "周杰伦",
       },
     ],
     album: {
       id: 512175,
-      name: '男女情歌对唱冠军全记录',
+      name: "男女情歌对唱冠军全记录",
     },
   },
 ];
@@ -217,7 +217,7 @@ export const SONG_LIST = [
 const Home = (props: IProps) => {
   const [refreshing, setRefreshing] = useState(false);
   // const [searchValue, setSearchValue] = useState<string>();
-  const {navigation} = props;
+  const { navigation } = props;
 
   /**
    * @description: 首页音乐搜索处理
@@ -248,7 +248,7 @@ const Home = (props: IProps) => {
    */
   const handlePressCollectionItem = (id: string | number) => {
     console.log(id);
-    navigation.navigate('SongCollectionDetail', {
+    navigation.navigate("SongCollectionDetail", {
       id: id,
     });
   };
@@ -260,7 +260,7 @@ const Home = (props: IProps) => {
    */
   const handlePressSonglistItem = (id: string | number) => {
     console.log(id);
-    navigation.navigate('SongPlayingDetail', {
+    navigation.navigate("SongPlayingDetail", {
       id: id,
     });
   };
@@ -271,7 +271,7 @@ const Home = (props: IProps) => {
    * @return {*}
    */
   const renderSongCollectionItem = (params: any) => {
-    const {item} = params;
+    const { item } = params;
     return (
       <SongCollectionItem
         handlePressCollectionItem={handlePressCollectionItem}
@@ -286,9 +286,9 @@ const Home = (props: IProps) => {
    * @return {*}
    */
   const renderSongListItem = (params: any) => {
-    const {item = {}, index}: {item: any; index: number} = params;
-    const {name, artists, album, id} = item;
-    const artistsName = artists.map((artist: any) => artist.name).join('/');
+    const { item = {}, index }: { item: any; index: number } = params;
+    const { name, artists, album, id } = item;
+    const artistsName = artists.map((artist: any) => artist.name).join("/");
     return (
       <SongListItem
         index={index}
@@ -316,7 +316,7 @@ const Home = (props: IProps) => {
             data={DATA}
             horizontal
             renderItem={renderSongCollectionItem}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => item.id}
           />
         </View>
       </View>
@@ -327,7 +327,7 @@ const Home = (props: IProps) => {
         <FlatList
           data={SONG_LIST}
           renderItem={renderSongListItem}
-          keyExtractor={item => item.id + ''}
+          keyExtractor={(item) => item.id + ""}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -345,12 +345,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchBarContainer: {
-    width: '95%',
+    width: "95%",
     marginTop: 10,
-    marginLeft: '2.5%',
+    marginLeft: "2.5%",
   },
   dividerContainer: {
-    width: '100%',
+    width: "100%",
     marginTop: 10,
   },
   recommendContainer: {
@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
   },
   recommendText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   flatListContainer: {},
   songListContainer: {

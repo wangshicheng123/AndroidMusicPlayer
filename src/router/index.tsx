@@ -7,25 +7,25 @@
  * @FilePath: /MusicProject/src/router/index.ts
  */
 
-import React from 'react';
+import React from "react";
 /* app的导航栈【屏幕切换】，注意和stack的区别 */
-import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 /* app的导航栈 */
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from "@react-navigation/stack";
 /* APP初始化加载状态控制 */
 // import RNBootSplash from 'react-native-bootsplash';
-import {useTheme} from 'react-native-paper';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import { useTheme } from "react-native-paper";
+import { SafeAreaView, StyleSheet } from "react-native";
 // import {useNavigation} from '@react-navigation/native';
 
 /* 导航集合 */
-import BottomNavigator from './BottomNavigator';
-import FindNavigator from './FindNavigator';
-import PlayerNavigator from './PlayerNavigator';
+import BottomNavigator from "./BottomNavigator";
+import FindNavigator from "./FindNavigator";
+import PlayerNavigator from "./PlayerNavigator";
 
 /* 初始化相关导航页面 */
-import LaunchScreen from '../pages/Launch/index';
-import IntroductionScreen from '../pages/Introduction/index';
+import LaunchScreen from "../pages/Launch/index";
+import IntroductionScreen from "../pages/Introduction/index";
 
 const Stack = createStackNavigator();
 const NativeStack = createNativeStackNavigator();
@@ -58,7 +58,7 @@ const AppStack = () => {
       <Stack.Screen
         name="Player"
         component={PlayerNavigator}
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -75,7 +75,8 @@ const AuthStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Launch">
+      initialRouteName="Launch"
+    >
       {/* APP正式内容 */}
       <NativeStack.Screen name="App" component={AppStack} />
       {/* APP介绍展示 */}
@@ -87,10 +88,11 @@ const AuthStack = () => {
 };
 
 const AppNavigator = () => {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
   return (
     <SafeAreaView
-      style={{backgroundColor: colors.surface, ...styles.container}}>
+      style={{ backgroundColor: colors.surface, ...styles.container }}
+    >
       <AuthStack />
     </SafeAreaView>
   );

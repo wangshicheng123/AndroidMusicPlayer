@@ -1,23 +1,23 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-11 15:41:31
- * @LastEditTime: 2021-04-13 17:02:58
+ * @LastEditTime: 2021-04-17 18:31:02
  * @LastEditors: Please set LastEditors
  * @Description: 歌单详情页面
  * @FilePath: /MusicProject/src/pages/Songlist/index.tsx
  */
 
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
   ActivityIndicator,
-} from 'react-native';
-import {Image, Icon} from 'react-native-elements';
-import SongListItem from '../../components/SongListItem/index';
-import {SONG_LIST} from '../Home2/index';
+} from "react-native";
+import { Image, Icon } from "react-native-elements";
+import SongListItem from "../../components/SongListItem/index";
+import { SONG_LIST } from "../Home2/index";
 
 interface IProps {
   navigation: any;
@@ -29,16 +29,16 @@ const CollectionDetailData = {
   playCount: 634341,
   commentCount: 54,
   createTime: 1616662981476,
-  tags: ['欧美', '治愈', '爵士'],
-  name: '温暖爵士｜咖啡与猫，治愈周末时光',
+  tags: ["欧美", "治愈", "爵士"],
+  name: "温暖爵士｜咖啡与猫，治愈周末时光",
   coverImgUrl:
-    'https://p2.music.126.net/ybw7-ePjz1AfFnmZuJjgGQ==/109951165832891814.jpg',
+    "https://p2.music.126.net/ybw7-ePjz1AfFnmZuJjgGQ==/109951165832891814.jpg",
   description:
-    '太快没有故事，太急没有人生。\n在繁华中自律，在落魄中自愈。\n\n星星与月，流光相皎洁，将天空喷绘成斑斓的绮梦。咖啡与猫相伴，周末假期小憩一会儿，唯有温暖慰藉人心的爵士与我共缠绵。\n\n关键词：温暖男声、治愈、Jazz Pop 、smooth Jazz\n\n封面：Limduey',
+    "太快没有故事，太急没有人生。\n在繁华中自律，在落魄中自愈。\n\n星星与月，流光相皎洁，将天空喷绘成斑斓的绮梦。咖啡与猫相伴，周末假期小憩一会儿，唯有温暖慰藉人心的爵士与我共缠绵。\n\n关键词：温暖男声、治愈、Jazz Pop 、smooth Jazz\n\n封面：Limduey",
 };
 
 const SongCollectionDetail = (props: IProps) => {
-  const {navigation} = props;
+  const { navigation } = props;
 
   /**
    * @description: 导航至歌曲播放详情页面
@@ -46,7 +46,7 @@ const SongCollectionDetail = (props: IProps) => {
    * @return {*}
    */
   const handlePressSonglistItem = (id: string | number) => {
-    navigation.navigate('SongPlayingDetail', {
+    navigation.navigate("SongPlayingDetail", {
       id: id,
     });
   };
@@ -57,9 +57,9 @@ const SongCollectionDetail = (props: IProps) => {
    * @return {*}
    */
   const renderSongListItem = (params: any) => {
-    const {item = {}, index}: {item: any; index: number} = params;
-    const {name, artists, album, id} = item;
-    const artistsName = artists.map((artist: any) => artist.name).join('/');
+    const { item = {}, index }: { item: any; index: number } = params;
+    const { name, artists, album, id } = item;
+    const artistsName = artists.map((artist: any) => artist.name).join("/");
     return (
       <SongListItem
         index={index}
@@ -79,7 +79,7 @@ const SongCollectionDetail = (props: IProps) => {
             <Text style={styles.collectionPlayCount}>11万</Text>
           </View>
           <Image
-            source={{uri: CollectionDetailData.coverImgUrl}}
+            source={{ uri: CollectionDetailData.coverImgUrl }}
             style={styles.collectionImg}
             PlaceholderContent={<ActivityIndicator />}
           />
@@ -92,7 +92,7 @@ const SongCollectionDetail = (props: IProps) => {
           </View>
           <View>
             <Text style={styles.collectionTags} numberOfLines={1}>
-              标签: {CollectionDetailData.tags.join('/')}
+              标签: {CollectionDetailData.tags.join("/")}
             </Text>
           </View>
           <View>
@@ -129,7 +129,7 @@ const SongCollectionDetail = (props: IProps) => {
         <FlatList
           data={SONG_LIST}
           renderItem={renderSongListItem}
-          keyExtractor={item => item.id + ''}
+          keyExtractor={(item) => item.id + ""}
         />
       </View>
     </View>
@@ -144,25 +144,25 @@ const styles = StyleSheet.create({
   },
   /* 歌单头部信息样式 */
   collectionListInfoHeader: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   collectionImgContainer: {
-    position: 'relative',
+    position: "relative",
   },
   collectionPlayCountView: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     right: 3,
     top: 3,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
-    backgroundColor: '#333',
+    backgroundColor: "#333",
     opacity: 0.5,
   },
   collectionPlayCount: {
     fontSize: 12,
-    color: '#fff',
+    color: "#fff",
   },
   collectionImg: {
     width: 100,
@@ -175,53 +175,53 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   collectionName: {
-    color: '#333',
+    color: "#333",
   },
   collectionTags: {
     fontSize: 12,
     marginTop: 8,
-    color: '#666',
+    color: "#666",
   },
   collectionDesc: {
     fontSize: 12,
     marginTop: 8,
-    color: '#666',
+    color: "#666",
   },
   /* 歌单操作项 */
   collectionOperateContainer: {
     marginTop: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   collectionOperate: {
-    width: '90%',
+    width: "90%",
     height: 30,
     borderRadius: 50,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#49afcd',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    borderColor: "#49afcd",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 
   collectionOperateLikeView: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   collectionOperateLike: {
-    color: '#49afcd',
+    color: "#49afcd",
     marginLeft: 6,
   },
   verticalDividerLine: {
-    height: '70%',
-    backgroundColor: '#49afcd',
+    height: "70%",
+    backgroundColor: "#49afcd",
     width: StyleSheet.hairlineWidth,
   },
   collectionOperateCommentView: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   collectionOperateComment: {
-    color: '#49afcd',
+    color: "#49afcd",
     marginLeft: 6,
   },
 

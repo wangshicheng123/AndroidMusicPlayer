@@ -6,9 +6,9 @@
  * @Description: 底部Tab导航集合
  * @FilePath: /MusicProject/src/router/BottomNavigator.ts
  */
-import React from 'react';
-import {View, Text} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React from "react";
+import { View, Text } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const HomeScreen = () => {
   return (

@@ -6,22 +6,22 @@
  * @Description: 操作登陆/授权等组件集合
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroContent/index.tsx
  */
-import React from 'react';
+import React from "react";
 import {
   View,
   Animated,
   StyleSheet,
   Dimensions,
   ImageRequireSource,
-} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {useTheme, Button} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
-import LocalLibraryAccess from '../LocalLibraryAccess/index';
-import GoogleLogin from '../GoogleLogin/index';
-import {visitIntroductionPage} from '../../../../reducers/userSlice';
+} from "react-native";
+import { useDispatch } from "react-redux";
+import { useTheme, Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import LocalLibraryAccess from "../LocalLibraryAccess/index";
+import GoogleLogin from "../GoogleLogin/index";
+import { visitIntroductionPage } from "../../../../reducers/userSlice";
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get("window");
 const LOGO_WIDTH = 220;
 const LOGO_HEIGHT = 40;
 
@@ -38,7 +38,7 @@ interface IIntroContentProps {
 const IntroContent = (props: IIntroContentProps) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   const {
     type,
@@ -68,7 +68,7 @@ const IntroContent = (props: IIntroContentProps) => {
    */
   const handleLaunchApp = () => {
     dispatch(visitIntroductionPage(true));
-    navigation.navigate('App');
+    navigation.navigate("App");
   };
 
   /**
@@ -78,24 +78,25 @@ const IntroContent = (props: IIntroContentProps) => {
    */
   const renderUserActions = () => {
     switch (type) {
-      case 'Welcome':
+      case "Welcome":
         return (
           <Button
             mode="contained"
             icon="arrow-forward"
             color={color}
-            onPress={handleNavigate2nextPage}>
+            onPress={handleNavigate2nextPage}
+          >
             Start
           </Button>
         );
-      case 'Grant Access':
+      case "Grant Access":
         return (
           <LocalLibraryAccess
             color={color}
             handleNavigate2nextPage={handleNavigate2nextPage}
           />
         );
-      case 'Google':
+      case "Google":
         return (
           <GoogleLogin
             handleNavigate2nextPage={handleNavigate2nextPage}
@@ -108,7 +109,8 @@ const IntroContent = (props: IIntroContentProps) => {
             mode="contained"
             icon="home"
             color={color}
-            onPress={handleLaunchApp}>
+            onPress={handleLaunchApp}
+          >
             Go to Home
           </Button>
         );
@@ -123,7 +125,7 @@ const IntroContent = (props: IIntroContentProps) => {
           style={[
             styles.imageStyle,
             {
-              transform: [{scale}],
+              transform: [{ scale }],
             },
           ]}
         />
@@ -137,7 +139,8 @@ const IntroContent = (props: IIntroContentProps) => {
                 opacity,
                 color: colors.text,
               },
-            ]}>
+            ]}
+          >
             {heading}
           </Animated.Text>
           <Animated.Text
@@ -147,7 +150,8 @@ const IntroContent = (props: IIntroContentProps) => {
                 opacity,
                 color: colors.text,
               },
-            ]}>
+            ]}
+          >
             {description}
           </Animated.Text>
         </View>
@@ -161,70 +165,70 @@ const styles = StyleSheet.create({
   container: {
     width,
     height,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1,
   },
   imageContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   imageStyle: {
     marginTop: 8,
     width: width * 0.75,
     height: width * 0.75,
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 
   operationContainer: {
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    alignItems: "flex-end",
+    justifyContent: "center",
     flex: 1,
   },
   descripTextStyle: {
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    alignItems: "flex-end",
+    justifyContent: "center",
     flex: 1,
   },
   btnStyle: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
   },
 
   heading: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     fontSize: 24,
-    fontWeight: '800',
-    fontFamily: 'Nunito-Bold',
+    fontWeight: "800",
+    fontFamily: "Nunito-Bold",
     letterSpacing: 2,
     marginBottom: 5,
-    textAlign: 'right',
+    textAlign: "right",
   },
   description: {
-    fontWeight: '600',
-    textAlign: 'right',
+    fontWeight: "600",
+    textAlign: "right",
     width: width * 0.75,
     marginRight: 10,
     fontSize: 16,
     lineHeight: 16 * 1.5,
-    fontFamily: 'Nunito-Light',
+    fontFamily: "Nunito-Light",
   },
   logo: {
     opacity: 0.9,
     height: LOGO_HEIGHT,
     width: LOGO_WIDTH,
-    resizeMode: 'contain',
-    position: 'absolute',
+    resizeMode: "contain",
+    position: "absolute",
     left: 10,
     bottom: 10,
     transform: [
-      {translateX: -LOGO_WIDTH / 2},
-      {translateY: -LOGO_HEIGHT / 2},
-      {rotateZ: '-90deg'},
-      {translateX: LOGO_WIDTH / 2},
-      {translateY: LOGO_HEIGHT / 2},
+      { translateX: -LOGO_WIDTH / 2 },
+      { translateY: -LOGO_HEIGHT / 2 },
+      { rotateZ: "-90deg" },
+      { translateX: LOGO_WIDTH / 2 },
+      { translateY: LOGO_HEIGHT / 2 },
     ],
   },
 });

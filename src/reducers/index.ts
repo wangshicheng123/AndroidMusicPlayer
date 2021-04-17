@@ -6,10 +6,10 @@
  * @Description: reducer集合
  * @FilePath: /MusicProject/src/reducers/index.ts
  */
-import {combineReducers} from 'redux';
-import homeSlice from '../pages/Home/homeSlice';
-import configSlice, {IInitialConfigState} from '../reducers/configSlice';
-import userSlice, {IInitialUserState} from '../reducers/userSlice';
+import { combineReducers } from "redux";
+import homeSlice from "../pages/Home/homeSlice";
+import configSlice, { IInitialConfigState } from "../reducers/configSlice";
+import userSlice, { IInitialUserState } from "../reducers/userSlice";
 
 export interface IAppState {
   home: Array<number>;

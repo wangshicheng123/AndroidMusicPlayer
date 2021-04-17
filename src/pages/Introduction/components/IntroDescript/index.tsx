@@ -1,17 +1,17 @@
 /*
  * @Author: your name
  * @Date: 2021-04-15 15:48:36
- * @LastEditTime: 2021-04-15 22:09:33
+ * @LastEditTime: 2021-04-17 18:31:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroDecript/index.tsx
  */
 
-import React from 'react';
-import {View, StyleSheet, Animated, Dimensions} from 'react-native';
-import {scrollConfig} from '../../config';
+import React from "react";
+import { View, StyleSheet, Animated, Dimensions } from "react-native";
+import { scrollConfig } from "../../config";
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const CIRCLE_SIZE = width * 0.6;
 
 interface IIntroDescriptProps {
@@ -19,16 +19,16 @@ interface IIntroDescriptProps {
 }
 
 const IntroDescript = (props: IIntroDescriptProps) => {
-  const {scrollOffsetAnimatedValue} = props;
+  const { scrollOffsetAnimatedValue } = props;
   return (
     <View style={styles.introDescriptContainer}>
-      {scrollConfig.map(({color}, index) => {
+      {scrollConfig.map(({ color }, index) => {
         const inputRange = [0, 0.5, 0.99];
         const inputRangeOpacity = [0, 0.5, 0.99];
         const scale = scrollOffsetAnimatedValue.interpolate({
           inputRange,
           outputRange: [1, 0, 1],
-          extrapolate: 'clamp',
+          extrapolate: "clamp",
         });
 
         const opacity = scrollOffsetAnimatedValue.interpolate({
@@ -44,7 +44,7 @@ const IntroDescript = (props: IIntroDescriptProps) => {
               {
                 backgroundColor: color,
                 opacity,
-                transform: [{scale}],
+                transform: [{ scale }],
               },
             ]}
           />
@@ -56,20 +56,20 @@ const IntroDescript = (props: IIntroDescriptProps) => {
 
 const styles = StyleSheet.create({
   introDescriptContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   circle: {
     width: CIRCLE_SIZE,
     height: CIRCLE_SIZE,
     borderRadius: CIRCLE_SIZE / 2,
-    position: 'absolute',
-    top: '15%',
+    position: "absolute",
+    top: "15%",
   },
 });
 

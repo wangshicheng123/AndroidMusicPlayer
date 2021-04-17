@@ -6,9 +6,9 @@
  * @Description: 初始化页面的分页组件
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroPagination/index.tsx
  */
-import React from 'react';
-import {View, Animated, StyleSheet} from 'react-native';
-import {scrollConfig} from '../../config';
+import React from "react";
+import { View, Animated, StyleSheet } from "react-native";
+import { scrollConfig } from "../../config";
 
 const DOT_SIZE = 40;
 
@@ -17,12 +17,12 @@ interface IIntroPagination {
   positionAnimatedValue: Animated.Value;
 }
 const IntroPagination = (props: IIntroPagination) => {
-  const {scrollOffsetAnimatedValue, positionAnimatedValue} = props;
+  const { scrollOffsetAnimatedValue, positionAnimatedValue } = props;
 
   const inputRange = [0, scrollConfig.length];
   const translateX = Animated.add(
     scrollOffsetAnimatedValue,
-    positionAnimatedValue,
+    positionAnimatedValue
   ).interpolate({
     inputRange,
     outputRange: [0, scrollConfig.length * DOT_SIZE],
@@ -34,16 +34,16 @@ const IntroPagination = (props: IIntroPagination) => {
         style={[
           styles.paginationIndicator,
           {
-            position: 'absolute',
-            transform: [{translateX}],
+            position: "absolute",
+            transform: [{ translateX }],
           },
         ]}
       />
-      {scrollConfig.map(item => {
+      {scrollConfig.map((item) => {
         return (
           <View key={item.key} style={styles.paginationDotContainer}>
             <View
-              style={[styles.paginationDot, {backgroundColor: item.color}]}
+              style={[styles.paginationDot, { backgroundColor: item.color }]}
             />
           </View>
         );
@@ -54,10 +54,10 @@ const IntroPagination = (props: IIntroPagination) => {
 
 const styles = StyleSheet.create({
   pagination: {
-    position: 'absolute',
+    position: "absolute",
     right: 20,
     bottom: 40,
-    flexDirection: 'row',
+    flexDirection: "row",
     height: DOT_SIZE,
   },
   paginationDot: {
@@ -67,15 +67,15 @@ const styles = StyleSheet.create({
   },
   paginationDotContainer: {
     width: DOT_SIZE,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   paginationIndicator: {
     width: DOT_SIZE,
     height: DOT_SIZE,
     borderRadius: DOT_SIZE / 2,
     borderWidth: 2,
-    borderColor: '#ddd',
+    borderColor: "#ddd",
   },
 });
 

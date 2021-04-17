@@ -6,13 +6,13 @@
  * @Description: 用户信息状态管理
  * @FilePath: /MusicProject/src/reducers/userSlice.ts
  */
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {PermissionsAndroid} from 'react-native';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { PermissionsAndroid } from "react-native";
 import {
   GoogleSignin,
   statusCodes,
-} from '@react-native-google-signin/google-signin';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+} from "@react-native-google-signin/google-signin";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type userInfo = {
   photo?: string | null;
@@ -41,22 +41,22 @@ const initialState: IInitialUserState = {
  * @return {*}
  */
 export const getLocalLiraryAccessAuthorition = createAsyncThunk(
-  'user/getLocalLiraryAccessAuthorition',
+  "user/getLocalLiraryAccessAuthorition",
   async () => {
     const accessAuthorition = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
       // && PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       {
-        title: 'Grant Access',
+        title: "Grant Access",
         message:
-          'Serenity App needs access to your EXTERNAL_STORAGE ' +
-          'so you can take play offline songs.',
-        buttonNeutral: 'Ask Me Later',
-        buttonPositive: 'OK',
-      },
+          "Serenity App needs access to your EXTERNAL_STORAGE " +
+          "so you can take play offline songs.",
+        buttonNeutral: "Ask Me Later",
+        buttonPositive: "OK",
+      }
     );
     return accessAuthorition;
-  },
+  }
 );
 
 /**
@@ -65,7 +65,7 @@ export const getLocalLiraryAccessAuthorition = createAsyncThunk(
  * @return {*}
  */
 export const getGoogleAccessAuthorization = createAsyncThunk(
-  'user/getGoogleAccessAuthorization',
+  "user/getGoogleAccessAuthorization",
   async () => {
     let userInfo: userInfo = {};
     try {
@@ -77,7 +77,7 @@ export const getGoogleAccessAuthorization = createAsyncThunk(
       userInfo = sighInUserInfo.user;
 
       const token = await GoogleSignin.getTokens();
-      await AsyncStorage.setItem('@token', token.accessToken);
+      await AsyncStorage.setItem("@token", token.accessToken);
       // console.log('wahgkagefk', userInfo, token.accessToken);
     } catch (error) {
       // console.log('error', error);
@@ -92,11 +92,11 @@ export const getGoogleAccessAuthorization = createAsyncThunk(
       }
     }
     return userInfo;
-  },
+  }
 );
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: initialState,
   reducers: {
     visitIntroductionPage: (
@@ -104,13 +104,13 @@ const userSlice = createSlice({
       action: {
         type: string;
         payload: boolean;
-      },
+      }
     ) => {
       const isVisited = action.payload;
       state.introductionVisited = isVisited;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder.addCase(
       getLocalLiraryAccessAuthorition.fulfilled,
       (state: IInitialUserState, action) => {
@@ -120,13 +120,13 @@ const userSlice = createSlice({
         } else {
           state.localLibraryAccessAuthorization = false;
         }
-      },
+      }
     );
     builder.addCase(
       getLocalLiraryAccessAuthorition.rejected,
       (state: IInitialUserState) => {
         state.localLibraryAccessAuthorization = false;
-      },
+      }
     );
     builder.addCase(
       getGoogleAccessAuthorization.fulfilled,
@@ -135,22 +135,22 @@ const userSlice = createSlice({
         action: {
           type: string;
           payload: userInfo;
-        },
+        }
       ) => {
         state.userInfo = action.payload;
         state.googleAccessAuthorization = true;
-      },
+      }
     );
     builder.addCase(
       getGoogleAccessAuthorization.rejected,
       (state: IInitialUserState) => {
         state.userInfo = {};
         state.googleAccessAuthorization = false;
-      },
+      }
     );
   },
 });
 
-export const {visitIntroductionPage} = userSlice.actions;
+export const { visitIntroductionPage } = userSlice.actions;
 
 export default userSlice.reducer;

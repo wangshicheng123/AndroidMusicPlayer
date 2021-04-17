@@ -7,9 +7,9 @@
  * @FilePath: /MusicProject/src/components/SongListItem/index.tsx
  */
 
-import React from 'react';
-import {View, Text, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import {Icon} from 'react-native-elements';
+import React from "react";
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { Icon } from "react-native-elements";
 
 interface IProps {
   id: number;
@@ -48,7 +48,8 @@ const SongListItem = (props: IProps) => {
         <TouchableWithoutFeedback
           onPress={() => {
             handlePressSonglistItem(id);
-          }}>
+          }}
+        >
           <View style={styles.songOperation}>
             <Icon name="play-circle-outline" type="ionicon" color="#49afcd" />
           </View>
@@ -61,34 +62,34 @@ const SongListItem = (props: IProps) => {
 const styles = StyleSheet.create({
   container: {
     height: 60,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 8,
   },
   songIndex: {
     width: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   songInfo: {
     flex: 1,
-    flexDirection: 'row',
-    borderColor: '#49afcd',
+    flexDirection: "row",
+    borderColor: "#49afcd",
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   songBody: {
     flex: 0.8,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginLeft: 4,
   },
   songUsers: {
     marginTop: 3,
     fontSize: 12,
-    color: '#666',
+    color: "#666",
   },
   songOperation: {
     flex: 0.2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

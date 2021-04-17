@@ -7,15 +7,15 @@
  * @FilePath: /MusicProject/src/components/CustomInput/index.tsx
  */
 
-import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
-import {Button} from 'react-native-elements';
+import React from "react";
+import { View, TextInput, StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
 
 interface IProps {
   loading?: boolean;
 }
 const CustomInput = (props: IProps) => {
-  const {loading} = props;
+  const { loading } = props;
   return (
     <View style={styles.searchContainer}>
       <TextInput
@@ -27,10 +27,10 @@ const CustomInput = (props: IProps) => {
           title="Search"
           loading={loading}
           icon={{
-            type: 'ionicon',
-            name: 'search-outline',
+            type: "ionicon",
+            name: "search-outline",
             size: 15,
-            color: 'white',
+            color: "white",
           }}
         />
       </View>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   border: {
     borderWidth: 1,
     borderRightWidth: 0,
-    borderColor: '#49afcd',
+    borderColor: "#49afcd",
     borderRadius: 3,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
@@ -50,20 +50,20 @@ const styles = StyleSheet.create({
 
   //搜索框
   searchContainer: {
-    flexDirection: 'row',
-    position: 'relative',
+    flexDirection: "row",
+    position: "relative",
   },
   textInput: {
     flex: 6,
     fontSize: 16,
     padding: 0,
     paddingLeft: 8,
-    color: '#49afcd',
+    color: "#49afcd",
   },
 
   buttonContainer: {
     width: 100,
-    position: 'relative',
+    position: "relative",
     left: -1,
   },
 });

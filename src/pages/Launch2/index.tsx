@@ -6,23 +6,23 @@
  * @Description: app初始化页面
  * @FilePath: /MusicProject/src/pages/InitLoading/index.tsx
  */
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Button} from 'react-native-elements';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
 
 interface IProps {
   navigation: any;
 }
 
 const Launch = (props: IProps) => {
-  const {navigation} = props;
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       <View style={styles.btnLogin}>
         <Button
           title="SIGN IN"
           onPress={() => {
-            navigation.navigate('Login');
+            navigation.navigate("Login");
           }}
         />
       </View>
@@ -30,7 +30,7 @@ const Launch = (props: IProps) => {
         <Button
           title="SIGN UP"
           onPress={() => {
-            navigation.navigate('Register');
+            navigation.navigate("Register");
           }}
         />
       </View>
@@ -41,8 +41,8 @@ const Launch = (props: IProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnLogin: {
     width: 200,

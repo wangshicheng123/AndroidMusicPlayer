@@ -1,22 +1,22 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:54:35
- * @LastEditTime: 2021-04-17 09:34:58
+ * @LastEditTime: 2021-04-17 18:31:16
  * @LastEditors: Please set LastEditors
  * @Description: 用户第一次进入APP时候的展示页面【包括注册/登陆/授权等操作】
  * @FilePath: /MusicProject/src/pages/introduction/index.tsx
  */
-import React, {useRef, useState} from 'react';
-import {View, StyleSheet, Animated} from 'react-native';
-import Screen from '../../components/Screen/index';
+import React, { useRef, useState } from "react";
+import { View, StyleSheet, Animated } from "react-native";
+import Screen from "../../components/Screen/index";
 import PagerView, {
   PagerViewOnPageScrollEventData,
-} from 'react-native-pager-view';
-import IntroDescript from './components/IntroDescript/index';
-import IntroTitle from './components/IntroTitle/index';
-import IntroPagination from './components/IntroPagination/index';
-import IntroContent from './components/IntroContent/index';
-import {scrollConfig} from './config';
+} from "react-native-pager-view";
+import IntroDescript from "./components/IntroDescript/index";
+import IntroTitle from "./components/IntroTitle/index";
+import IntroPagination from "./components/IntroPagination/index";
+import IntroContent from "./components/IntroContent/index";
+import { scrollConfig } from "./config";
 
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 const Introduction = () => {
@@ -50,12 +50,13 @@ const Introduction = () => {
             },
           ],
           {
-            listener: ({nativeEvent: {offset, position}}) => {
+            listener: ({ nativeEvent: { offset, position } }) => {
               setPage(position);
             },
             useNativeDriver: true,
-          },
-        )}>
+          }
+        )}
+      >
         {scrollConfig.map((item, index) => (
           <View collapsable={false} key={index}>
             <IntroContent
@@ -76,8 +77,8 @@ const Introduction = () => {
 
 const styles = StyleSheet.create({
   animatedPagerView: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
 });
 

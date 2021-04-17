@@ -6,12 +6,12 @@
  * @Description: 授权可以访问用户本地的额外资源
  * @FilePath: /MusicProject/src/pages/Introduction/components/LocalLibraryAccess/index.tsx
  */
-import React, {useEffect} from 'react';
-import {StyleSheet} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {IAppState} from '../../../../reducers/index';
-import {Button} from 'react-native-paper';
-import {getLocalLiraryAccessAuthorition} from '../../../../reducers/userSlice';
+import React, { useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { IAppState } from "../../../../reducers/index";
+import { Button } from "react-native-paper";
+import { getLocalLiraryAccessAuthorition } from "../../../../reducers/userSlice";
 
 interface IProps {
   color: string;
@@ -19,10 +19,10 @@ interface IProps {
 }
 
 const LocalLibraryAccess = (props: IProps) => {
-  const {color, handleNavigate2nextPage} = props;
+  const { color, handleNavigate2nextPage } = props;
   const dispatch = useDispatch();
   const localLibraryAccessAuthorization = useSelector(
-    (state: IAppState) => state.user.localLibraryAccessAuthorization,
+    (state: IAppState) => state.user.localLibraryAccessAuthorization
   );
   // console.log(
   //   '==>>>>>localLibraryAccessGiven',
@@ -44,7 +44,8 @@ const LocalLibraryAccess = (props: IProps) => {
         mode="contained"
         icon="done-all"
         color={color}
-        onPress={handleNavigate2nextPage}>
+        onPress={handleNavigate2nextPage}
+      >
         Done
       </Button>
     );
@@ -55,7 +56,8 @@ const LocalLibraryAccess = (props: IProps) => {
       mode="contained"
       icon="unlock-outline"
       color={color}
-      onPress={handleBtnPress}>
+      onPress={handleBtnPress}
+    >
       Allow Access
     </Button>
   );

@@ -7,15 +7,15 @@
  * @FilePath: /MusicProject/src/components/SongCollectionCard/index.tsx
  */
 
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   ActivityIndicator,
   TouchableWithoutFeedback,
-} from 'react-native';
-import {Image} from 'react-native-elements';
+} from "react-native";
+import { Image } from "react-native-elements";
 
 interface IProps {
   id: string;
@@ -26,19 +26,20 @@ interface IProps {
 }
 
 const SongCollectionItem = (props: IProps) => {
-  const {name, coverImgUrl, handlePressCollectionItem, id} = props;
+  const { name, coverImgUrl, handlePressCollectionItem, id } = props;
   return (
     <TouchableWithoutFeedback
       onPress={() => {
         handlePressCollectionItem(id);
-      }}>
+      }}
+    >
       <View style={styles.container}>
         <View style={styles.songInfoContainer}>
           <View style={styles.songPlayCountView}>
             <Text style={styles.songPlayCount}>11万</Text>
           </View>
           <Image
-            source={{uri: coverImgUrl}}
+            source={{ uri: coverImgUrl }}
             style={styles.songBgUrl}
             PlaceholderContent={<ActivityIndicator />}
           />
@@ -58,22 +59,22 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   songInfoContainer: {
-    position: 'relative',
+    position: "relative",
   },
   songPlayCountView: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     right: 3,
     top: 3,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
-    backgroundColor: '#333',
+    backgroundColor: "#333",
     opacity: 0.5,
   },
   songPlayCount: {
     fontSize: 12,
-    color: '#fff',
+    color: "#fff",
   },
 
   songBgUrl: {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   },
   describeText: {
     fontSize: 12,
-    color: '#222',
+    color: "#222",
   },
 });
 

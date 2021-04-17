@@ -1,16 +1,16 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 10:18:26
- * @LastEditTime: 2021-04-11 16:35:12
+ * @LastEditTime: 2021-04-17 18:15:10
  * @LastEditors: Please set LastEditors
  * @Description: 注册页面
  * @FilePath: /MusicProject/src/pages/Register/index.tsx
  */
 
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Input, Button} from 'react-native-elements';
-import {Formik} from 'formik';
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Input, Button } from "react-native-elements";
+import { Formik } from "formik";
 
 interface IProps {
   navigation: any;
@@ -24,11 +24,11 @@ interface IUserInfo {
 
 const Register = (props: IProps) => {
   const [errMsgs, setErrMsgs] = useState<IUserInfo>({
-    email: '',
-    password: '',
-    confirmPassword: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
-  const {navigation} = props;
+  const { navigation } = props;
 
   /**
    * @description: 用户信息校验
@@ -36,12 +36,12 @@ const Register = (props: IProps) => {
    * @return {*}
    */
   const checkValidUserInfo = (userInfo: IUserInfo): boolean => {
-    const {email, password, confirmPassword} = userInfo;
+    const { email, password, confirmPassword } = userInfo;
     if (!email || !password || !confirmPassword) {
       setErrMsgs({
-        email: email ? '' : 'Enter a valid message',
-        password: password ? '' : 'Enter a valid message',
-        confirmPassword: confirmPassword ? '' : 'Enter a valid message',
+        email: email ? "" : "Enter a valid message",
+        password: password ? "" : "Enter a valid message",
+        confirmPassword: confirmPassword ? "" : "Enter a valid message",
       });
       return false;
     }
@@ -60,7 +60,7 @@ const Register = (props: IProps) => {
     }
     if (userInfo.password !== userInfo.confirmPassword) {
       setErrMsgs({
-        confirmPassword: 'The two passwords are not the same',
+        confirmPassword: "The two passwords are not the same",
       });
       return;
     }
@@ -68,37 +68,38 @@ const Register = (props: IProps) => {
       提交注册用户信息到数据库中进行存储
       成功之后跳转到登陆页面进行登陆操作
     */
-    navigation.navigate('Login');
+    navigation.navigate("Login");
   };
 
   return (
     <Formik
-      initialValues={{email: '', password: '', confirmPassword: ''}}
-      onSubmit={handleRegister}>
-      {({handleChange, handleSubmit, values}) => (
+      initialValues={{ email: "", password: "", confirmPassword: "" }}
+      onSubmit={handleRegister}
+    >
+      {({ handleChange, handleSubmit, values }) => (
         <View style={styles.container}>
           <Input
             placeholder="Email"
             errorStyle={styles.errorInputStyle}
             errorMessage={errMsgs.email}
-            leftIcon={{type: 'ionicon', name: 'mail-outline'}}
-            onChangeText={handleChange('email')}
+            leftIcon={{ type: "ionicon", name: "mail-outline" }}
+            onChangeText={handleChange("email")}
             value={values.email}
           />
           <Input
             placeholder="Password"
             errorStyle={styles.errorInputStyle}
             errorMessage={errMsgs.password}
-            leftIcon={{type: 'ionicon', name: 'lock-closed-outline'}}
-            onChangeText={handleChange('password')}
+            leftIcon={{ type: "ionicon", name: "lock-closed-outline" }}
+            onChangeText={handleChange("password")}
             value={values.password}
           />
           <Input
             placeholder="Confirm Password"
             errorStyle={styles.errorInputStyle}
             errorMessage={errMsgs.confirmPassword}
-            leftIcon={{type: 'ionicon', name: 'lock-closed-outline'}}
-            onChangeText={handleChange('confirmPassword')}
+            leftIcon={{ type: "ionicon", name: "lock-closed-outline" }}
+            onChangeText={handleChange("confirmPassword")}
             value={values.confirmPassword}
           />
           <View style={styles.btnRegister}>
@@ -113,15 +114,15 @@ const Register = (props: IProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnRegister: {
-    width: '80%',
+    width: "80%",
     marginTop: 20,
   },
   errorInputStyle: {
-    color: 'red',
+    color: "red",
   },
 });
 

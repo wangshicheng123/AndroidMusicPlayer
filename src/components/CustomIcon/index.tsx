@@ -7,19 +7,19 @@
  * @FilePath: /MusicProject/src/components/CustomIcon/index.tsx
  */
 
-import React from 'react';
-import {ICONS} from '../../assets/Icons/index';
+import React from "react";
+import { ICONS } from "../../assets/Icons/index";
 
 interface Iprops {
   name: string;
   size?: number;
   color?: string;
-  direction?: 'rtl' | 'ltr';
+  direction?: "rtl" | "ltr";
   allowFontScaling?: boolean | undefined;
 }
 
 const CustomIcon = (props: Iprops) => {
-  const {name, size = 40, color = '#000', ...rest} = props;
+  const { name, size = 40, color = "#000", ...rest } = props;
   const IconImplement = ICONS[name];
   if (!IconImplement) {
     return null;

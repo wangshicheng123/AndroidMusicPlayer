@@ -1,19 +1,19 @@
 /*
  * @Author: your name
  * @Date: 2021-04-08 09:35:11
- * @LastEditTime: 2021-04-08 09:39:20
+ * @LastEditTime: 2021-04-17 17:27:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Detail/index.tsx
  */
 
-import React from 'react';
-import {Text, View, Button} from 'react-native';
+import React from "react";
+import { Text, View, Button } from "react-native";
 
-const Detail = ({route, navigation}) => {
-  const {itemId, otherParams} = route.params;
+const Detail = ({ route, navigation }) => {
+  const { itemId, otherParams } = route.params;
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Details Screen</Text>
       <Text>
         {itemId}: {otherParams}
@@ -21,7 +21,7 @@ const Detail = ({route, navigation}) => {
       <Button
         title="Change Title"
         onPress={() => {
-          navigation.setOptions({title: '详情'});
+          navigation.setOptions({ title: "详情" });
         }}
       />
       <Button
