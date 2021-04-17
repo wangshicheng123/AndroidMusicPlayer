@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 21:17:46
- * @LastEditTime: 2021-04-17 18:19:29
+ * @LastEditTime: 2021-04-17 18:36:48
  * @LastEditors: Please set LastEditors
  * @Description: 使用Google登陆
  * @FilePath: /MusicProject/src/pages/Introduction/components/GoogleLogin/index.tsx
@@ -12,8 +12,8 @@ import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
-import { IAppState } from "../../../../reducers/index";
-import { getGoogleAccessAuthorization } from "../../../../reducers/userSlice";
+import { IAppState } from "@/reducers/index";
+import { getGoogleAccessAuthorization } from "@/reducers/userSlice";
 
 interface IProps {
   color: string;

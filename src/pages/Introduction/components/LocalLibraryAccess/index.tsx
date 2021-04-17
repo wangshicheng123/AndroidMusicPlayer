@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 21:12:19
- * @LastEditTime: 2021-04-16 11:11:19
+ * @LastEditTime: 2021-04-17 18:37:35
  * @LastEditors: Please set LastEditors
  * @Description: 授权可以访问用户本地的额外资源
  * @FilePath: /MusicProject/src/pages/Introduction/components/LocalLibraryAccess/index.tsx
@@ -9,9 +9,9 @@
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { IAppState } from "../../../../reducers/index";
+import { IAppState } from "@/reducers/index";
 import { Button } from "react-native-paper";
-import { getLocalLiraryAccessAuthorition } from "../../../../reducers/userSlice";
+import { getLocalLiraryAccessAuthorition } from "@/reducers/userSlice";
 
 interface IProps {
   color: string;

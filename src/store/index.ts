@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 16:23:46
- * @LastEditTime: 2021-04-17 18:30:34
+ * @LastEditTime: 2021-04-17 18:39:15
  * @LastEditors: Please set LastEditors
  * @Description: APP状态容器
  * @FilePath: /MusicProject/src/store/index.ts
@@ -15,7 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 /* redux状态发生变化的时候，能够持久化存储 */
 import { persistStore, persistReducer } from "redux-persist";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { reducers } from "../reducers/index";
+import { reducers } from "@/reducers/index";
 
 const persistConfig = {
   key: "root",

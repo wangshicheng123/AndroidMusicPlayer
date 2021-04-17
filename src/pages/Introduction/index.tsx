@@ -1,14 +1,14 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:54:35
- * @LastEditTime: 2021-04-17 18:31:16
+ * @LastEditTime: 2021-04-17 18:37:55
  * @LastEditors: Please set LastEditors
  * @Description: 用户第一次进入APP时候的展示页面【包括注册/登陆/授权等操作】
  * @FilePath: /MusicProject/src/pages/introduction/index.tsx
  */
 import React, { useRef, useState } from "react";
 import { View, StyleSheet, Animated } from "react-native";
-import Screen from "../../components/Screen/index";
+import Screen from "@/components/Screen/index";
 import PagerView, {
   PagerViewOnPageScrollEventData,
 } from "react-native-pager-view";

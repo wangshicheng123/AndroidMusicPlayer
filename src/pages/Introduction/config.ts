@@ -1,13 +1,13 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 14:37:41
- * @LastEditTime: 2021-04-17 17:51:10
+ * @LastEditTime: 2021-04-17 18:37:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Introduction/config.ts
  */
 
-import Images from "../../assets/Images";
+import Images from "@/assets/Images";
 
 export const scrollConfig = [
   {

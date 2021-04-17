@@ -1,14 +1,14 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 17:48:34
- * @LastEditTime: 2021-04-15 18:49:02
+ * @LastEditTime: 2021-04-17 18:35:39
  * @LastEditors: Please set LastEditors
  * @Description: APP自定义的ICON
  * @FilePath: /MusicProject/src/components/CustomIcon/index.tsx
  */
 
 import React from "react";
-import { ICONS } from "../../assets/Icons/index";
+import { ICONS } from "@/assets/Icons/index";
 
 interface Iprops {
   name: string;

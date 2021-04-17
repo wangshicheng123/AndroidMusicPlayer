@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-17 13:38:28
+ * @LastEditTime: 2021-04-17 18:39:05
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts
@@ -24,8 +24,8 @@ import FindNavigator from "./FindNavigator";
 import PlayerNavigator from "./PlayerNavigator";
 
 /* 初始化相关导航页面 */
-import LaunchScreen from "../pages/Launch/index";
-import IntroductionScreen from "../pages/Introduction/index";
+import LaunchScreen from "@/pages/Launch/index";
+import IntroductionScreen from "@/pages/Introduction/index";
 
 const Stack = createStackNavigator();
 const NativeStack = createNativeStackNavigator();
