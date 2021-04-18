@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-17 18:39:05
+ * @LastEditTime: 2021-04-18 23:22:23
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts
@@ -31,13 +31,13 @@ const Stack = createStackNavigator();
 const NativeStack = createNativeStackNavigator();
 
 /**
- * @description: APP内部导航容器[其实就是APP上面的导航按钮/导航标题文案等]
+ * @description: APP内部导航容器
  * @param {*}
  * @return {*}
  */
 const AppStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Main">
       <Stack.Screen
         name="Main"
         component={BottomNavigator}
@@ -77,12 +77,12 @@ const AuthStack = () => {
       }}
       initialRouteName="Launch"
     >
-      {/* APP正式内容 */}
-      <NativeStack.Screen name="App" component={AppStack} />
-      {/* APP介绍展示 */}
-      <NativeStack.Screen name="Intro" component={IntroductionScreen} />
       {/* APP初始化 */}
       <NativeStack.Screen name="Launch" component={LaunchScreen} />
+      {/* APP介绍展示 */}
+      <NativeStack.Screen name="Intro" component={IntroductionScreen} />
+      {/* APP正式内容 */}
+      <NativeStack.Screen name="App" component={AppStack} />
     </NativeStack.Navigator>
   );
 };

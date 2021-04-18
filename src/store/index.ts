@@ -1,7 +1,7 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-13 16:23:46
- * @LastEditTime: 2021-04-17 18:39:15
+ * @LastEditTime: 2021-04-18 23:15:27
  * @LastEditors: Please set LastEditors
  * @Description: APP状态容器
  * @FilePath: /MusicProject/src/store/index.ts

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:37:27
- * @LastEditTime: 2021-04-17 16:21:14
+ * @LastEditTime: 2021-04-18 23:17:22
  * @LastEditors: Please set LastEditors
  * @Description: APP 初始化页面
  * @FilePath: /MusicProject/src/pages/Launch/index.tsx
@@ -19,10 +19,10 @@ const Launch = () => {
 
   /**
    * @description: 判断用户是否已经登陆
-   * @param {*} async
+   * @param {*}
    * @return {*}
    */
-  const isSignedIn = async () => {
+  const isSignedIn = () => {
     if (introductionVisited) {
       navigation.navigate("App");
     } else {

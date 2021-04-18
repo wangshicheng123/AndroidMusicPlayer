@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-04 10:44:20
- * @LastEditTime: 2021-04-17 17:20:47
+ * @LastEditTime: 2021-04-18 15:27:57
  * @LastEditors: Please set LastEditors
  * @Description: babel相关配置
  * @FilePath: /MusicProject/babel.config.js
@@ -25,6 +25,7 @@ module.exports = {
           "@/assets": ["./src/assets"],
           "@/api": ["./src/api"],
           "@/config": ["./src/config"],
+          "@/interface": ["./src/interface"],
         },
       },
     ],

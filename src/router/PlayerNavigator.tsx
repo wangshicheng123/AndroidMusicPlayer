@@ -1,23 +1,16 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-14 21:11:15
- * @LastEditTime: 2021-04-17 14:16:28
+ * @LastEditTime: 2021-04-18 23:29:32
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 音乐播放页面导航
  * @FilePath: /MusicProject/src/router/PlayerNavigator.ts
  */
 import React from "react";
 import { View, Text } from "react-native";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useTheme } from "react-native-paper";
-
-const PlayScreen = () => {
-  return (
-    <View>
-      <Text>PlayScreen component</Text>
-    </View>
-  );
-};
+import PlayScreen from "@/pages/Player/index";
 
 const QueueScreen = () => {
   return (

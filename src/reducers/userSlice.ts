@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:42:43
- * @LastEditTime: 2021-04-16 23:30:01
+ * @LastEditTime: 2021-04-18 23:09:46
  * @LastEditors: Please set LastEditors
  * @Description: 用户信息状态管理
  * @FilePath: /MusicProject/src/reducers/userSlice.ts
@@ -44,8 +44,8 @@ export const getLocalLiraryAccessAuthorition = createAsyncThunk(
   "user/getLocalLiraryAccessAuthorition",
   async () => {
     const accessAuthorition = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      // && PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE &&
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       {
         title: "Grant Access",
         message:
