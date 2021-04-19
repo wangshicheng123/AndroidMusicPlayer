@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:12:28
- * @LastEditTime: 2021-04-18 16:07:19
+ * @LastEditTime: 2021-04-19 22:27:32
  * @LastEditors: Please set LastEditors
  * @Description: 在线歌单
  * @FilePath: /MusicProject/src/pages/Home/components/OnlineSongs/index.tsx
@@ -39,7 +39,7 @@ const OnlineSongsContainer = () => {
       cover: playlist.cover,
     };
     navigation.navigate("Playlist", {
-      playlist: playlistMetadata,
+      playlistMetadata: playlistMetadata,
       songs: playlist.children,
     });
   };

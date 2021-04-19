@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:19:55
- * @LastEditTime: 2021-04-18 23:49:42
+ * @LastEditTime: 2021-04-20 00:46:34
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放页面
  * @FilePath: /MusicProject/src/pages/Player/components/PlayerScreen/index.tsx
@@ -19,62 +19,52 @@ import PlayerController from "@/components/PlayerController/index";
 import Progress from "@/components/Progress/index";
 import Screen from "@/components/Screen/index";
 import ActiveTrackDetails from "@/components/ActiveTrackDetails/index";
-// import { RootReducerType } from '../../reducers';
 import PlaylistDialog from "@/components/PlaylistDialog/index";
-// import { addToPlaylist } from '../../actions/playerState';
-// import { downloadMedia } from '../../actions/mediaStore';
-import { ISongItem } from "@/interface/index";
+import { downloadSong, cacheLoadSong } from "@/reducers/songSlice";
+import { addToPlayingQueue } from "@/reducers/queueSlice";
 
-const PlayerScreen = () => {
+interface IProps {
+  route: any;
+}
+const PlayerScreen = (props: IProps) => {
+  const { route } = props;
+  const { songData } = route.params;
   const navigation = useNavigation();
-  const [visible, setVisible] = useState("");
+  const [dialogVisible, setDialogVisible] = useState(false);
   const dispatch = useDispatch();
-  const close = () => {
+
+  const handlePlayerClose = () => {
     navigation.goBack();
   };
 
   const addSongToPlaylist = (id: string) => {
+    dispatch(addToPlayingQueue([songData]));
     // dispatch(addToPlaylist(id, active));
-    setVisible("");
+    setDialogVisible(false);
   };
 
-  // const active = useSelector(
-  //   (state: RootReducerType) => state.playerState.active,
-  // );
-  // test
-  const active: ISongItem = {
-    id: "1",
-    cover:
-      "https://dl.dropboxusercontent.com/s/cmzkdk7lxsxvnnb/ni-sanihake-bandare.jpg?dl=0",
-    title: "Ni Sanihake bandare",
-    path:
-      "https://dl.dropboxusercontent.com/s/o4djrulrcic6zjb/Nee%20Sanihake%20Bandre.mp3?dl=0",
-    artist: "Sonu Nigam",
-    type: "online",
+  const download = () => {
+    dispatch(downloadSong({ songData: songData }));
+    setDialogVisible(false);
   };
-
-  function download() {
-    // dispatch(downloadMedia(active));
-    setVisible("");
-  }
 
   return (
     <Screen>
       <PlaylistDialog
-        visible={visible === "DIALOG"}
-        hideModal={() => setVisible("")}
+        visible={dialogVisible}
+        hideModal={() => setDialogVisible(false)}
         addToPlaylist={addSongToPlaylist}
       />
       <View style={styles.playerContainer}>
         <View style={styles.container}>
-          <IconButton icon="close" onPress={close} />
+          <IconButton icon="close" onPress={handlePlayerClose} />
         </View>
-        <ActiveTrackDetails track={active} />
+        <ActiveTrackDetails track={songData} />
         <View style={styles.centerContainer}>
           <Progress />
         </View>
         <View style={styles.playerToolbox}>
-          <FavContainer item={active} type="song" style={{ flex: 1 }} />
+          <FavContainer item={songData} type="song" style={{ flex: 1 }} />
           <PlayerController />
           <RepeatContainer />
         </View>
@@ -90,7 +80,7 @@ const PlayerScreen = () => {
           </View>
           {includes(
             ["youtube", "online", "jiosaavn"],
-            active.type?.toLowerCase()
+            songData.type?.toLowerCase()
           ) && (
             <View style={styles.extraIcon}>
               <IconButton
@@ -111,7 +101,7 @@ const PlayerScreen = () => {
               icon={(props) => (
                 <CustomIcon name="folder-add-outline" {...props} />
               )}
-              onPress={() => setVisible("DIALOG")}
+              onPress={() => setDialogVisible(true)}
             />
             <Caption>Playlist</Caption>
           </View>

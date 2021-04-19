@@ -1,35 +1,45 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-19 18:42:38
+ * @LastEditTime: 2021-04-19 22:55:08
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
  */
 import React, { useState } from "react";
-import { Title, Button, Divider, Subheading } from "react-native-paper";
-import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import { useDispatch } from "react-redux";
-import isEmpty from "lodash/isEmpty";
-import values from "lodash/values";
 import FastImage from "react-native-fast-image";
-// import { addToQueue } from '../../actions/playerState';
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
+import { Title, Button, Divider, Subheading } from "react-native-paper";
+
+import isEmpty from "lodash/isEmpty";
 import SongContainer from "@/components/SongContainer/index";
 import DefaultImage from "@/components/DefaultImage";
 import Screen from "@/components/Screen";
 import EmptyPlaylist from "@/components/EmptyPlayList/index";
-
 import { IPlayListItem } from "@/interface/index";
+import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
 
-const SongsList = ({ route }) => {
-  console.log(route);
-  const { playlist, songs } = route.params;
+interface IProps {
+  route: any;
+}
+
+const SongsList = (props: IProps) => {
+  const dispatch = useDispatch();
+  const { route } = props;
+  const { playlistMetadata, songs } = route.params;
   const [refreshing, setRefreshing] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const addSongToQueue = () => {
-    // dispatch(addToQueue(values(songs)));
+  /**
+   * @description: 播放所有歌曲，添加到播放队列
+   * @param {*}
+   * @return {*}
+   */
+  const handlePlayAll = () => {
+    /* 添加歌单到播放任务队列 */
+    dispatch(addToPlayingQueue(songs));
+    /* 执行当前任务队列中的第一首歌 */
+    dispatch(excutePlayingQueue());
   };
 
   const onRefresh = () => {
@@ -45,9 +55,9 @@ const SongsList = ({ route }) => {
           ListHeaderComponent={() => (
             <View style={{ margin: 12 }}>
               <View style={styles.coverContainer}>
-                {playlist.cover ? (
+                {playlistMetadata.cover ? (
                   <FastImage
-                    source={{ uri: playlist.cover }}
+                    source={{ uri: playlistMetadata.cover }}
                     style={styles.artCover}
                   />
                 ) : (
@@ -55,11 +65,11 @@ const SongsList = ({ route }) => {
                 )}
               </View>
               <View style={styles.titleContainer}>
-                <Title>{playlist.name}</Title>
-                <Subheading>{`by ${playlist.owner}`}</Subheading>
+                <Title>{playlistMetadata.name}</Title>
+                <Subheading>{`by ${playlistMetadata.owner}`}</Subheading>
               </View>
               <View style={styles.buttonContainer}>
-                <Button mode="contained" onPress={addSongToQueue}>
+                <Button mode="contained" onPress={handlePlayAll}>
                   Play All
                 </Button>
               </View>

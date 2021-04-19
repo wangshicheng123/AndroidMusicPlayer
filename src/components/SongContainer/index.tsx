@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:31:48
- * @LastEditTime: 2021-04-19 17:30:07
+ * @LastEditTime: 2021-04-19 21:52:59
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表中的item
  * @FilePath: /MusicProject/src/components/SongContainer/index.tsx
@@ -12,10 +12,8 @@ import isEqual from "lodash/isEqual";
 
 import Song from "@/components/Song/index";
 import { IPlayListItem } from "@/interface/index";
-// import { RootReducerType } from '../reducers';
-// import { downloadMedia } from '../actions/mediaStore';
 import { IAppState } from "@/reducers/index";
-import { catcheLoadSong, downloadSong } from "@/reducers/songSlice";
+import { cacheLoadSong, downloadSong } from "@/reducers/songSlice";
 
 interface IProps {
   songData: IPlayListItem;
@@ -56,7 +54,7 @@ const SongContainer = ({ songData, goBack }: IProps) => {
    */
   const handelSongPlay = () => {
     if (isActive) return;
-    dispatch(catcheLoadSong({ songData: songData }));
+    dispatch(cacheLoadSong({ songData: songData }));
     if (goBack) {
       goBack();
     }

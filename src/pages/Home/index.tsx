@@ -1,20 +1,21 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 17:03:23
- * @LastEditTime: 2021-04-18 16:03:34
+ * @LastEditTime: 2021-04-19 23:27:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Home/index.tsx
  */
 
 import React from "react";
+import { useDispatch } from "react-redux";
 import { View, Text } from "react-native";
 import { useTheme, IconButton } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 import { getGreetingTime } from "@/utils/greeting";
 import HomeScreen from "./Home";
 import SongPlayListScreen from "../SongPlayList/index";
-// import {useDispatch, useSelector} from 'react-redux';
+import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
 
 const SettingScreen = () => {
   return (
@@ -27,6 +28,7 @@ const Stack = createStackNavigator();
 
 const Home = () => {
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -63,18 +65,18 @@ const Home = () => {
       <Stack.Screen
         name="Playlist"
         component={SongPlayListScreen}
-        options={({ route }) => {
-          const playlist = route?.params?.playlist;
-          // const { addToQueue } = route.params;
-          // console.log("===>>>", route);
+        options={({ route }: { route: any }) => {
+          const {
+            params: { playlistMetadata, songs },
+          } = route;
           return {
-            headerTitle: playlist.name,
+            headerTitle: playlistMetadata.name,
             headerRight: () => (
               <IconButton
                 icon="play-circle-outline"
-                // onPress={() => addToQueue()}
                 onPress={() => {
-                  console.log("addToQueen");
+                  dispatch(addToPlayingQueue(songs));
+                  dispatch(excutePlayingQueue());
                 }}
               />
             ),

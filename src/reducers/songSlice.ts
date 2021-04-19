@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-19 18:37:45
+ * @LastEditTime: 2021-04-19 23:50:29
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -12,8 +12,8 @@ import { TrackPlayer } from "react-track-player";
 import { ISongItem } from "@/interface/index";
 import RNFS from "react-native-fs";
 import { checkFolderPath, download } from "@/utils/downloadSong";
-import { showNotify } from "@/reducers/notifySlice";
-import { State } from "react-native-gesture-handler";
+import { showNotify } from "./notifySlice";
+import { addToHistoryQueue } from "./queueSlice";
 
 type TPlayingStatus = "init" | "playing" | "paused";
 let subscription: EmitterSubscription;
@@ -39,13 +39,14 @@ const initialState: IInitialSongState = {
  */
 export const cacheLoadSong = createAsyncThunk(
   "song/cacheLoadSong",
-  async (params: ICacheLoadSong) => {
+  async (params: ICacheLoadSong, thunkAPI) => {
     const { playingOnLoad = true, songData } = params;
     const { path } = songData;
     if (!path) return;
 
     try {
       await TrackPlayer.load(path);
+      thunkAPI.dispatch(addToHistoryQueue([songData]));
       return {
         playingOnLoad: playingOnLoad,
         songData: songData,

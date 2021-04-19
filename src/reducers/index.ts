@@ -12,6 +12,7 @@ import configSlice, { IInitialConfigState } from "./configSlice";
 import userSlice, { IInitialUserState } from "./userSlice";
 import songSlice, { IInitialSongState } from "./songSlice";
 import notifySlice, { IInitialNotifyState } from "./notifySlice";
+import queueSlice, { IInitialQueueState } from "./queueSlice";
 
 export interface IAppState {
   home: Array<number>;
@@ -19,6 +20,7 @@ export interface IAppState {
   user: IInitialUserState;
   song: IInitialSongState;
   notify: IInitialNotifyState;
+  queue: IInitialQueueState;
 }
 
 export const reducers = combineReducers({
@@ -27,4 +29,5 @@ export const reducers = combineReducers({
   user: userSlice,
   song: songSlice,
   notify: notifySlice,
+  queue: queueSlice,
 });
