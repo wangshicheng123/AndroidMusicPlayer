@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:31:48
- * @LastEditTime: 2021-04-18 22:39:01
+ * @LastEditTime: 2021-04-19 10:31:08
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表中的item
  * @FilePath: /MusicProject/src/components/SongContainer/index.tsx
@@ -15,7 +15,7 @@ import { IPlayListItem } from "@/interface/index";
 // import { RootReducerType } from '../reducers';
 // import { downloadMedia } from '../actions/mediaStore';
 import { IAppState } from "@/reducers/index";
-import { playingSong } from "@/reducers/songSlice";
+import { playingSong, downloadSong } from "@/reducers/songSlice";
 
 interface Props {
   songData: IPlayListItem;
@@ -37,13 +37,16 @@ const SongContainer = ({ songData, goBack }: Props) => {
     }
   }, [currentSong, songData]);
 
+  const handleCheckLibraryAccessAthorization = () => {};
   /**
    * @description: 处理歌曲下载
    * @param {*}
    * @return {*}
    */
   const handleSongDownload = () => {
-    // dispatch(downloadMedia(track));
+    // 点击下载之前需要校验下载权限
+    handleCheckLibraryAccessAthorization();
+    dispatch(downloadSong({ songData: songData }));
   };
 
   /**

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-04-04 10:44:20
+ * @LastEditTime: 2021-04-19 10:03:02
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /MusicProject/android/app/src/main/java/com/musicproject/MainApplication.java
+ */
 package com.musicproject;
 
 import android.app.Application;
@@ -12,6 +20,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import com.rnfs.RNFSPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,6 +37,10 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new RNGoogleSigninPackage());
+          // return Arrays.<ReactPackage>asList(
+          // new MainReactPackage(), // <---- add comma
+          // new RNFSPackage() // <---------- add package
+          // );
           return packages;
         }
 

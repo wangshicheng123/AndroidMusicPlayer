@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-18 23:22:23
+ * @LastEditTime: 2021-04-19 15:55:38
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts
@@ -26,6 +26,7 @@ import PlayerNavigator from "./PlayerNavigator";
 /* 初始化相关导航页面 */
 import LaunchScreen from "@/pages/Launch/index";
 import IntroductionScreen from "@/pages/Introduction/index";
+import Notification from "@/components/Notification/index";
 
 const Stack = createStackNavigator();
 const NativeStack = createNativeStackNavigator();
@@ -93,6 +94,7 @@ const AppNavigator = () => {
     <SafeAreaView
       style={{ backgroundColor: colors.surface, ...styles.container }}
     >
+      <Notification />
       <AuthStack />
     </SafeAreaView>
   );
