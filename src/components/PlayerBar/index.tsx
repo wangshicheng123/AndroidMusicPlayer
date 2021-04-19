@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:09:11
- * @LastEditTime: 2021-04-18 23:44:58
+ * @LastEditTime: 2021-04-19 17:50:57
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放条
  * @FilePath: /MusicProject/src/components/PlayerBar/index.tsx
@@ -20,15 +20,20 @@ import DefaultImage from "../DefaultImage/index";
 import { ISongItem } from "@/interface/index";
 
 interface IProps {
-  active: ISongItem;
-  status: string;
-  togglePlayback(): void;
-  navigateToPlayer(): void;
+  songData: ISongItem;
+  playingStatus: string;
+  handelTogglePlayStatus: () => void;
+  navigateToPlayer: () => void;
 }
 
 const PlayerBar = (props: IProps) => {
-  const { active, status, togglePlayback, navigateToPlayer } = props;
-  const { cover, artist, album, title } = active;
+  const {
+    songData,
+    playingStatus,
+    handelTogglePlayStatus,
+    navigateToPlayer,
+  } = props;
+  const { cover, artist, album, title } = songData;
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -45,25 +50,29 @@ const PlayerBar = (props: IProps) => {
           <Text numberOfLines={1} style={styles.textStyle}>
             {title}
           </Text>
-          <Caption
-            numberOfLines={1}
-            style={{ marginVertical: 0, includeFontPadding: false }}
-          >
+          <Caption numberOfLines={1} style={styles.captionStyle}>
             {artist || album}
           </Caption>
         </View>
         <View style={styles.iconContainer}>
-          {status === "loading" ? (
-            <ActivityIndicator animating={status === "loading"} />
+          <IconButton
+            icon={playingStatus === "playing" ? "pause" : "play"}
+            animated
+            size={34}
+            onPress={handelTogglePlayStatus}
+            style={styles.iconButtonStyle}
+          />
+          {/* {playingStatus === "loading" ? (
+            <ActivityIndicator animating={playingStatus === "loading"} />
           ) : (
             <IconButton
-              icon={status === "playing" ? "pause" : "play"}
+              icon={playingStatus === "playing" ? "pause" : "play"}
               animated
               size={34}
-              onPress={togglePlayback}
+              onPress={handelTogglePlayStatus}
               style={styles.iconButtonStyle}
             />
-          )}
+          )} */}
         </View>
       </Surface>
     </TouchableOpacity>
@@ -95,7 +104,6 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   textContainer: {
-    // alignItems: 'center',
     flex: 1,
     justifyContent: "center",
     marginHorizontal: 12,
@@ -110,6 +118,10 @@ const styles = StyleSheet.create({
   iconButtonStyle: {
     margin: 0,
     padding: 0,
+  },
+  captionStyle: {
+    marginVertical: 0,
+    includeFontPadding: false,
   },
 });
 

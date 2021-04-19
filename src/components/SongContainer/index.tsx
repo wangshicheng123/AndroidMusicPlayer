@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:31:48
- * @LastEditTime: 2021-04-19 10:31:08
+ * @LastEditTime: 2021-04-19 17:30:07
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表中的item
  * @FilePath: /MusicProject/src/components/SongContainer/index.tsx
@@ -15,14 +15,14 @@ import { IPlayListItem } from "@/interface/index";
 // import { RootReducerType } from '../reducers';
 // import { downloadMedia } from '../actions/mediaStore';
 import { IAppState } from "@/reducers/index";
-import { playingSong, downloadSong } from "@/reducers/songSlice";
+import { catcheLoadSong, downloadSong } from "@/reducers/songSlice";
 
-interface Props {
+interface IProps {
   songData: IPlayListItem;
   goBack?: () => void;
 }
 
-const SongContainer = ({ songData, goBack }: Props) => {
+const SongContainer = ({ songData, goBack }: IProps) => {
   /* 记录【当前】此歌曲的播放状态 */
   const [isActive, setActive] = useState(false);
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const SongContainer = ({ songData, goBack }: Props) => {
    */
   const handelSongPlay = () => {
     if (isActive) return;
-    dispatch(playingSong({ songData: songData }));
+    dispatch(catcheLoadSong({ songData: songData }));
     if (goBack) {
       goBack();
     }

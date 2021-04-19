@@ -1,9 +1,9 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-18 18:22:08
+ * @LastEditTime: 2021-04-19 18:42:38
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
  */
 import React, { useState } from "react";

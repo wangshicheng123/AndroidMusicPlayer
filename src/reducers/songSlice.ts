@@ -1,25 +1,28 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-19 16:29:54
+ * @LastEditTime: 2021-04-19 18:37:45
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
  */
+import { DeviceEventEmitter, EmitterSubscription } from "react-native";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { TrackPlayer } from "react-track-player";
 import { ISongItem } from "@/interface/index";
 import RNFS from "react-native-fs";
 import { checkFolderPath, download } from "@/utils/downloadSong";
 import { showNotify } from "@/reducers/notifySlice";
+import { State } from "react-native-gesture-handler";
 
 type TPlayingStatus = "init" | "playing" | "paused";
+let subscription: EmitterSubscription;
 export interface IInitialSongState {
   currentSong: ISongItem;
   playingStatus: TPlayingStatus; // 音乐播放的状态
 }
 
-interface IPlayingSong {
+interface ICacheLoadSong {
   playingOnLoad?: boolean;
   songData: ISongItem;
 }
@@ -30,13 +33,13 @@ const initialState: IInitialSongState = {
 };
 
 /**
- * @description: 歌曲播放
+ * @description: 缓存加载歌曲，不一定立即播放
  * @param {*}
  * @return {*}
  */
-export const playingSong = createAsyncThunk(
-  "song/playingSong",
-  async (params: IPlayingSong) => {
+export const cacheLoadSong = createAsyncThunk(
+  "song/cacheLoadSong",
+  async (params: ICacheLoadSong) => {
     const { playingOnLoad = true, songData } = params;
     const { path } = songData;
     if (!path) return;
@@ -86,28 +89,73 @@ export const downloadSong = createAsyncThunk(
   }
 );
 
+/**
+ * @description: 初始化歌曲的播放状态【订阅播放事件/初始化播放状态】
+ * @param {*}
+ * @return {*}
+ */
+export const initializeTrackPlayer = createAsyncThunk(
+  "song/initializeTrackPlayer",
+  async (params, thunkAPI) => {
+    try {
+      /* 可以监听设备的前进后退事件 */
+      subscription = DeviceEventEmitter.addListener("media", function (event) {
+        if (event == "skip_to_next") {
+          // dispatch(skipToNext());
+          console.log("skip_to_next");
+          thunkAPI.dispatch(pause());
+        } else if (event == "skip_to_previous") {
+          // dispatch(skipToPrevious());
+          console.log("skip_to_previous");
+          thunkAPI.dispatch(pause());
+        } else if (event == "completed") {
+          // dispatch(skipToNext());
+          console.log("completed");
+          thunkAPI.dispatch(pause());
+        } else {
+        }
+      });
+      thunkAPI.dispatch(pause());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+/**
+ * @description: 销毁播放条
+ * @param {*} createAsyncThunk
+ * @return {*}
+ */
+export const destroyTrackPlayer = createAsyncThunk(
+  "song/destroyTrackPlayer",
+  async (params, thunkAPI) => {
+    try {
+      TrackPlayer.destroy();
+      subscription.remove();
+      thunkAPI.dispatch(pause());
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const songSlice = createSlice({
   name: "song",
   initialState: initialState,
   reducers: {
-    updatePlayingStatus: (
-      state: IInitialSongState,
-      action: {
-        payload: {
-          playingStatus: TPlayingStatus;
-        };
-        type: string;
-      }
-    ) => {
-      const {
-        payload: { playingStatus },
-      } = action;
-      state.playingStatus = playingStatus;
+    play: (state: IInitialSongState) => {
+      state.playingStatus = "playing";
+      TrackPlayer.play();
+    },
+    pause: (state: IInitialSongState) => {
+      state.playingStatus = "paused";
+      TrackPlayer.pause();
     },
   },
   extraReducers: (builder) => {
     builder.addCase(
-      playingSong.fulfilled,
+      cacheLoadSong.fulfilled,
       (state: IInitialSongState, action: { type: string; payload: any }) => {
         const {
           payload: { playingOnLoad, songData },
@@ -122,11 +170,11 @@ const songSlice = createSlice({
         }
       }
     );
-    builder.addCase(playingSong.rejected, (state) => {
+    builder.addCase(cacheLoadSong.rejected, (state) => {
       console.log("歌曲加载失败");
     });
   },
 });
 
 export default songSlice.reducer;
-export const { updatePlayingStatus } = songSlice.actions;
+export const { play, pause } = songSlice.actions;

@@ -1,72 +1,74 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:09:32
- * @LastEditTime: 2021-04-18 23:40:18
+ * @LastEditTime: 2021-04-19 18:17:45
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放条外部容器组件
  * @FilePath: /MusicProject/src/components/PlayerBarContainer/index.tsx
  */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { isEmpty } from "lodash";
 import { useNavigation } from "@react-navigation/core";
-
-// import {
-//   playTrack,
-//   pauseTrack,
-//   loadTrack,
-//   destroyTrackPlayer,
-//   setUpTrackPlayer,
-// } from '../actions/playerState';
+import { IAppState } from "@/reducers/index";
 import PlayerBar from "@/components/PlayerBar/index";
+import {
+  play,
+  pause,
+  initializeTrackPlayer,
+  destroyTrackPlayer,
+  cacheLoadSong,
+} from "@/reducers/songSlice";
 
 const PlayerBarContainer = () => {
   const navigation = useNavigation();
-  // const active = useSelector((state: any) => state.playerState.active);
-  // const status = useSelector((state: any) => state.playerState.status);
-  // const dispatch = useDispatch();
+  const { currentSong, playingStatus } = useSelector(
+    (state: IAppState) => state.song
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(setUpTrackPlayer());
-    // if (active !== {} && !isEmpty(active)) {
-    // dispatch(loadTrack(active, false));
-    // }
+    /* 初始化播放条 */
+    dispatch(initializeTrackPlayer());
+    if (currentSong.id) {
+      /* 歌曲预加载【不播放】*/
+      dispatch(cacheLoadSong({ playingOnLoad: false, songData: currentSong }));
+    }
     return () => {
-      // dispatch(destroyTrackPlayer());
+      dispatch(destroyTrackPlayer());
     };
   }, []);
 
-  const togglePlayback = () => {
-    // if (status === 'playing') {
-    // pauseTrack();
-    // } else {
-    // playTrack();
-    // }
+  /**
+   * @description: 处理播放/暂停的切换事件
+   * @param {*}
+   * @return {*}
+   */
+  const handelTogglePlayStatus = () => {
+    if (playingStatus === "playing") {
+      dispatch(pause());
+    } else {
+      dispatch(play());
+    }
   };
 
+  /**
+   * @description: 导航至播放详情页面
+   * @param {*}
+   * @return {*}
+   */
   const navigateToPlayer = React.useMemo(
     () => () => navigation.navigate("Player"),
     [navigation]
   );
 
-  // if (Object.keys(active).length === 0 && active.constructor === Object) {
-  //   return null;
-  // }
-  const data = {
-    id: "1",
-    cover:
-      "https://dl.dropboxusercontent.com/s/cmzkdk7lxsxvnnb/ni-sanihake-bandare.jpg?dl=0",
-    title: "Ni Sanihake bandare",
-    path:
-      "https://dl.dropboxusercontent.com/s/o4djrulrcic6zjb/Nee%20Sanihake%20Bandre.mp3?dl=0",
-    artist: "Sonu Nigam",
-    type: "online",
-  };
+  if (!currentSong.id) {
+    return null;
+  }
   return (
     <PlayerBar
-      active={data}
-      status={"playing"}
-      togglePlayback={togglePlayback}
+      songData={currentSong}
+      playingStatus={playingStatus}
+      handelTogglePlayStatus={handelTogglePlayStatus}
       navigateToPlayer={navigateToPlayer}
     />
   );
