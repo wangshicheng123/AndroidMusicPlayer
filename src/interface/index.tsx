@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-18 15:26:26
- * @LastEditTime: 2021-04-18 20:54:29
+ * @LastEditTime: 2021-04-22 14:56:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/interface/index.tsx
@@ -45,10 +45,10 @@ export interface ArtistProps {
   name: string;
 }
 
-export interface PlaylistProps {
+export interface IPlaylist {
   id: string;
   name: string;
   owner: string;
-  songs?: ISongItem;
+  songs: ISongItem[];
   cover?: string;
 }

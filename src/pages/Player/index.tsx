@@ -1,13 +1,13 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:19:55
- * @LastEditTime: 2021-04-20 00:46:34
+ * @LastEditTime: 2021-04-22 15:04:27
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放页面
  * @FilePath: /MusicProject/src/pages/Player/components/PlayerScreen/index.tsx
  */
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { Caption, IconButton } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -18,28 +18,26 @@ import RepeatContainer from "@/components/RepeatContainer/index";
 import PlayerController from "@/components/PlayerController/index";
 import Progress from "@/components/Progress/index";
 import Screen from "@/components/Screen/index";
-import ActiveTrackDetails from "@/components/ActiveTrackDetails/index";
+import ActiveSongDetails from "@/components/ActiveSongDetails/index";
 import PlaylistDialog from "@/components/PlaylistDialog/index";
-import { downloadSong, cacheLoadSong } from "@/reducers/songSlice";
-import { addToPlayingQueue } from "@/reducers/queueSlice";
+import { downloadSong } from "@/reducers/songSlice";
+import { IAppState } from "@/reducers/index";
+import { addSongToPlaylist } from "@/reducers/playlistSlice";
 
-interface IProps {
-  route: any;
-}
-const PlayerScreen = (props: IProps) => {
-  const { route } = props;
-  const { songData } = route.params;
+const PlayerScreen = () => {
   const navigation = useNavigation();
   const [dialogVisible, setDialogVisible] = useState(false);
   const dispatch = useDispatch();
+  const { currentSong: songData } = useSelector(
+    (state: IAppState) => state.song
+  );
 
   const handlePlayerClose = () => {
     navigation.goBack();
   };
 
-  const addSongToPlaylist = (id: string) => {
-    dispatch(addToPlayingQueue([songData]));
-    // dispatch(addToPlaylist(id, active));
+  const handleAddSongToPlaylist = (id: string) => {
+    dispatch(addSongToPlaylist({ playlistId: id, songData: songData }));
     setDialogVisible(false);
   };
 
@@ -53,20 +51,27 @@ const PlayerScreen = (props: IProps) => {
       <PlaylistDialog
         visible={dialogVisible}
         hideModal={() => setDialogVisible(false)}
-        addToPlaylist={addSongToPlaylist}
+        addToPlaylist={handleAddSongToPlaylist}
       />
       <View style={styles.playerContainer}>
         <View style={styles.container}>
           <IconButton icon="close" onPress={handlePlayerClose} />
         </View>
-        <ActiveTrackDetails track={songData} />
+        <ActiveSongDetails songData={songData} />
         <View style={styles.centerContainer}>
           <Progress />
         </View>
         <View style={styles.playerToolbox}>
-          <FavContainer item={songData} type="song" style={{ flex: 1 }} />
-          <PlayerController />
-          <RepeatContainer />
+          <FavContainer
+            favData={songData}
+            likeType="song"
+            style={styles.favContainerStyle}
+          />
+          <PlayerController songData={songData} />
+          {/* <RepeatContainer /> */}
+          <View>
+            <Text> </Text>
+          </View>
         </View>
         <View style={styles.extraMenuContainer}>
           <View style={styles.extraIcon}>
@@ -128,9 +133,14 @@ const styles = StyleSheet.create({
   },
   playerToolbox: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     margin: 16,
+  },
+  favContainerStyle: {
+    width: 5,
+    marginLeft: 17,
+    // flex: 0.2,
   },
   extraMenuContainer: {
     flexDirection: "row",

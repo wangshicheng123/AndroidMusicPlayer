@@ -2,221 +2,196 @@
   "media": [
     {
       "id": "1",
-      "cover": "https://dl.dropboxusercontent.com/s/0dk1xmdi05eci1p/kannadiga.jpg?dl=0",
-      "title": "Sandalwood Hits",
+      "cover": "https://p2.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg",
+      "title": "音乐飙升榜",
       "artist": "All",
       "type": "Folder",
-      "subtitle": "18 items",
+      "subtitle": "20 items",
       "genre": "Sandalwood",
       "children": [
         {
           "id": "1",
-          "cover": "https://dl.dropboxusercontent.com/s/cmzkdk7lxsxvnnb/ni-sanihake-bandare.jpg?dl=0",
-          "title": "Ni Sanihake bandare",
-          "path": "https://dl.dropboxusercontent.com/s/o4djrulrcic6zjb/Nee%20Sanihake%20Bandre.mp3?dl=0",
-          "artist": "Sonu Nigam",
+          "cover": "http://p3.music.126.net/Qoot8VQwIhdN61dlGX58fg==/109951165895528876.jpg",
+          "title": "火花",
+          "path": "https://m701.music.126.net/20210422001354/9b2821a9e9d61951afdfdcb8c5585ec6/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8480285773/3919/15b0/2cd6/eb78c2aa0604f4c968d80a9d0fe89d8c.mp3",
+          "artist": "毛不易",
           "type": "online"
         },
         {
           "id": "2",
-          "cover": "http://kannadasongs.cc/thumbs/102.png",
-          "title": "Avarivara Jothe",
-          "path": "http://kannadasongs.cc/file/download/104.html",
-          "artist": "Sonu Nigam",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "灯火里的中国",
+          "path": "https://m701.music.126.net/20210422001445/bb4808c148b4f80b8e781f43a39f4ea4/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8457605799/e0a3/ab72/9daf/48618ccd626e9388260c6682afcca8bd.mp3",
+          "artist": "张也/周深",
           "type": "online"
         },
         {
           "id": "3",
-          "cover": "http://kannadasongs.cc/thumbs/46.png",
-          "title": " Natasaarvabhowma ",
-          "path": "http://kannadasongs.cc/file/download/46.html",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "孩子气",
+          "path": "https://m701.music.126.net/20210422001509/6c50e970e70fccf0531c0fde54696185/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8458214143/d75c/c457/130f/2b8214d31666bdf0db6fbcbff91086e7.mp3",
+          "artist": "沈以诚",
           "type": "online"
         },
         {
           "id": "4",
-          "cover": "http://kannadasongs.cc/thumbs/41.png",
-          "title": " Nagarahavu",
-          "path": "http://kannadasongs.cc/file/download/41.html",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "鱼缸",
+          "path": "https://m801.music.126.net/20210422001532/0da154842d8ff84217970acc3c8bc69f/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7591056798/e3dd/6473/8c74/2098c37fc5e24f60c709acb7003cfc03.mp3",
+          "artist": "浦东老农民",
           "type": "online"
         },
         {
           "id": "5",
-          "cover": "http://kannadasongs.cc/icon.php?file=L2ZpbGVzL05ld19NcDNfU29uZ3MvS2F2YWNoYS9SZWtrYXlhX3NvbG9fLm1wMw==&fid=21",
-          "title": " Rekkaya-solo ",
-          "path": "http://kannadasongs.cc/file/download/21.html",
-          "type": "online"
-        },
-        {
-          "id": "6",
-          "cover": "http://kannadasongs.cc/thumbs/108.png",
-          "title": " Magariya",
-          "path": "http://kannadasongs.cc/file/download/108.html",
-          "type": "online"
-        },
-        {
-          "id": "7",
-          "cover": "http://kannadasongs.cc/icon.php?file=L2ZpbGVzL05ld19NcDNfU29uZ3MvQW5hbnRodV9WU19OdXNyYXRoL09tbWV5dV9UaGlydWdpXy5tcDM=&fid=29",
-          "title": " Ommeyu Thirugi ",
-          "path": "http://kannadasongs.cc/file/download/29.html",
-          "type": "online"
-        },
-        {
-          "id": "8",
-          "cover": "http://kannadasongs.cc/thumbs/42.png",
-          "title": " Kotigobba-2 ",
-          "path": "http://kannadasongs.cc/file/download/42.html",
-          "type": "online"
-        },
-        {
-          "id": "9",
-          "cover": "http://kannadasongs.cc/thumbs/102.png",
-          "title": " Avarivara Jothe",
-          "path": "http://kannadasongs.cc/file/download/104.html",
-          "artist": "Sonu Nigam",
-          "type": "online"
-        },
-        {
-          "id": "10",
-          "cover": "https://dl.dropboxusercontent.com/s/iw69wlkr9k7e8l6/Googly-2015.jpg?dl=0",
-          "title": "Yeno Yeno Aagide ",
-          "path": "https://dl.dropboxusercontent.com/s/j00rbiout3lt8yn/Yeno%20Yeno%20Aagide.mp3?dl=0",
-          "type": "online"
-        },
-        {
-          "id": "111",
-          "cover": "http://kannadasongs.cc/thumbs/94.png",
-          "title": " Nee Eshtu Muddhu",
-          "path": "http://kannadasongs.cc/file/download/97.html",
-          "type": "online"
-        },
-        {
-          "id": "112",
-          "cover": "http://kannadasongs.cc/thumbs/109.png",
-          "title": " Ninna Shehadinda",
-          "path": "http://kannadasongs.cc/file/download/118.html",
-          "type": "online"
-        },
-        {
-          "id": "113",
-          "cover": "http://kannadasongs.cc/thumbs/41.png",
-          "title": " Nagarahavu",
-          "path": "http://kannadasongs.cc/file/download/41.html",
-          "type": "online"
-        },
-        {
-          "id": "114",
-          "cover": "https://dl.dropboxusercontent.com/s/iw69wlkr9k7e8l6/Googly-2015.jpg?dl=0",
-          "title": "Neenirade",
-          "path": "https://dl.dropboxusercontent.com/s/cfwy6incaicpaqo/Neenirade.mp3?dl=0",
-          "artist": "Sonu Nigam",
-          "type": "online"
-        },
-        {
-          "id": "15",
-          "cover": "https://dl.dropboxusercontent.com/s/3a5o701zlpujpr9/Dont-Worry-2019.jpg?dl=0",
-          "title": " Don't Worry",
-          "path": "https://dl.dropboxusercontent.com/s/evzyrlnrtyovho6/Don%27t%20Worry.mp3?dl=0",
-          "artist": "Allok",
-          "type": "online"
-        },
-        {
-          "id": "16",
-          "cover": "http://kannadasongs.cc/thumbs/46.png",
-          "title": " Natasaarvabhowma ",
-          "path": "http://kannadasongs.cc/file/download/46.html",
-          "type": "online"
-        },
-        {
-          "id": "117",
-          "cover": "https://dl.dropboxusercontent.com/s/vxbiutz5e0yyen0/Amar-2019.jpg?dl=0",
-          "title": "Marethuhoyithe",
-          "path": "https://dl.dropboxusercontent.com/s/gcg48saswg7juu8/Marethuhoyithe.mp3?dl=0",
-          "artist": "Sanchith Hegde",
-          "type": "online"
-        },
-        {
-          "id": "18",
-          "cover": "http://kannadasongs.cc/icon.php?file=L2ZpbGVzL05ld19NcDNfU29uZ3MvS2F2YWNoYS9SZWtrYXlhX3NvbG9fLm1wMw==&fid=21",
-          "title": " Rekkaya-solo ",
-          "path": "http://kannadasongs.cc/file/download/21.html",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "望",
+          "path": "https://m801.music.126.net/20210422001553/4930d144cc0331ba8d1dd5c973e04739/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7060712852/87fb/ec4a/eb47/fe36941572014ad5e107f9ef7a63eefb.mp3",
+          "artist": "周深",
           "type": "online"
         }
       ]
     },
     {
       "id": "2",
-      "cover": "https://dl.dropboxusercontent.com/s/z42l5cnuvvox8vv/hindi.jpg?dl=0",
-      "title": "Bollywood Hits",
+      "cover": "https://p1.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/18713687906568048.jpg",
+      "title": "音乐新歌榜",
       "artist": "All",
       "genre": "Bollywood",
-      "subtitle": "4 items",
+      "subtitle": "20items",
       "type": "Folder",
       "children": [
         {
-          "id": "118",
-          "cover": "https://dl.dropboxusercontent.com/s/xksid0fjeobbdlq/dheeme-dheeme.jpg?dl=0",
-          "title": "Dheeme Dheeme",
-          "path": "https://dl.dropboxusercontent.com/s/1jvloe34chc5cgb/Dheeme%20Dheeme%20-%20Tony%20Kakkar%20%28DJJOhAL.Com%29.mp3?dl=0",
-          "artist": "Tony Kakkar",
+          "id": "50",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "红马 (女版)",
+          "path": "https://m801.music.126.net/20210422001638/05d89e1bb921fbdf8ffcebca6de04ad6/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8197221114/c89d/2df6/1b74/04972cbd2664f1446312f47df36e91de.mp3",
+          "artist": "一颗狼星_许篮心",
           "type": "online"
         },
         {
-          "id": "119",
-          "cover": "https://dl.dropboxusercontent.com/s/jy7y7j601k1hkjo/Bekhayali.jpg?dl=0",
-          "title": "Bekhayali",
-          "path": "https://dl.dropboxusercontent.com/s/09j4vox3afuq7zk/Bekhayali.mp3?dl=0",
-          "artist": "Arjith Singh",
+          "id": "51",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "完美降落",
+          "path": "https://m701.music.126.net/20210422001702/31e3c3eb0c5b28133cf8434605ff07c4/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8046492783/c276/ed57/3a5b/bc9b0c06c3a257b9ecca180a94452ae4.mp3",
+          "artist": "胡期皓",
           "type": "online"
         },
         {
-          "id": "120",
-          "cover": "https://dl.dropboxusercontent.com/s/kd8e3738m4djlwk/Chale-Aana.jpg?dl=0",
-          "title": "Chale Aana",
-          "path": "https://dl.dropboxusercontent.com/s/op2qkjebri9m5s3/Chale_Aana.mp3?dl=0",
-          "artist": "Armaan Malik",
+          "id": "52",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "嫌晚",
+          "path": "https://m801.music.126.net/20210422001727/5c3466c85b03ec034b3dd9a5d1942be1/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8150886562/d849/eb98/9daf/45861a7d7b9897104363ebe09a5ac4ea.mp3",
+          "artist": "徐梓淳",
           "type": "online"
         },
         {
-          "id": "91",
-          "title": "Vaaste",
-          "cover": "https://dl.dropboxusercontent.com/s/8ettjtmojj4m6cu/vaaste.jpg?dl=0",
-          "path": "https://dl.dropboxusercontent.com/s/3uhc47ioj3f5dts/Vaaste%20Song%20%28Dhvani%20Bhanushali%29.mp3?dl=0",
-          "artist": "Dhvani Bhanushali",
+          "id": "53",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "火花",
+          "path": "https://m701.music.126.net/20210422001749/7871a219b67a08e8674572eeb8ac9203/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8480285773/3919/15b0/2cd6/eb78c2aa0604f4c968d80a9d0fe89d8c.mp3",
+          "artist": "毛不易",
+          "type": "online"
+        },
+        {
+          "id": "54",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "Us2",
+          "path": "https://m801.music.126.net/20210422001811/e6b7ca4428eae22e0c1138662c57aafc/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/8077323839/6438/0a6d/7bd0/3bb5ec496375f62ad1b636227c29395f.mp3",
+          "artist": "Yultron",
+          "type": "online"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "cover": "https://p2.music.126.net/GhhuF6Ep5Tq9IEvLsyCN7w==/18708190348409091.jpg",
+      "title": "音乐热歌榜",
+      "artist": "All",
+      "subtitle": "10items",
+      "genre": "International",
+      "type": "Folder",
+      "children": [
+        {
+          "id": "100",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "还是会想你",
+          "path": "https://m701.music.126.net/20210422001847/9b97cf2d3045c5b1d506b17ad078dfc5/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7937681993/d14b/8f71/1390/e694a66f322ff46b6945edc18a621966.mp3",
+          "artist": "林达浪",
+          "type": "online"
+        },
+        {
+          "id": "101",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "慢热",
+          "path": "https://m801.music.126.net/20210422001913/c47325b9804c48500d3e689bccf04ded/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7693559645/2ab0/1e74/0426/3d8ed0f72e66a3b0cf14f8b3a7ac1ea5.mp3",
+          "artist": "满舒克",
+          "type": "online"
+        },
+        {
+          "id": "102",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "给你呀（又名：for ya）",
+          "path": "https://m801.music.126.net/20210422001937/a5ccec740065252f003933eecc617510/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/4959745147/cf89/a226/c657/7d2812350f6016cad50c0515c7afff17.mp3",
+          "artist": "蒋小呢",
+          "type": "online"
+        },
+        {
+          "id": "103",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "晚风",
+          "path": "https://m801.music.126.net/20210422002010/a4c7ced29fd0f4c4631beeda4e956ec5/jdymusic/obj/w5zDlMODwrDDiGjCn8Ky/2234477728/4af1/74d7/167a/03c26c36a27cdcd434ddc7040ce40696.mp3",
+          "artist": "Copy",
           "type": "online"
         }
       ]
     },
     {
       "id": "4",
-      "cover": "https://dl.dropboxusercontent.com/s/t8lsj6lo61qfxir/billboard.jpg?dl=0",
-      "title": "International Hits",
+      "cover": "https://p1.music.126.net/8sRm2fQNh_KZeWmJ1sRhQQ==/109951165611408950.jpg",
+      "title": "抖音排行榜",
       "artist": "All",
-      "subtitle": "3 items",
+      "subtitle": "5items",
       "genre": "International",
       "type": "Folder",
       "children": [
         {
-          "id": "501",
-          "cover": "https://dl.dropboxusercontent.com/s/s0z2m243o554yqo/pray-for-me.jpg?dl=0",
-          "title": "Pray for me",
-          "path": "https://dl.dropboxusercontent.com/s/6nwin3y04ohkep7/the-weeknd-kendrick-lamar-pray-for-me.mp3?dl=0",
-          "artist": "Kendrick Lamar, The weekend",
+          "id": "100",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "星辰大海",
+          "path": "https://m801.music.126.net/20210422143424/4287c6c3c2c5c2ced5b25a96de46c9a4/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/5755656025/233c/ef92/f555/0024c2275511d3e826ca70a7e0a0d0fc.mp3",
+          "artist": "黄霄雲",
           "type": "online"
         },
         {
-          "id": "119",
-          "cover": "https://m.media-amazon.com/images/I/71We4fKLaJL._SS500_.jpg",
-          "title": "A Thousand Years",
-          "path": "https://dl.dropboxusercontent.com/s/ylfa3zbuy5jr57h/Christina%20Perri%20-%20A%20Thousand%20Years%20%5BOfficial%20online%20Video%5D.mp3?dl=0",
-          "artist": "Christina Perri",
+          "id": "101",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "四季予你",
+          "path": "https://m701.music.126.net/20210422143451/817e292d98fa1252e5e2a9bcc12f2f94/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/5473403102/c3b6/7f9c/c169/2e612af8a75f1b5dc4dce24e7000e21f.mp3",
+          "artist": "程响",
           "type": "online"
         },
         {
-          "id": "120",
-          "cover": "https://dl.dropboxusercontent.com/s/2zfvpvztqgm6ja7/counting-stars.jpg?dl=0",
-          "title": "Counting Stars",
-          "path": "https://dl.dropboxusercontent.com/s/eyww5v209u4ytpc/OneRepublic%20-%20Counting%20Stars.mp3?dl=0",
-          "artist": "One Republic",
+          "id": "102",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "你的轮廓",
+          "path": "https://m801.music.126.net/20210422143517/cf4f41c07f481c78dfc6c5cea417d6a4/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/7029244968/ea1c/f8f0/a66e/17b36ce162a720e4198037c6cc4d57a3.mp3",
+          "artist": "叶琼琳",
+          "type": "online"
+        },
+        {
+          "id": "103",
+          "cover": "http://p4.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "千千万万",
+          "path": "https://m701.music.126.net/20210422143543/d6d060f39b30714b2c8f1f1d0f547304/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/5726833897/a4b4/bd90/dbdd/14b91afdc1e2d83ec06ff7c3aea1286a.mp3",
+          "artist": "深海鱼子酱",
+          "type": "online"
+        },
+        {
+          "id": "104",
+          "cover": "http://p3.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg",
+          "title": "荡漾RIPPLES",
+          "path": "https://m701.music.126.net/20210422143604/64e1cba0130bdfed36e54e214fe95958/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/5773215590/b8b4/220d/6fe9/7b8e573a74cd40428f3ce8a8cbb1e3c8.mp3",
+          "artist": "ICE",
           "type": "online"
         }
       ]

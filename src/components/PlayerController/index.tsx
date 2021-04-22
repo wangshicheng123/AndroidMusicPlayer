@@ -1,62 +1,79 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-18 17:32:00
- * @LastEditTime: 2021-04-18 17:33:25
+ * @LastEditTime: 2021-04-22 09:02:53
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 播放进度控制条
  * @FilePath: /MusicProject/src/components/PlayerController/index.tsx
  */
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { IconButton, FAB, useTheme } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
+import { IAppState } from "@/reducers/index";
+import { play, pause, skipToNext, skipToPrevious } from "@/reducers/songSlice";
+import { ISongItem } from "@/interface/index";
 
-// import {
-//   playTrack,
-//   skipToNext,
-//   skipToPrevious,
-//   pauseTrack,
-// } from '../actions/playerState';
-// import { RootReducerType } from '../reducers';
+interface IProps {
+  songData: ISongItem;
+}
 
-const PlayerController = () => {
+const PlayerController = (props: IProps) => {
+  const { songData } = props;
   const dispatch = useDispatch();
   const { colors } = useTheme();
-  // const status = useSelector(
-  //   (state: RootReducerType) => state.playerState.status,
-  // );
+  const playingStatus = useSelector(
+    (state: IAppState) => state.song.playingStatus
+  );
 
-  const previous = () => {
-    // dispatch(skipToPrevious());
+  /**
+   * @description: 跳到上一首歌曲播放
+   * @param {*}
+   * @return {*}
+   */
+  const handleSkipToPrevious = () => {
+    dispatch(skipToPrevious());
   };
 
-  const next = () => {
-    // dispatch(skipToNext());
+  /**
+   * @description: 跳到下一首歌曲播放
+   * @param {*}
+   * @return {*}
+   */
+  const handleSkipToNext = () => {
+    dispatch(skipToNext());
   };
 
-  const togglePlayback = () => {
-    // if (status === 'playing') {
-    //   requestAnimationFrame(() => {
-    //     pauseTrack();
-    //   });
-    // } else {
-    //   requestAnimationFrame(() => {
-    //     playTrack();
-    //   });
-    // }
+  const handleTogglePlayStatus = () => {
+    if (playingStatus === "playing") {
+      requestAnimationFrame(() => {
+        dispatch(pause());
+      });
+    } else {
+      requestAnimationFrame(() => {
+        dispatch(play());
+      });
+    }
   };
   return (
     <View style={styles.playerToolbox}>
-      <IconButton icon="skip-back-outline" size={40} onPress={previous} />
+      <IconButton
+        icon="skip-back-outline"
+        size={40}
+        onPress={handleSkipToPrevious}
+      />
       <FAB
-        // icon={status === 'playing' ? 'pause' : 'play'}
-        icon={"pause"}
-        onPress={togglePlayback}
+        icon={playingStatus === "playing" ? "pause" : "play"}
+        onPress={handleTogglePlayStatus}
         // loading={status === 'loading'}
         loading={false}
         style={{ backgroundColor: colors.onSurface }}
       />
-      <IconButton icon="skip-forward-outline" size={40} onPress={next} />
+      <IconButton
+        icon="skip-forward-outline"
+        size={40}
+        onPress={handleSkipToNext}
+      />
     </View>
   );
 };

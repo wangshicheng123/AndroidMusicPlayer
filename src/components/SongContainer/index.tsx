@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:31:48
- * @LastEditTime: 2021-04-19 21:52:59
+ * @LastEditTime: 2021-04-22 10:04:46
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表中的item
  * @FilePath: /MusicProject/src/components/SongContainer/index.tsx
@@ -11,12 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import isEqual from "lodash/isEqual";
 
 import Song from "@/components/Song/index";
-import { IPlayListItem } from "@/interface/index";
+import { IPlayListItem, ISongItem } from "@/interface/index";
 import { IAppState } from "@/reducers/index";
 import { cacheLoadSong, downloadSong } from "@/reducers/songSlice";
 
 interface IProps {
-  songData: IPlayListItem;
+  songData: IPlayListItem | ISongItem;
   goBack?: () => void;
 }
 
@@ -26,7 +26,7 @@ const SongContainer = ({ songData, goBack }: IProps) => {
   const dispatch = useDispatch();
 
   /* 当前正在播放的歌曲 */
-  const currentSong = useSelector((state: IAppState) => state.song.currentSong);
+  const { currentSong } = useSelector((state: IAppState) => state.song);
 
   useEffect(() => {
     /* 点击的歌曲是否是当前正在播放的歌曲 */

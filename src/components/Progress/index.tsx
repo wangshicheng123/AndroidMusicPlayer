@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:34:15
- * @LastEditTime: 2021-04-19 00:15:07
+ * @LastEditTime: 2021-04-20 11:51:27
  * @LastEditors: Please set LastEditors
  * @Description: 播放进度条
  * @FilePath: /MusicProject/src/components/Progress/index.tsx
@@ -14,18 +14,18 @@ import { ProgressBar } from "react-track-player";
 const Progress = () => {
   const { colors } = useTheme();
   return (
-    <View style={styles.view}>
+    <View style={styles.container}>
       <ProgressBar
         style={styles.bar}
         thumbTintColor={colors.primary}
-        trackTintColor={colors.primary}
+        // trackTintColor="red"
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  view: {
+  container: {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",

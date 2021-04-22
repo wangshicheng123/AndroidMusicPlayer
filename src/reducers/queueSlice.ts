@@ -1,7 +1,7 @@
 /*
  * @Author: wangshichengn
  * @Date: 2021-04-19 21:54:58
- * @LastEditTime: 2021-04-19 23:25:56
+ * @LastEditTime: 2021-04-22 14:12:21
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的队列 状态集合
  * @FilePath: /MusicProject/src/reducers/queueSlice.ts
@@ -13,33 +13,13 @@ import { cacheLoadSong } from "./songSlice";
 export interface IInitialQueueState {
   playingQueue: ISongItem[];
   historyQueue: ISongItem[];
+  likingSongQueue: ISongItem[];
 }
 
 const initialState: IInitialQueueState = {
-  playingQueue: [
-    {
-      id: "15",
-      cover:
-        "https://dl.dropboxusercontent.com/s/3a5o701zlpujpr9/Dont-Worry-2019.jpg?dl=0",
-      title: " Don't Worry",
-      path:
-        "https://dl.dropboxusercontent.com/s/evzyrlnrtyovho6/Don%27t%20Worry.mp3?dl=0",
-      artist: "Allok",
-      type: "online",
-    },
-  ],
-  historyQueue: [
-    {
-      id: "15",
-      cover:
-        "https://dl.dropboxusercontent.com/s/3a5o701zlpujpr9/Dont-Worry-2019.jpg?dl=0",
-      title: " Don't Worry",
-      path:
-        "https://dl.dropboxusercontent.com/s/evzyrlnrtyovho6/Don%27t%20Worry.mp3?dl=0",
-      artist: "Allok",
-      type: "online",
-    },
-  ],
+  playingQueue: [],
+  historyQueue: [],
+  likingSongQueue: [],
 };
 
 /**
@@ -76,6 +56,21 @@ const queueSlice = createSlice({
     ) => {
       state.playingQueue = [...action.payload, ...state.playingQueue];
     },
+    removeSongFromPlayingQueue: (
+      state: IInitialQueueState,
+      action: {
+        type: string;
+        payload: ISongItem;
+      }
+    ) => {
+      const songData = action.payload;
+      state.playingQueue = state.playingQueue.filter((song: ISongItem) => {
+        return song.id !== songData.id;
+      });
+    },
+    clearPlayingQueue: (state: IInitialQueueState) => {
+      state.playingQueue = [];
+    },
     addToHistoryQueue: (
       state: IInitialQueueState,
       action: {
@@ -85,9 +80,38 @@ const queueSlice = createSlice({
     ) => {
       state.historyQueue = [...action.payload, ...state.historyQueue];
     },
+    addToLikeSongQueue: (
+      state: IInitialQueueState,
+      action: {
+        type: string;
+        payload: ISongItem[];
+      }
+    ) => {
+      state.likingSongQueue = [...action.payload, ...state.likingSongQueue];
+    },
+    removeToLikeSongQueue: (
+      state: IInitialQueueState,
+      action: {
+        type: string;
+        payload: ISongItem[];
+      }
+    ) => {
+      state.likingSongQueue = state.likingSongQueue.filter(
+        (song: ISongItem) => {
+          return !action.payload.some((item) => item.id === song.id);
+        }
+      );
+    },
   },
 });
 
-export const { addToPlayingQueue, addToHistoryQueue } = queueSlice.actions;
+export const {
+  addToPlayingQueue,
+  removeSongFromPlayingQueue,
+  clearPlayingQueue,
+  addToHistoryQueue,
+  addToLikeSongQueue,
+  removeToLikeSongQueue,
+} = queueSlice.actions;
 
 export default queueSlice.reducer;

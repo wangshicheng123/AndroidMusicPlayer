@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:28:38
- * @LastEditTime: 2021-04-19 00:15:38
+ * @LastEditTime: 2021-04-22 07:54:26
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲播放重复模式容器组件
  * @FilePath: /MusicProject/src/components/RepeatContainer/index.tsx
@@ -10,27 +10,28 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { View, StyleSheet } from "react-native";
 import RepeatIcon from "../RepeatIcon/index";
-// import { repeatSongs } from '../actions/playerState';
-// import { RootReducerType } from '../reducers';
+import { changeRepeatStatus } from "@/reducers/configSlice";
+import { IAppState } from "@/reducers/index";
 
 const RepeatContainer = () => {
-  // const repeat = useSelector((state: RootReducerType) => state.config.repeat);
-  // const dispatch = useDispatch();
+  const repeatStatus = useSelector(
+    (state: IAppState) => state.config.repeatStatus
+  );
+  const dispatch = useDispatch();
 
   const updateRepeatType = () => {
-    // if (repeat === 'repeat-all') {
-    //   dispatch(repeatSongs('repeat-one'));
-    // } else if (repeat === 'repeat-one') {
-    //   dispatch(repeatSongs('repeat-off'));
-    // } else {
-    //   dispatch(repeatSongs('repeat-all'));
-    // }
+    if (repeatStatus === "repeat-all") {
+      dispatch(changeRepeatStatus("repeat-one"));
+    } else if (repeatStatus === "repeat-one") {
+      dispatch(changeRepeatStatus("repeat-off"));
+    } else {
+      dispatch(changeRepeatStatus("repeat-all"));
+    }
   };
 
   return (
     <View style={styles.container}>
-      {/* repeat={repeat}  */}
-      <RepeatIcon repeat={"repeat-one"} updateRepeatType={updateRepeatType} />
+      <RepeatIcon repeat={repeatStatus} updateRepeatType={updateRepeatType} />
     </View>
   );
 };

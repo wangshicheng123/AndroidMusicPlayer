@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:12:28
- * @LastEditTime: 2021-04-19 22:27:32
+ * @LastEditTime: 2021-04-21 22:48:01
  * @LastEditors: Please set LastEditors
  * @Description: 在线歌单
  * @FilePath: /MusicProject/src/pages/Home/components/OnlineSongs/index.tsx
@@ -11,10 +11,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { useNetInfo } from "@react-native-community/netinfo";
-import * as playListsData from "@/assets/Media.json";
 import HorizontalScrollView from "@/components/HorizontalScrollView/index";
 import Headline from "@/components/HeadLine/index";
 import { IPlayListItem } from "@/interface/index";
+import * as playListsData from "@/assets/Media.json";
 
 const OnlineSongsContainer = () => {
   const netInfo = useNetInfo(); // 当前网络状态信息
@@ -23,7 +23,6 @@ const OnlineSongsContainer = () => {
   if (!netInfo.isConnected) {
     return null;
   }
-
   const { media: playLists } = playListsData;
 
   /**

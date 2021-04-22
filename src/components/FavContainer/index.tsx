@@ -1,40 +1,37 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:21:30
- * @LastEditTime: 2021-04-19 00:04:34
+ * @LastEditTime: 2021-04-21 09:46:21
  * @LastEditors: Please set LastEditors
  * @Description: Like组件容器
  * @FilePath: /MusicProject/src/components/FavContainer/index.tsx
  */
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ViewStyle } from "react-native";
-
-// import {
-//   addSongToFavorite,
-//   addAlbumToFavorite,
-//   removeAlbumFromFavorite,
-// } from '../actions/playerState';
-// import {
-//   isAlbumPresent,
-//   isArtistPresent,
-//   isSongPresent,
-//   addArtist,
-//   removeArtist,
-// } from '../actions/realmAction';
 import Fav from "../Fav/index";
-import Follow from "../Follow/index";
+// import Follow from "../Follow/index";
 import { AlbumProps, ArtistProps, ISongItem } from "@/interface/index";
+import {
+  addToLikeSongQueue,
+  removeToLikeSongQueue,
+} from "@/reducers/queueSlice";
+import { IAppState } from "@/reducers/index";
 
 interface IProps {
-  type: string;
+  likeType: "song" | "album";
   style?: any;
-  item: AlbumProps | ArtistProps | ISongItem;
+  favData: AlbumProps | ArtistProps | ISongItem;
 }
 
 export const FavContainer = (props: IProps) => {
-  const { type = "song", style, item } = props;
-  const [liked, setLiked] = useState(false);
+  const { likeType = "song", style, favData } = props;
+  const likingSongQueue = useSelector(
+    (state: IAppState) => state.queue.likingSongQueue
+  );
+  const [liked, setLiked] = useState(
+    likingSongQueue.some((item) => item.id === favData.id)
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,22 +48,13 @@ export const FavContainer = (props: IProps) => {
     // } else {
     //   setLiked(false);
     // }
-  }, [type, item]);
-
-  const addArtistToFavorite = () => {
-    // addArtist(item);
-    setLiked(true);
-  };
-
-  const removeArtistFromFav = () => {
-    // removeArtist(item.id);
-    setLiked(false);
-  };
+  }, [likeType, favData]);
 
   const addToFavorite = () => {
-    if (type === "song") {
-      // dispatch(addSongToFavorite(item));
-    } else if (type === "album") {
+    if (likeType === "song") {
+      dispatch(addToLikeSongQueue([favData]));
+    } else if (likeType === "album") {
+      console.log("add like album");
       // dispatch(addAlbumToFavorite(item));
     }
 
@@ -74,22 +62,15 @@ export const FavContainer = (props: IProps) => {
   };
 
   const removeFromFavorite = () => {
-    if (type === "album") {
-      // dispatch(removeAlbumFromFavorite(item));
+    if (likeType === "song") {
+      dispatch(removeToLikeSongQueue([favData]));
+    } else if (likeType === "album") {
+      console.log("add like album");
+      // dispatch(addAlbumToFavorite(item));
     }
     setLiked(false);
   };
 
-  if (type === "artist") {
-    return (
-      <Follow
-        liked={liked}
-        style={style}
-        addToFavorite={addArtistToFavorite}
-        removeFromFavorite={removeArtistFromFav}
-      />
-    );
-  }
   return (
     <Fav
       liked={liked}

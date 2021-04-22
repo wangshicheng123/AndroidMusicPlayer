@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-19 23:50:29
+ * @LastEditTime: 2021-04-22 11:00:03
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -9,11 +9,11 @@
 import { DeviceEventEmitter, EmitterSubscription } from "react-native";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { TrackPlayer } from "react-track-player";
-import { ISongItem } from "@/interface/index";
 import RNFS from "react-native-fs";
 import { checkFolderPath, download } from "@/utils/downloadSong";
 import { showNotify } from "./notifySlice";
 import { addToHistoryQueue } from "./queueSlice";
+import { ISongItem } from "@/interface/index";
 
 type TPlayingStatus = "init" | "playing" | "paused";
 let subscription: EmitterSubscription;
@@ -67,12 +67,10 @@ export const downloadSong = createAsyncThunk(
   async (params: { songData: ISongItem }, thunkAPI) => {
     const { songData } = params;
     const { path, title } = songData;
-    // console.log(songData);
     if (!path) return;
 
     try {
       const folderPath = `${RNFS.ExternalStorageDirectoryPath}/Music`;
-      // console.log(folderPath);
       /* 校验文件夹路径是否合法 */
       await checkFolderPath(folderPath);
 
@@ -99,19 +97,16 @@ export const initializeTrackPlayer = createAsyncThunk(
   "song/initializeTrackPlayer",
   async (params, thunkAPI) => {
     try {
+      // const {
+      //   song: { currentSong },
+      // }: any = thunkAPI.getState();
       /* 可以监听设备的前进后退事件 */
       subscription = DeviceEventEmitter.addListener("media", function (event) {
         if (event == "skip_to_next") {
-          // dispatch(skipToNext());
-          console.log("skip_to_next");
-          thunkAPI.dispatch(pause());
+          thunkAPI.dispatch(skipToNext());
         } else if (event == "skip_to_previous") {
-          // dispatch(skipToPrevious());
-          console.log("skip_to_previous");
-          thunkAPI.dispatch(pause());
+          thunkAPI.dispatch(skipToPrevious());
         } else if (event == "completed") {
-          // dispatch(skipToNext());
-          console.log("completed");
           thunkAPI.dispatch(pause());
         } else {
         }
@@ -137,6 +132,86 @@ export const destroyTrackPlayer = createAsyncThunk(
       thunkAPI.dispatch(pause());
     } catch (error) {
       console.log(error);
+    }
+  }
+);
+
+/**
+ * @description: 跳到下一首歌进行播放【首先需要判断播放模式，单曲循环等】
+ * @param {*} createAsyncThunk
+ * @return {*}
+ */
+export const skipToNext = createAsyncThunk(
+  "song/skipToNext",
+  async (params, thunkAPI) => {
+    try {
+      // const currentPlayingSong = params.songData;
+      const {
+        queue: { playingQueue },
+        song: { currentSong },
+      }: any = thunkAPI.getState();
+      let nextPlaySongIndex = -1;
+
+      /* 队列中是否有歌 */
+      if (playingQueue.length <= 1) {
+        thunkAPI.dispatch(pause());
+        return;
+      }
+
+      playingQueue.map((song: ISongItem, index: number) => {
+        /* 是否是最后一首歌 */
+        if (song.id === currentSong.id && index + 1 < playingQueue.length) {
+          nextPlaySongIndex = index + 1;
+        }
+      });
+
+      /* 当前歌曲在队列中，找到其位置播放下一首， 不再队列中，默认播放第一首 */
+      if (nextPlaySongIndex !== -1) {
+        thunkAPI.dispatch(
+          cacheLoadSong({ songData: playingQueue[nextPlaySongIndex] })
+        );
+      } else {
+        thunkAPI.dispatch(cacheLoadSong({ songData: playingQueue[0] }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const skipToPrevious = createAsyncThunk(
+  "song/skipToPrevious",
+  async (params, thunkAPI) => {
+    try {
+      const {
+        queue: { playingQueue },
+        song: { currentSong },
+      }: any = thunkAPI.getState();
+      let previousPlaySongIndex = -1;
+
+      /* 队列中是否有歌 */
+      if (playingQueue.length <= 1) {
+        thunkAPI.dispatch(pause());
+        return;
+      }
+
+      playingQueue.map((song: ISongItem, index: number) => {
+        /* 是否是最后一首歌 */
+        if (song.id === currentSong.id && index) {
+          previousPlaySongIndex = index - 1;
+        }
+      });
+
+      /* 当前歌曲在队列中，找到其位置播放下一首， 不再队列中，默认播放第一首 */
+      if (previousPlaySongIndex !== -1) {
+        thunkAPI.dispatch(
+          cacheLoadSong({ songData: playingQueue[previousPlaySongIndex] })
+        );
+      } else {
+        thunkAPI.dispatch(cacheLoadSong({ songData: playingQueue[0] }));
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 );

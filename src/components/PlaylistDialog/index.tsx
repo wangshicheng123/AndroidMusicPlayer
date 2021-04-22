@@ -1,15 +1,17 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-18 17:40:21
- * @LastEditTime: 2021-04-19 00:11:34
+ * @LastEditTime: 2021-04-22 15:00:23
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 收藏歌曲到歌集
  * @FilePath: /MusicProject/src/components/PlaylistDialog/index.tsx
  */
 import React from "react";
 import { List, Dialog, Portal, Button } from "react-native-paper";
 import { FlatList, StyleSheet } from "react-native";
-// import { getUserPlaylists } from '../actions/realmAction';
+import { IPlaylist } from "@/interface/index";
+import { useSelector } from "react-redux";
+import { IAppState } from "@/reducers/index";
 
 interface Props {
   visible: boolean;
@@ -17,27 +19,21 @@ interface Props {
   addToPlaylist(id: string): void;
 }
 
-interface PlaylistProps {
-  id: string;
-  name: string;
-  owner: string;
-}
-
-const PlaylistDialog = ({ visible, hideModal, addToPlaylist }: Props) => {
-  // const data = getUserPlaylists();
-  const data: any = [];
+const PlaylistDialog = (props: Props) => {
+  const { visible, hideModal, addToPlaylist } = props;
+  const playlists = useSelector((state: IAppState) => state.playlist);
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={hideModal}>
         <Dialog.Title style={styles.dialogTextStyle}>
-          {data.length ? "Add to Playlist" : "No playlists found"}
+          {playlists.length ? "Add to Playlist" : "No playlists found"}
         </Dialog.Title>
 
         <Dialog.ScrollArea>
           <FlatList
-            data={data}
+            data={playlists}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }: { item: PlaylistProps }) => (
+            renderItem={({ item }: { item: IPlaylist }) => (
               <List.Item
                 title={item.name}
                 description={`by ${item.owner}`}

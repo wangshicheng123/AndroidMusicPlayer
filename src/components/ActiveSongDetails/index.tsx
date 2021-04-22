@@ -1,42 +1,43 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:36:56
- * @LastEditTime: 2021-04-18 23:58:51
+ * @LastEditTime: 2021-04-20 11:42:04
  * @LastEditors: Please set LastEditors
  * @Description: 播放详情
- * @FilePath: /MusicProject/src/components/ActiveTrackDetails/index.tsx
+ * @FilePath: /MusicProject/src/components/ActiveSongDetails/index.tsx
  */
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import FastImage from "react-native-fast-image";
-import { Subheading, Text, Title } from "react-native-paper";
+import { Subheading, Text } from "react-native-paper";
 import { ISongItem } from "@/interface/index";
-import ActiveTrackImage from "../ActiveTrackImage/index";
+import ActiveSongImage from "../ActiveSongImage/index";
 
 interface Props {
-  track: ISongItem;
+  songData: ISongItem;
 }
 
-const ActiveTrackDetails = ({ track }: Props) => {
+const ActiveSongDetails = (props: Props) => {
+  const { songData } = props;
   return (
     <View>
       <View style={styles.centerContainer}>
-        {track.cover ? (
+        {songData.cover ? (
           <FastImage
-            source={{ uri: track.cover }}
+            source={{ uri: songData.cover }}
             style={[styles.artCover]}
             resizeMode="contain"
           />
         ) : (
-          <ActiveTrackImage style={styles.artCover} />
+          <ActiveSongImage style={styles.artCover} />
         )}
       </View>
       <View style={styles.centerContainer}>
         <Text style={styles.titleStyle} numberOfLines={1}>
-          {track.title}
+          {songData.title}
         </Text>
         <Subheading numberOfLines={1}>
-          {track.artist ? track.artist : track.album}
+          {songData.artist ? songData.artist : songData.album}
         </Subheading>
       </View>
     </View>
@@ -64,4 +65,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ActiveTrackDetails;
+export default ActiveSongDetails;

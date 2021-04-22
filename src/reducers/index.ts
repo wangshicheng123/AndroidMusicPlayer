@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 21:50:15
- * @LastEditTime: 2021-04-19 15:31:06
+ * @LastEditTime: 2021-04-22 14:30:51
  * @LastEditors: Please set LastEditors
  * @Description: reducer集合
  * @FilePath: /MusicProject/src/reducers/index.ts
@@ -13,6 +13,7 @@ import userSlice, { IInitialUserState } from "./userSlice";
 import songSlice, { IInitialSongState } from "./songSlice";
 import notifySlice, { IInitialNotifyState } from "./notifySlice";
 import queueSlice, { IInitialQueueState } from "./queueSlice";
+import playlistSlice, { IInitialPlaylistState } from "./playlistSlice";
 
 export interface IAppState {
   home: Array<number>;
@@ -21,6 +22,7 @@ export interface IAppState {
   song: IInitialSongState;
   notify: IInitialNotifyState;
   queue: IInitialQueueState;
+  playlist: IInitialPlaylistState;
 }
 
 export const reducers = combineReducers({
@@ -30,4 +32,5 @@ export const reducers = combineReducers({
   song: songSlice,
   notify: notifySlice,
   queue: queueSlice,
+  playlist: playlistSlice,
 });

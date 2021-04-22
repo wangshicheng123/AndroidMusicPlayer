@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:32:38
- * @LastEditTime: 2021-04-18 22:35:36
+ * @LastEditTime: 2021-04-22 09:28:16
  * @LastEditors: Please set LastEditors
  * @Description: 音乐-item歌曲信息
  * @FilePath: /MusicProject/src/components/Track/index.tsx
@@ -14,7 +14,7 @@ import ActiveSongIcon from "../ActiveSongIcon/index";
 import DefaultImage from "../DefaultImage/index";
 
 interface SongProps {
-  title: string;
+  title?: string;
   album?: string;
   artist?: string;
   cover?: string;
@@ -25,7 +25,7 @@ interface IProps {
   songData: SongProps;
   active: boolean;
   handelSongPlay: () => void;
-  handleSongDownload: () => void;
+  handleSongDownload?: () => void;
 }
 
 const Song = React.memo(
@@ -49,9 +49,7 @@ const Song = React.memo(
           }
           right={(props) =>
             active ? (
-              <ActiveSongIcon
-                style={[styles.activeSongIconStyle, props.style]}
-              />
+              <ActiveSongIcon style={styles.activeSongIconStyle} />
             ) : (
               songData.type === "online" && (
                 <IconButton
