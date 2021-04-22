@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:42:43
- * @LastEditTime: 2021-04-18 23:09:46
+ * @LastEditTime: 2021-04-22 16:47:36
  * @LastEditors: Please set LastEditors
  * @Description: 用户信息状态管理
  * @FilePath: /MusicProject/src/reducers/userSlice.ts
@@ -25,14 +25,12 @@ export interface IInitialUserState {
   userInfo: userInfo;
   googleAccessAuthorization: boolean;
   localLibraryAccessAuthorization: boolean;
-  introductionVisited: boolean; // 是否已经访问过初始化介绍页面
 }
 
 const initialState: IInitialUserState = {
   userInfo: {},
   googleAccessAuthorization: false,
   localLibraryAccessAuthorization: false,
-  introductionVisited: false,
 };
 
 /**
@@ -69,9 +67,6 @@ export const getGoogleAccessAuthorization = createAsyncThunk(
   async () => {
     let userInfo: userInfo = {};
     try {
-      GoogleSignin.configure({
-        offlineAccess: false,
-      });
       await GoogleSignin.hasPlayServices();
       const sighInUserInfo = await GoogleSignin.signIn();
       userInfo = sighInUserInfo.user;
@@ -99,15 +94,9 @@ const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    visitIntroductionPage: (
-      state: IInitialUserState,
-      action: {
-        type: string;
-        payload: boolean;
-      }
-    ) => {
-      const isVisited = action.payload;
-      state.introductionVisited = isVisited;
+    clearUserInfo: (state: IInitialUserState) => {
+      state.userInfo = {};
+      state.googleAccessAuthorization = false;
     },
   },
   extraReducers: (builder) => {
@@ -151,6 +140,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { visitIntroductionPage } = userSlice.actions;
+export const { clearUserInfo } = userSlice.actions;
 
 export default userSlice.reducer;

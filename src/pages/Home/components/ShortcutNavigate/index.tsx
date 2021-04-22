@@ -1,80 +1,69 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:09:11
- * @LastEditTime: 2021-04-18 12:27:54
+ * @LastEditTime: 2021-04-22 16:17:45
  * @LastEditors: Please set LastEditors
  * @Description: 快捷操作
  * @FilePath: /MusicProject/src/pages/Home/components/ShortcutContainer/index.tsx
  */
 
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { Avatar, Caption } from "react-native-paper";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
-
-// import { getPlayedSongs, getFavoriteSongs } from '../actions/realmAction';
-// import { startRadio } from '../actions/playerState';
-// import { mostPlayedSongs } from '../actions/mediaStore';
+import { Avatar, Caption } from "react-native-paper";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { IAppState } from "@/reducers/index";
 
 const ShortCutContainer = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  // const mostPlayed = () => {
-  //   return mostPlayedSongs(getPlayedSongs());
-  // };
+  const { historyQueue, likingSongQueue } = useSelector(
+    (state: IAppState) => state.queue
+  );
 
   const navigateToHistory = React.useMemo(
     () => () => {
-      const playlist = {
+      const playlistMetadata = {
         id: "user-playlist--000001",
         name: "Recently Played Songs",
         owner: "Serenity",
       };
       navigation.navigate("Playlist", {
-        playlist,
-        // songs: getPlayedSongs(),
-        songs: [],
+        playlistMetadata: playlistMetadata,
+        songs: historyQueue,
       });
     },
-    [navigation]
+    [navigation, historyQueue]
   );
 
   const navigateToFavorite = React.useMemo(
     () => () => {
-      const playlist = {
+      const playlistMetadata = {
         id: "user-playlist--000002",
         name: "Liked Songs",
         owner: "Serenity",
       };
       navigation.navigate("Playlist", {
-        playlist,
-        // songs: getFavoriteSongs(),
-        songs: [],
+        playlistMetadata: playlistMetadata,
+        songs: likingSongQueue,
       });
     },
-    [navigation]
+    [navigation, likingSongQueue]
   );
 
   const navigateToMostPlayed = React.useMemo(
     () => () => {
-      const playlist = {
+      const playlistMetadata = {
         id: "user-playlist--000002",
         name: "Most Played Songs",
         owner: "Serenity",
       };
       navigation.navigate("Playlist", {
-        playlist,
-        // songs: mostPlayed(),
+        playlistMetadata: playlistMetadata,
         songs: [],
       });
     },
     [navigation]
   );
-
-  // const startSongs = () => {
-  // dispatch(startRadio());
-  // };
 
   return (
     <View style={styles.container}>
@@ -111,17 +100,6 @@ const ShortCutContainer = () => {
         />
         <Caption>Most Played</Caption>
       </TouchableOpacity>
-      {/* <TouchableOpacity
-        style={{ justifyContent: "center", alignItems: "center" }}
-        onPress={startSongs}
-      >
-        <Avatar.Icon
-          icon="radio-outline"
-          color="#0c9463"
-          style={{ backgroundColor: "#0c946350" }}
-        />
-        <Caption>Radio</Caption>
-      </TouchableOpacity> */}
     </View>
   );
 };

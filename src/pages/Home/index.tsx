@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 17:03:23
- * @LastEditTime: 2021-04-19 23:27:11
+ * @LastEditTime: 2021-04-22 15:37:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Home/index.tsx
@@ -9,21 +9,14 @@
 
 import React from "react";
 import { useDispatch } from "react-redux";
-import { View, Text } from "react-native";
 import { useTheme, IconButton } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 import { getGreetingTime } from "@/utils/greeting";
 import HomeScreen from "./Home";
 import SongPlayListScreen from "../SongPlayList/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
+import SettingScreen from "@/pages/SettingScreen/index";
 
-const SettingScreen = () => {
-  return (
-    <View>
-      <Text>Main</Text>
-    </View>
-  );
-};
 const Stack = createStackNavigator();
 
 const Home = () => {

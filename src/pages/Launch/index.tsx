@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 const Launch = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const { introductionVisited } = useSelector((state: any) => state.user);
+  const { googleAccessAuthorization } = useSelector((state: any) => state.user);
 
   /**
    * @description: 判断用户是否已经登陆
@@ -23,7 +23,7 @@ const Launch = () => {
    * @return {*}
    */
   const isSignedIn = () => {
-    if (introductionVisited) {
+    if (googleAccessAuthorization) {
       navigation.navigate("App");
     } else {
       navigation.navigate("Intro");

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 15:49:08
- * @LastEditTime: 2021-04-17 18:37:07
+ * @LastEditTime: 2021-04-22 16:30:13
  * @LastEditors: Please set LastEditors
  * @Description: 操作登陆/授权等组件集合
  * @FilePath: /MusicProject/src/pages/Introduction/components/IntroContent/index.tsx
@@ -19,7 +19,6 @@ import { useTheme, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import LocalLibraryAccess from "../LocalLibraryAccess/index";
 import GoogleLogin from "../GoogleLogin/index";
-import { visitIntroductionPage } from "@/reducers/userSlice";
 
 const { width, height } = Dimensions.get("window");
 const LOGO_WIDTH = 220;
@@ -67,7 +66,6 @@ const IntroContent = (props: IIntroContentProps) => {
    * @return {*}
    */
   const handleLaunchApp = () => {
-    dispatch(visitIntroductionPage(true));
     navigation.navigate("App");
   };
 

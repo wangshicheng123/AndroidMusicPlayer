@@ -1,7 +1,7 @@
 /*
  * @Author: wangshichengn
  * @Date: 2021-04-19 21:54:58
- * @LastEditTime: 2021-04-22 14:12:21
+ * @LastEditTime: 2021-04-22 16:11:39
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的队列 状态集合
  * @FilePath: /MusicProject/src/reducers/queueSlice.ts
@@ -14,12 +14,14 @@ export interface IInitialQueueState {
   playingQueue: ISongItem[];
   historyQueue: ISongItem[];
   likingSongQueue: ISongItem[];
+  mostPlatQueue: ISongItem[];
 }
 
 const initialState: IInitialQueueState = {
   playingQueue: [],
   historyQueue: [],
   likingSongQueue: [],
+  mostPlatQueue: [],
 };
 
 /**
@@ -80,6 +82,9 @@ const queueSlice = createSlice({
     ) => {
       state.historyQueue = [...action.payload, ...state.historyQueue];
     },
+    clearHistoryQueue: (state: IInitialQueueState) => {
+      state.historyQueue = [];
+    },
     addToLikeSongQueue: (
       state: IInitialQueueState,
       action: {
@@ -110,6 +115,7 @@ export const {
   removeSongFromPlayingQueue,
   clearPlayingQueue,
   addToHistoryQueue,
+  clearHistoryQueue,
   addToLikeSongQueue,
   removeToLikeSongQueue,
 } = queueSlice.actions;
