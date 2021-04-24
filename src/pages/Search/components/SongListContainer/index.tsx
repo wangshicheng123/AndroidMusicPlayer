@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 17:33:49
- * @LastEditTime: 2021-04-24 10:10:48
+ * @LastEditTime: 2021-04-24 15:53:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/SongListContainer/index.tsx
@@ -10,7 +10,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import SongList from "../SongsList/index";
 import { ISongItem } from "@/interface/index";
-import { addSongToPlaylist } from "@/reducers/playlistSlice";
+import { addSongToCollectionList } from "@/reducers/collectionListSlice";
 import { addToPlayingQueue } from "@/reducers/queueSlice";
 
 interface IProps {
@@ -26,14 +26,14 @@ export const SongListContainer = (props: IProps) => {
 
   /**
    * @description: 添加歌曲至指定歌集
-   * @param {string} playlistId
+   * @param {string} collectionListId
    * @param {ISongItem} song
    * @return {*}
    */
-  const addSongsToPlaylist = (playlistId: string, song: ISongItem) => {
+  const addSongsToPlaylist = (collectionListId: string, song: ISongItem) => {
     dispatch(
-      addSongToPlaylist({
-        playlistId: playlistId,
+      addSongToCollectionList({
+        collectionListId: collectionListId,
         songData: song,
       })
     );
@@ -54,7 +54,7 @@ export const SongListContainer = (props: IProps) => {
       title={title}
       cover={cover}
       fetchData={fetchData}
-      addToPlaylist={addSongsToPlaylist}
+      addToCollectionList={addSongsToPlaylist}
       addToQueue={addSongsToQueue}
     />
   );

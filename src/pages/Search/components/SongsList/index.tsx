@@ -16,7 +16,7 @@ interface IProps {
   songDatas: ISongItem[];
   title: string;
   cover: string;
-  addToPlaylist: (playlistId: string, song: ISongItem) => void;
+  addToCollectionList: (playlistId: string, song: ISongItem) => void;
   addToQueue: (songs: ISongItem[]) => void;
   fetchData(): void;
 }
@@ -27,7 +27,7 @@ const SongList = (props: IProps) => {
     title,
     cover,
     addToQueue,
-    addToPlaylist,
+    addToCollectionList,
     fetchData,
   } = props;
   const [visible, setVisibility] = useState(false);
@@ -57,8 +57,8 @@ const SongList = (props: IProps) => {
    * @param {string} playlistId
    * @return {*}
    */
-  const addSongToPlaylist = (playlistId: string) => {
-    addToPlaylist(playlistId, song);
+  const addSongToCollectionList = (playlistId: string) => {
+    addToCollectionList(playlistId, song);
     hideModal();
   };
 
@@ -67,7 +67,7 @@ const SongList = (props: IProps) => {
       <PlaylistDialog
         visible={visible}
         hideModal={hideModal}
-        addToPlaylist={addSongToPlaylist}
+        addSongToCollectionList={addSongToCollectionList}
       />
       <SwipeList
         songDatas={songDatas}

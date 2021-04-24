@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:10:16
- * @LastEditTime: 2021-04-22 17:51:05
+ * @LastEditTime: 2021-04-24 15:15:46
  * @LastEditors: Please set LastEditors
  * @Description: 底部Tab导航集合
  * @FilePath: /MusicProject/src/router/BottomNavigator.ts
@@ -13,6 +13,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BottomTabBar from "@/components/BottomTabBar/index";
 import HomeScreen from "@/pages/Home/index";
 import SearchScreen from "@/pages/Search/index";
+import CollectionScreen from "@/pages/Collection/index";
 
 interface ITabbarIcon {
   focused: boolean;
@@ -21,14 +22,6 @@ interface ITabbarIcon {
     disFocusedIcon: string;
   };
 }
-
-const OfflineScreen = () => {
-  return (
-    <View>
-      <Text>OfflineScreen component</Text>
-    </View>
-  );
-};
 
 const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
@@ -96,9 +89,9 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Library"
-        component={OfflineScreen}
+        component={CollectionScreen}
         options={{
-          tabBarLabel: "Your library",
+          tabBarLabel: "CollectionList",
           tabBarIcon: ({ focused }) => {
             return renderTabbarIcon({
               focused,

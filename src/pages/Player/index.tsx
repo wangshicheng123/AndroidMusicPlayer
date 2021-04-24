@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:19:55
- * @LastEditTime: 2021-04-22 15:04:27
+ * @LastEditTime: 2021-04-24 15:55:24
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放页面
  * @FilePath: /MusicProject/src/pages/Player/components/PlayerScreen/index.tsx
@@ -22,7 +22,7 @@ import ActiveSongDetails from "@/components/ActiveSongDetails/index";
 import PlaylistDialog from "@/components/PlaylistDialog/index";
 import { downloadSong } from "@/reducers/songSlice";
 import { IAppState } from "@/reducers/index";
-import { addSongToPlaylist } from "@/reducers/playlistSlice";
+import { addSongToCollectionList } from "@/reducers/collectionListSlice";
 
 const PlayerScreen = () => {
   const navigation = useNavigation();
@@ -36,8 +36,10 @@ const PlayerScreen = () => {
     navigation.goBack();
   };
 
-  const handleAddSongToPlaylist = (id: string) => {
-    dispatch(addSongToPlaylist({ playlistId: id, songData: songData }));
+  const handleAddSongToCollectionList = (id: string) => {
+    dispatch(
+      addSongToCollectionList({ collectionListId: id, songData: songData })
+    );
     setDialogVisible(false);
   };
 
@@ -51,7 +53,7 @@ const PlayerScreen = () => {
       <PlaylistDialog
         visible={dialogVisible}
         hideModal={() => setDialogVisible(false)}
-        addToPlaylist={handleAddSongToPlaylist}
+        addSongToCollectionList={handleAddSongToCollectionList}
       />
       <View style={styles.playerContainer}>
         <View style={styles.container}>

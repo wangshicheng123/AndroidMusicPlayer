@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-04 10:44:20
- * @LastEditTime: 2021-04-19 10:03:02
+ * @LastEditTime: 2021-04-24 17:05:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/android/app/src/main/java/com/musicproject/MainApplication.java
@@ -21,6 +21,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.rnfs.RNFSPackage;
+// import com.facebook.react.bridge.JSIModulePackage;
+// import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -48,6 +50,11 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
+
+        // @Override
+        // protected JSIModulePackage getJSIModulePackage() {
+        //   return new ReanimatedJSIModulePackage();
+        // }
       };
 
   @Override
