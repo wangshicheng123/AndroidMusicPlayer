@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-19 15:55:38
+ * @LastEditTime: 2021-04-23 12:19:51
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts
@@ -20,13 +20,15 @@ import { SafeAreaView, StyleSheet } from "react-native";
 
 /* 导航集合 */
 import BottomNavigator from "./BottomNavigator";
-import FindNavigator from "./FindNavigator";
 import PlayerNavigator from "./PlayerNavigator";
+import FindScreen from "@/pages/Find/index";
 
 /* 初始化相关导航页面 */
 import LaunchScreen from "@/pages/Launch/index";
 import IntroductionScreen from "@/pages/Introduction/index";
 import Notification from "@/components/Notification/index";
+
+import SearchHeader from "@/components/SearchHeader/index";
 
 const Stack = createStackNavigator();
 const NativeStack = createNativeStackNavigator();
@@ -48,13 +50,14 @@ const AppStack = () => {
       />
       <Stack.Screen
         name="Find"
-        component={FindNavigator}
+        component={FindScreen}
+        // initialParams={{ type: 'all' }}
         initialParams={{}}
-        // options={{
-        //   header: ({navigation}) => (
-        //     <Header>
-        //   )}
-        // }}
+        options={{
+          header: ({ navigation }) => (
+            <SearchHeader goBack={navigation.goBack} />
+          ),
+        }}
       />
       <Stack.Screen
         name="Player"

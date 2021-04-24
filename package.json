@@ -41,6 +41,7 @@
     "react-native-svg-transformer": "^0.14.3",
     "react-native-swipe-list-view": "^3.2.7",
     "react-native-vector-icons": "^8.1.0",
+    "react-navigation-collapsible": "^5.9.1",
     "react-redux": "^7.2.3",
     "react-track-player": "^1.0.11",
     "redux": "^4.0.5",

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:19:39
- * @LastEditTime: 2021-04-19 00:00:18
+ * @LastEditTime: 2021-04-22 18:04:05
  * @LastEditors: Please set LastEditors
  * @Description: 空白音乐列表填充
  * @FilePath: /MusicProject/src/components/EmptyPlayList/index.tsx
@@ -13,7 +13,7 @@ import LottieView from "lottie-react-native";
 import Screen from "../Screen/index";
 import Animations from "@/assets/Animations";
 
-const EmptyPlaylist = () => {
+const EmptyPlayList = () => {
   return (
     <Screen>
       <View style={styles.container}>
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EmptyPlaylist;
+export default EmptyPlayList;

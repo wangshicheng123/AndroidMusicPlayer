@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 11:20:09
- * @LastEditTime: 2021-04-18 11:28:55
+ * @LastEditTime: 2021-04-22 18:39:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/utils/greeting.ts
@@ -22,6 +22,6 @@ export const getGreetingTime = (
   } else if (currentHour < splitAfternoon) {
     return "Good morning";
   } else {
-    return "Goog evening";
+    return "Good evening";
   }
 };

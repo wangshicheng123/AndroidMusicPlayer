@@ -26,6 +26,7 @@ module.exports = {
           "@/api": ["./src/api"],
           "@/config": ["./src/config"],
           "@/interface": ["./src/interface"],
+          "@/hooks": ["./src/hooks"],
         },
       },
     ],
