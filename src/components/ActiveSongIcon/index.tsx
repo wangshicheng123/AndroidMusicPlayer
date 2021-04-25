@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:33:14
- * @LastEditTime: 2021-04-21 11:14:38
+ * @LastEditTime: 2021-04-25 11:56:34
  * @LastEditors: Please set LastEditors
  * @Description: 表示音乐播放状态的图标
  * @FilePath: /MusicProject/src/components/ActiveTrackIcon/index.tsx
@@ -25,8 +25,6 @@ const ActiveSongIcon = ({ style }: ActiveSongIconProps) => {
   const playingStatus = useSelector(
     (state: IAppState) => state.song.playingStatus
   );
-
-  console.log("==>playingStatus", playingStatus);
 
   useEffect(() => {
     if (playingStatus === "playing") {

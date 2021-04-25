@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-15 21:12:19
- * @LastEditTime: 2021-04-17 18:37:35
+ * @LastEditTime: 2021-04-25 11:57:15
  * @LastEditors: Please set LastEditors
  * @Description: 授权可以访问用户本地的额外资源
  * @FilePath: /MusicProject/src/pages/Introduction/components/LocalLibraryAccess/index.tsx
@@ -24,10 +24,6 @@ const LocalLibraryAccess = (props: IProps) => {
   const localLibraryAccessAuthorization = useSelector(
     (state: IAppState) => state.user.localLibraryAccessAuthorization
   );
-  // console.log(
-  //   '==>>>>>localLibraryAccessGiven',
-  //   localLibraryAccessAuthorization,
-  // );
   useEffect(() => {
     // 触发获取最新的外部资源访问权限，同时更新redux状态，同步UI展示
     // dispatch(getLocalLiraryAccessAuthorition());

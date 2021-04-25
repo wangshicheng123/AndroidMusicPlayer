@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:10:16
- * @LastEditTime: 2021-04-24 15:15:46
+ * @LastEditTime: 2021-04-25 10:42:08
  * @LastEditors: Please set LastEditors
  * @Description: 底部Tab导航集合
  * @FilePath: /MusicProject/src/router/BottomNavigator.ts

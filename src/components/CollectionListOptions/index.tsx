@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-24 11:09:34
- * @LastEditTime: 2021-04-24 23:19:43
+ * @LastEditTime: 2021-04-25 11:56:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/components/PlaylistOptions/index.tsx
@@ -165,7 +165,6 @@ const CollectionListOptions = (props: IProps) => {
             >
               <TouchableOpacity
                 onPress={() => {
-                  console.log("aaa");
                   closeBottomSheet();
                 }}
               >

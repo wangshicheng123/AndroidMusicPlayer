@@ -44,7 +44,6 @@ function BottomTabBar(props: IProps) {
           const isFocused = state.index === index;
 
           const onPress = () => {
-            console.log(props);
             const event = navigation.emit({
               type: "tabPress",
               target: route.key,

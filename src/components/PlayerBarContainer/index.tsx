@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:09:32
- * @LastEditTime: 2021-04-20 00:35:41
+ * @LastEditTime: 2021-04-25 10:29:42
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放条外部容器组件
  * @FilePath: /MusicProject/src/components/PlayerBarContainer/index.tsx
@@ -58,9 +58,12 @@ const PlayerBarContainer = () => {
    */
   const navigateToPlayer = React.useMemo(
     () => () =>
-      navigation.navigate("Player", {
-        screen: "Active",
-        params: { songData: currentSong },
+      // navigation.navigate("Player", {
+      //   screen: "Active",
+      //   params: { songData: currentSong },
+      // }),
+      navigation.navigate("Active", {
+        songData: currentSong,
       }),
     [navigation, currentSong]
   );

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:42:43
- * @LastEditTime: 2021-04-22 16:47:36
+ * @LastEditTime: 2021-04-25 11:57:28
  * @LastEditors: Please set LastEditors
  * @Description: 用户信息状态管理
  * @FilePath: /MusicProject/src/reducers/userSlice.ts
@@ -73,7 +73,6 @@ export const getGoogleAccessAuthorization = createAsyncThunk(
 
       const token = await GoogleSignin.getTokens();
       await AsyncStorage.setItem("@token", token.accessToken);
-      // console.log('wahgkagefk', userInfo, token.accessToken);
     } catch (error) {
       // console.log('error', error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

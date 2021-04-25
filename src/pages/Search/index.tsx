@@ -1,72 +1,164 @@
 /*
  * @Author: wangshicheng
- * @Date: 2021-04-22 17:06:13
- * @LastEditTime: 2021-04-24 10:04:07
+ * @Date: 2021-04-22 17:34:52
+ * @LastEditTime: 2021-04-25 11:55:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /MusicProject/src/pages/Search/index.tsx
+ * @FilePath: /MusicProject/src/pages/Search/components/Search/index.tsx
  */
-import React from "react";
-import { StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { useTheme, IconButton } from "react-native-paper";
-import { createStackNavigator } from "@react-navigation/stack";
-import FilterScreen from "./components/Filter/index";
-import SearchScreen from "./components/Search/index";
-import { addToPlayingQueue } from "@/reducers/queueSlice";
-import { IAppState } from "@/reducers/index";
+import React, { useRef } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  Pressable,
+} from "react-native";
+import { useDispatch } from "react-redux";
+import { useTheme, Text, IconButton, Surface } from "react-native-paper";
+import LinearGradient from "react-native-linear-gradient";
+import { useScrollToTop, useNavigation } from "@react-navigation/native";
+import { useCollapsibleHeader } from "react-navigation-collapsible";
 
-const Stack = createStackNavigator();
+import Genre from "@/assets/genre.json";
+import Screen from "@/components/Screen/index";
+import Headline from "@/components/HeadLine/index";
+import Title from "@/components/Title/index";
+import { fetchSearchResult } from "@/reducers/searchSlice";
 
-const SearchStack = () => {
-  const theme = useTheme();
+interface GenreProps {
+  item: {
+    colors: [];
+    title: string;
+  };
+}
+
+const SearchScreen = () => {
+  const ref = useRef(null);
   const dispatch = useDispatch();
-  const searchData = useSelector((state: IAppState) => state.search.songDatas);
+  const { colors, roundness } = useTheme();
+  const navigation = useNavigation();
+  useScrollToTop(ref);
 
-  const { colors } = theme;
+  const {
+    onScroll,
+    containerPaddingTop,
+    scrollIndicatorInsetTop,
+    translateY,
+  } = useCollapsibleHeader({
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.background,
+        height: 10,
+      },
+    },
+  });
+
+  const stickyHeaderHeight = 60;
+
+  /**
+   * @description: 点击renderItem项触发
+   * @param {object} item
+   * @return {*}
+   */
+  const handleRenderItemPress = (item: { colors: []; title: string }) => {
+    dispatch(fetchSearchResult({ searchText: "test" }));
+    navigation.navigate("Filter", item);
+  };
+
   return (
-    <Stack.Navigator
-      headerMode="screen"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: colors.surface,
-        },
-        headerTintColor: colors.text,
-        safeAreaInsets: { top: 0, bottom: 0 },
-      }}
-    >
-      <Stack.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{
-          headerTitleStyle: styles.headerTitleStyle,
+    <Screen>
+      <Animated.FlatList
+        onScroll={onScroll}
+        contentContainerStyle={{
+          paddingTop: containerPaddingTop + stickyHeaderHeight,
         }}
-      />
-      <Stack.Screen
-        name="Filter"
-        component={FilterScreen}
-        options={({ route }: { route: any }) => {
-          const { title } = route.params;
-          return {
-            headerTitle: title,
-            headerRight: () => (
-              <IconButton
-                icon="play-circle-outline"
-                onPress={() => dispatch(addToPlayingQueue(searchData))}
-              />
-            ),
-          };
+        scrollIndicatorInsets={{
+          top: scrollIndicatorInsetTop + stickyHeaderHeight,
         }}
+        ref={ref}
+        key="Genre"
+        data={Genre}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+        ListHeaderComponent={() => (
+          <Headline style={styles.headline}>All Moods & Genres</Headline>
+        )}
+        renderItem={({ item }: GenreProps) => (
+          <TouchableOpacity
+            style={styles.touchableOpacityStyle}
+            onPress={() => handleRenderItemPress(item)}
+          >
+            <LinearGradient
+              colors={item.colors}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.item}
+            >
+              <Title style={styles.itemTitleStyle}>{item.title}</Title>
+            </LinearGradient>
+          </TouchableOpacity>
+        )}
       />
-    </Stack.Navigator>
+
+      <Animated.View
+        style={{
+          transform: [{ translateY: translateY }],
+          position: "absolute",
+          backgroundColor: colors.background,
+          top: containerPaddingTop,
+          height: stickyHeaderHeight,
+          width: "100%",
+        }}
+      >
+        <Pressable onPress={() => navigation.navigate("Find")}>
+          <Surface
+            style={[styles.searchBarContainer, { borderRadius: roundness }]}
+          >
+            <IconButton icon="search-outline" />
+            <Text
+              style={[
+                styles.searchBarPlaceholder,
+                { color: colors.placeholder },
+              ]}
+            >
+              Artists, songs or podcasts
+            </Text>
+          </Surface>
+        </Pressable>
+      </Animated.View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  headerTitleStyle: {
-    fontFamily: "Nunito-ExtraBold",
-    fontSize: 28,
+  searchBarContainer: {
+    marginHorizontal: 10,
+    marginVertical: 6,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
+    elevation: 4,
+  },
+  searchBarPlaceholder: { fontSize: 18, paddingLeft: 8 },
+  touchableOpacityStyle: {
+    flex: 1,
+  },
+  item: {
+    borderRadius: 4,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 100,
+    margin: 4,
+    elevation: 8,
+  },
+  itemTitleStyle: {
+    color: "white",
+  },
+  headline: {
+    textAlign: "center",
+    marginVertical: 4,
   },
 });
 
-export default SearchStack;
+export default SearchScreen;
