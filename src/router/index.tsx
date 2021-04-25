@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-25 11:23:30
+ * @LastEditTime: 2021-04-25 12:06:24
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts
@@ -81,20 +81,8 @@ const AppStack = () => {
           };
         }}
       />
-      <Stack.Screen
-        name="Search"
-        component={SearchScreen}
-        options={
-          {
-            // headerTitleStyle: styles.headerTitleStyle,
-          }
-        }
-      />
-      <Stack.Screen
-        name="CollectionList"
-        component={CollectionScreen}
-        options={{ headerShown: true }}
-      />
+      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name="CollectionList" component={CollectionScreen} />
       <Stack.Screen
         name="Playlist"
         component={SongPlayListScreen}
@@ -139,11 +127,6 @@ const AppStack = () => {
         component={PlayScreen}
         options={{
           headerShown: false,
-          headerStyle: {
-            backgroundColor: colors.surface,
-          },
-          headerTintColor: colors.text,
-          headerTopInsetEnabled: false,
         }}
       />
       <NativeStack.Screen name="Queue" component={QueueScreen} />
