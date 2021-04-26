@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:10:16
- * @LastEditTime: 2021-04-25 10:42:08
+ * @LastEditTime: 2021-04-26 17:07:54
  * @LastEditors: Please set LastEditors
  * @Description: 底部Tab导航集合
  * @FilePath: /MusicProject/src/router/BottomNavigator.ts
@@ -11,7 +11,8 @@ import { View, Text } from "react-native";
 import { useTheme, IconButton } from "react-native-paper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BottomTabBar from "@/components/BottomTabBar/index";
-import HomeScreen from "@/pages/Home/index";
+// import HomeScreen from "@/pages/Home/index";
+import HomeNavigator from "./HomeNavigator";
 import SearchScreen from "@/pages/Search/index";
 import CollectionScreen from "@/pages/Collection/index";
 
@@ -59,7 +60,7 @@ const BottomNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeNavigator}
         options={{
           tabBarIcon: ({ focused }) => {
             return renderTabbarIcon({
