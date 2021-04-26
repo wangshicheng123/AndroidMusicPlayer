@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:42:43
- * @LastEditTime: 2021-04-25 11:57:28
+ * @LastEditTime: 2021-04-26 22:05:18
  * @LastEditors: Please set LastEditors
  * @Description: 用户信息状态管理
  * @FilePath: /MusicProject/src/reducers/userSlice.ts
@@ -13,6 +13,8 @@ import {
   statusCodes,
 } from "@react-native-google-signin/google-signin";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { request } from "@/utils/fetch";
+import { userLogin } from "@/api/index";
 
 type userInfo = {
   photo?: string | null;
@@ -70,6 +72,8 @@ export const getGoogleAccessAuthorization = createAsyncThunk(
       await GoogleSignin.hasPlayServices();
       const sighInUserInfo = await GoogleSignin.signIn();
       userInfo = sighInUserInfo.user;
+
+      await request(userLogin, userInfo);
 
       const token = await GoogleSignin.getTokens();
       await AsyncStorage.setItem("@token", token.accessToken);

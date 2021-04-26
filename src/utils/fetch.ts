@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-25 12:15:50
- * @LastEditTime: 2021-04-26 17:17:42
+ * @LastEditTime: 2021-04-26 18:53:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/utils/fetch.ts
@@ -47,6 +47,7 @@ function getErrorMsgByStatusCode(msg: string, code: number) {
  * @return {Promise<T>} 状态码正常时返回响应本身，否则返回 reject 信息
  */
 function checkStatus(response: any) {
+  console.log("response", response);
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   } else {
@@ -55,8 +56,34 @@ function checkStatus(response: any) {
   }
 }
 
-export const request = (url: string, config: any) => {
-  return fetch(url, config)
-    .then(checkStatus)
-    .then((rps) => rps.json());
+export interface IRequest {
+  url: string;
+  config: {
+    method?: "GET" | "POST";
+    params?: {};
+  };
+}
+export const request = (requestApi: IRequest, requestParams: any = {}) => {
+  const { url, config = {} } = requestApi;
+  if (config.method === "GET") {
+    return fetch(url)
+      .then(checkStatus)
+      .then((rps) => rps.json());
+  }
+  if (config.method === "POST") {
+    console.log(requestApi);
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestParams),
+    })
+      .then(checkStatus)
+      .then((rps) => rps.json())
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 };
