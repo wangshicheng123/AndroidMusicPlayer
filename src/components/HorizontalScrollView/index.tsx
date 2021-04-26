@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:36:26
- * @LastEditTime: 2021-04-18 16:05:59
+ * @LastEditTime: 2021-04-26 22:33:07
  * @LastEditors: Please set LastEditors
  * @Description: 横向滚动组件
  * @FilePath: /MusicProject/src/components/HorizontalScrollVIew/index.tsx
@@ -16,11 +16,11 @@ import {
 } from "react-native";
 import FastImage from "react-native-fast-image";
 import DefaultImage from "../DefaultImage/index";
-import { IPlayListItem } from "@/interface/index";
+import { ICollectionListItem } from "@/interface/index";
 
 interface IProps {
   handleNavigateToPlaylist: any;
-  playLists: IPlayListItem[];
+  playLists: ICollectionListItem[];
   containerStyle?: ViewStyle;
   imageStyle?: {};
 }
@@ -56,7 +56,7 @@ const HorizontalScrollView = (props: IProps) => {
           )}
 
           <Text numberOfLines={2} style={styles.title}>
-            {item.title}
+            {item.name}
           </Text>
         </TouchableOpacity>
       )}

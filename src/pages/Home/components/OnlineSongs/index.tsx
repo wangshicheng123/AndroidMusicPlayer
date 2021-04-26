@@ -1,29 +1,32 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:12:28
- * @LastEditTime: 2021-04-21 22:48:01
+ * @LastEditTime: 2021-04-26 22:33:16
  * @LastEditors: Please set LastEditors
  * @Description: 在线歌单
  * @FilePath: /MusicProject/src/pages/Home/components/OnlineSongs/index.tsx
  */
 
 import React from "react";
+import { useSelector } from "react-redux";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 import { useNetInfo } from "@react-native-community/netinfo";
 import HorizontalScrollView from "@/components/HorizontalScrollView/index";
 import Headline from "@/components/HeadLine/index";
 import { IPlayListItem } from "@/interface/index";
-import * as playListsData from "@/assets/Media.json";
+import { IAppState } from "@/reducers/index";
 
 const OnlineSongsContainer = () => {
   const netInfo = useNetInfo(); // 当前网络状态信息
   const navigation = useNavigation();
+  const systemCollections = useSelector(
+    (state: IAppState) => state.collectionList.systemCollections
+  );
 
   if (!netInfo.isConnected) {
     return null;
   }
-  const { media: playLists } = playListsData;
 
   /**
    * @description: 导航至歌单列表页面
@@ -48,7 +51,7 @@ const OnlineSongsContainer = () => {
         <Headline>Online Songs</Headline>
       </View>
       <HorizontalScrollView
-        playLists={playLists}
+        playLists={systemCollections}
         handleNavigateToPlaylist={handleNavigateToPlaylist}
       />
     </View>

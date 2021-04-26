@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:40:21
- * @LastEditTime: 2021-04-24 17:41:58
+ * @LastEditTime: 2021-04-26 22:28:39
  * @LastEditors: Please set LastEditors
  * @Description: 收藏歌曲到歌集
  * @FilePath: /MusicProject/src/components/PlaylistDialog/index.tsx
@@ -16,13 +16,13 @@ import { IAppState } from "@/reducers/index";
 interface Props {
   visible: boolean;
   hideModal(): void;
-  addSongToCollectionList(id: string): void;
+  addSongToCollectionList(id: number): void;
 }
 
 const PlaylistDialog = (props: Props) => {
   const { visible, hideModal, addSongToCollectionList } = props;
   const collectionList = useSelector(
-    (state: IAppState) => state.collectionList
+    (state: IAppState) => state.collectionList.userCollections
   );
   return (
     <Portal>

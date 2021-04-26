@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-18 15:26:26
- * @LastEditTime: 2021-04-25 12:03:45
+ * @LastEditTime: 2021-04-26 22:26:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/interface/index.tsx
@@ -29,7 +29,7 @@ export interface IPlayListItem {
 }
 
 export interface ICollectionListItem {
-  id: string;
+  id: number;
   name: string;
   owner: string;
   songs: ISongItem[];
