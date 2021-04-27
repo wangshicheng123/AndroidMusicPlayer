@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 14:18:32
- * @LastEditTime: 2021-04-27 18:46:44
+ * @LastEditTime: 2021-04-27 21:32:51
  * @LastEditors: Please set LastEditors
  * @Description: 自定义歌曲集合
  * @FilePath: /MusicProject/src/reducers/playlistSlice.ts
@@ -69,9 +69,7 @@ const collectionListSlice = createSlice({
       action.payload.map((collection: ICollectionListItem) => {
         const isOwn = state.userCollections.some(
           (userCollection: ICollectionListItem) => {
-            return (
-              userCollection.collection_name === collection.collection_name
-            );
+            return userCollection.collection_id === collection.collection_id;
           }
         );
         !isOwn && state.userCollections.push(collection);
@@ -108,26 +106,28 @@ const collectionListSlice = createSlice({
       action: {
         type: string;
         payload: {
-          collectionId: number;
-          collectionName: string;
+          collectionId?: number;
+          collectionName?: string;
         };
       }
     ) => {
       const collectionId = action.payload.collectionId;
       const collectionName = action.payload.collectionName;
-      state.userCollections.map((collection: ICollectionListItem) => {
-        if (collection.collection_id === collectionId) {
-          collection.collection_name = collectionName;
+      state.userCollections = state.userCollections.map(
+        (collection: ICollectionListItem) => {
+          if (collection.collection_id === collectionId) {
+            collection.collection_name = collectionName;
+          }
+          return collection;
         }
-        return collection;
-      });
+      );
     },
     deleteCollectionitem: (
       state: IInitialCollectionListState,
       action: {
         type: string;
         payload: {
-          collectionId: number;
+          collectionId?: number;
         };
       }
     ) => {

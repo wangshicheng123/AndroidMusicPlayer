@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-24 11:11:01
- * @LastEditTime: 2021-04-24 22:49:57
+ * @LastEditTime: 2021-04-27 21:29:27
  * @LastEditors: Please set LastEditors
  * @Description: 编辑歌集名称
  * @FilePath: /MusicProject/src/components/RenamePlaylistDailog/index.tsx
@@ -10,15 +10,20 @@ import React, { useState } from "react";
 import { Dialog, Portal, Button, TextInput } from "react-native-paper";
 
 interface IProps {
-  visible: boolean;
-  collectionListName: string;
+  renameDialogVisible: boolean;
+  collectionListName?: string;
   hideDialog: () => void;
-  handleRename: (name: string) => void;
+  handleRenameCollection: (collectionName?: string) => void;
 }
 
 const RenameCollectionLstDailog = (props: IProps) => {
-  const { visible, collectionListName, hideDialog, handleRename } = props;
-  const [name, setName] = useState(collectionListName);
+  const {
+    renameDialogVisible,
+    collectionListName,
+    hideDialog,
+    handleRenameCollection,
+  } = props;
+  const [collectionName, setCollectionName] = useState(collectionListName);
 
   /**
    * @description: 获取新歌集名称
@@ -26,7 +31,7 @@ const RenameCollectionLstDailog = (props: IProps) => {
    * @return {*}
    */
   const onChangeText = (value: string) => {
-    setName(value);
+    setCollectionName(value);
   };
 
   /**
@@ -35,18 +40,18 @@ const RenameCollectionLstDailog = (props: IProps) => {
    * @return {*}
    */
   const handleSubmit = () => {
-    handleRename(name);
+    handleRenameCollection(collectionName);
   };
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={hideDialog}>
+      <Dialog visible={renameDialogVisible} onDismiss={hideDialog}>
         <Dialog.Title>Renaming</Dialog.Title>
         <Dialog.Content>
           <TextInput
             mode="outlined"
             label="Playlist Name"
-            value={name}
+            value={collectionName}
             onChangeText={onChangeText}
           />
         </Dialog.Content>

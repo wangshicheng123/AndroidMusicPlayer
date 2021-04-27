@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 18:14:11
- * @LastEditTime: 2021-04-27 18:01:44
+ * @LastEditTime: 2021-04-27 21:51:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/api/index.ts
@@ -48,6 +48,18 @@ export const findCollection: IRequest = {
 };
 export const createCollection: IRequest = {
   url: dev_api_prefix + "/collection/create",
+  config: {
+    method: "POST",
+  },
+};
+export const modifyCollection: IRequest = {
+  url: dev_api_prefix + "/collection/modify",
+  config: {
+    method: "POST",
+  },
+};
+export const deleteCollection: IRequest = {
+  url: dev_api_prefix + "/collection/delete",
   config: {
     method: "POST",
   },

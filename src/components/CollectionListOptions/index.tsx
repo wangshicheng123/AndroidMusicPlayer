@@ -1,20 +1,15 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-24 11:09:34
- * @LastEditTime: 2021-04-25 11:56:46
+ * @LastEditTime: 2021-04-27 22:14:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/components/PlaylistOptions/index.tsx
  */
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Animated,
-  TouchableOpacity,
-} from "react-native";
+import { useSelector } from "react-redux";
+import { StyleSheet, View, Dimensions, TouchableOpacity } from "react-native";
 import {
   Title,
   List,
@@ -30,7 +25,11 @@ import {
   modifyCollectionListItem,
   deleteCollectionitem,
 } from "@/reducers/collectionListSlice";
-import { addToPlayingQueue, addToLikeSongQueue } from "@/reducers/queueSlice";
+import { addToPlayingQueue } from "@/reducers/queueSlice";
+import { ICollectionListItem, ISongItem } from "@/interface/index";
+import { request } from "@/utils/fetch";
+import { modifyCollection, deleteCollection } from "@/api/index";
+import { IAppState } from "@/reducers/index";
 
 interface IProps {
   route: any;
@@ -41,6 +40,7 @@ const CollectionListOptions = (props: IProps) => {
   const { route, navigation } = props;
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { id: userId } = useSelector((state: IAppState) => state.user.userInfo);
 
   const [renameDialogVisible, setRenameDialogVisible] = useState<boolean>(
     false
@@ -51,7 +51,11 @@ const CollectionListOptions = (props: IProps) => {
   const [showRenderInner, setRenderInner] = useState<boolean>(false);
 
   const { colors } = theme;
-  const { collecetionListMetadata, songs } = route.params;
+  const {
+    collecetionListMetadata,
+  }: {
+    collecetionListMetadata: ICollectionListItem;
+  } = route.params;
 
   /**
    * @description: 关闭修改歌集名称dialog
@@ -68,7 +72,6 @@ const CollectionListOptions = (props: IProps) => {
    * @return {*}
    */
   const handleOpenRenameDialog = () => {
-    closeBottomSheet();
     setRenameDialogVisible(true);
   };
 
@@ -96,13 +99,21 @@ const CollectionListOptions = (props: IProps) => {
    * @param {*}
    * @return {*}
    */
-  const handleDeleteCollectionItem = () => {
-    dispatch(
-      deleteCollectionitem({
-        collectionId: collecetionListMetadata.id,
-      })
-    );
-    navigation.goBack();
+  const handleDeleteCollection = async () => {
+    const { collection_id } = collecetionListMetadata;
+    const deleteRes = await request(deleteCollection, {
+      collection_id: collection_id,
+      user_id: userId,
+    });
+    if (deleteRes) {
+      dispatch(
+        deleteCollectionitem({
+          collectionId: collection_id,
+        })
+      );
+    }
+    handleHideDeleteDialog();
+    navigation.navigate("CollectionList");
   };
 
   /**
@@ -110,16 +121,23 @@ const CollectionListOptions = (props: IProps) => {
    * @param {string} playlistName
    * @return {*}
    */
-  const handleRename = (collectionListName: string) => {
-    const { id } = collecetionListMetadata;
+  const handleRenameCollection = async (collectionListName?: string) => {
+    const { collection_id } = collecetionListMetadata;
     handleHideRenameDialog();
-    dispatch(
-      modifyCollectionListItem({
-        collectionId: id,
-        collectionName: collectionListName,
-      })
-    );
-    navigation.goBack();
+    const moidifyRes = await request(modifyCollection, {
+      collection_id: collection_id,
+      collection_name: collectionListName,
+    });
+    if (moidifyRes) {
+      dispatch(
+        modifyCollectionListItem({
+          collectionId: collection_id,
+          collectionName: collectionListName,
+        })
+      );
+    }
+    closeBottomSheet();
+    navigation.navigate("CollectionList");
   };
 
   /**
@@ -140,17 +158,8 @@ const CollectionListOptions = (props: IProps) => {
     setRenderInner(false);
   };
 
-  /**
-   * @description: 添加到播放队列
-   * @param {*}
-   * @return {*}
-   */
-  const addSongToQueue = () => {
-    dispatch(addToPlayingQueue(songs));
-  };
-
   const renderInner = () => {
-    const { name, owner } = collecetionListMetadata;
+    const { collection_name, user_name } = collecetionListMetadata;
     return (
       <View style={styles.container}>
         <View
@@ -177,28 +186,20 @@ const CollectionListOptions = (props: IProps) => {
             >
               <>
                 <DefaultImage style={styles.artCover} />
-                <Title>{name}</Title>
-                <Subheading>{`by ${owner}`}</Subheading>
+                <Title>{collection_name}</Title>
+                <Subheading>{`by ${user_name}`}</Subheading>
               </>
             </TouchableOpacity>
           </View>
           <View style={{ backgroundColor: colors.surface }}>
-            <TouchableOpacity onPress={addSongToQueue}>
-              <List.Item
-                title="Play All"
-                left={(props) => (
-                  <List.Icon {...props} icon="play-circle-outline" />
-                )}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => dispatch(addToLikeSongQueue(songs))}
             >
               <List.Item
                 title="like"
                 left={(props) => <List.Icon {...props} icon="heart" />}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={handleOpenDeleteDialog}>
               <List.Item
                 title="Delete Playlist"
@@ -221,16 +222,16 @@ const CollectionListOptions = (props: IProps) => {
     <View>
       <Portal>{showRenderInner ? renderInner() : null}</Portal>
       <RenamePlaylistDailog
-        visible={renameDialogVisible}
+        renameDialogVisible={renameDialogVisible}
         hideDialog={handleHideRenameDialog}
-        collectionListName={collecetionListMetadata.name}
-        handleRename={handleRename}
+        collectionListName={collecetionListMetadata.collection_name}
+        handleRenameCollection={handleRenameCollection}
       />
       <AlertDialog
         visible={deleteDialogVisible}
         title="Delete playlist"
-        message={`Are you sure you want to delete ${collecetionListMetadata.name}`}
-        action={handleDeleteCollectionItem}
+        message={`Are you sure you want to delete ${collecetionListMetadata.collection_name}`}
+        action={handleDeleteCollection}
         hideDialog={handleHideDeleteDialog}
       />
       <IconButton
