@@ -1,13 +1,13 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-24 11:03:32
- * @LastEditTime: 2021-04-25 10:02:18
+ * @LastEditTime: 2021-04-27 17:37:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Collection/components/Playlist/index.tsx
  */
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { List, useTheme, Chip } from "react-native-paper";
 import { RefreshControl, SectionList, StyleSheet, View } from "react-native";
@@ -16,17 +16,39 @@ import Screen from "@/components/Screen/index";
 import Title from "@/components/Title/index";
 import CreateCollectionDialog from "./components/CreateCollection/index";
 import { IAppState } from "@/reducers/index";
+import { createCollectionList } from "@/reducers/collectionListSlice";
 import { ICollectionListItem } from "@/interface/index";
+import { findCollection } from "@/api/index";
+import { request } from "@/utils/fetch";
 
 const CollectionListScreen = () => {
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [dialogVisible, setDialogVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const collectionList = useSelector(
-    (state: IAppState) => state.collectionList
+    (state: IAppState) => state.collectionList.userCollections
   );
+  const { id: userId } = useSelector((state: IAppState) => state.user.userInfo);
+
+  useEffect(() => {
+    fetchCollectionData();
+  }, []);
+
+  /**
+   * @description: 获取初始歌集数据
+   * @param {*}
+   * @return {*}
+   */
+  const fetchCollectionData = () => {
+    return request(findCollection, {
+      user_id: userId,
+    })?.then((collectionDatas) => {
+      dispatch(createCollectionList(collectionDatas.data));
+    });
+  };
 
   /**
    * @description: 跳转至指定歌集详情页面
@@ -63,8 +85,9 @@ const CollectionListScreen = () => {
    * @param {string}
    * @return {*}
    */
-  const refreshCollectionList = () => {
+  const refreshCollectionList = async () => {
     setRefreshing(true);
+    await fetchCollectionData();
     setRefreshing(false);
   };
 
@@ -85,24 +108,29 @@ const CollectionListScreen = () => {
         ListFooterComponent={() => <View style={styles.listFooterStyle} />}
         sections={[{ title: "Collections", data: collectionList }]}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }: { item: any }) => (
-          <List.Item
-            title={item.name}
-            description={`by ${item.owner}`}
-            left={(props) =>
-              item.cover ? (
-                <FastImage
-                  source={{ uri: item.cover }}
-                  style={[styles.artwork, { backgroundColor: colors.surface }]}
-                  resizeMode="cover"
-                />
-              ) : (
-                <List.Icon {...props} icon="folder" />
-              )
-            }
-            onPress={() => navigateToCollection(item)}
-          />
-        )}
+        renderItem={({ item }: { item: ICollectionListItem }) => {
+          return (
+            <List.Item
+              title={item.collection_name}
+              description={`by ${item.user_name}`}
+              left={(props) =>
+                item.collection_cover ? (
+                  <FastImage
+                    source={{ uri: item.collection_cover }}
+                    style={[
+                      styles.artwork,
+                      { backgroundColor: colors.surface },
+                    ]}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <List.Icon {...props} icon="folder" />
+                )
+              }
+              onPress={() => navigateToCollection(item)}
+            />
+          );
+        }}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

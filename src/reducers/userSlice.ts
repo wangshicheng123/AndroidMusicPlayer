@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:42:43
- * @LastEditTime: 2021-04-26 22:05:18
+ * @LastEditTime: 2021-04-27 16:35:58
  * @LastEditors: Please set LastEditors
  * @Description: 用户信息状态管理
  * @FilePath: /MusicProject/src/reducers/userSlice.ts
@@ -17,6 +17,7 @@ import { request } from "@/utils/fetch";
 import { userLogin } from "@/api/index";
 
 type userInfo = {
+  id?: string;
   photo?: string | null;
   email?: string;
   familyName?: string | null;

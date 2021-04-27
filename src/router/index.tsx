@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-26 17:16:20
+ * @LastEditTime: 2021-04-27 17:29:05
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts

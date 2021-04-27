@@ -1,21 +1,18 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-14 21:10:16
- * @LastEditTime: 2021-04-26 17:07:54
+ * @LastEditTime: 2021-04-27 17:51:12
  * @LastEditors: Please set LastEditors
  * @Description: 底部Tab导航集合
  * @FilePath: /MusicProject/src/router/BottomNavigator.ts
  */
 import React from "react";
-import { View, Text } from "react-native";
 import { useTheme, IconButton } from "react-native-paper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BottomTabBar from "@/components/BottomTabBar/index";
-// import HomeScreen from "@/pages/Home/index";
 import HomeNavigator from "./HomeNavigator";
-import SearchScreen from "@/pages/Search/index";
-import CollectionScreen from "@/pages/Collection/index";
-
+import CollectionNavigator from "./CollectionNavigator";
+import SearchNavigator from "./SearchNavigator";
 interface ITabbarIcon {
   focused: boolean;
   icon: {
@@ -75,7 +72,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchNavigator}
         options={{
           tabBarIcon: ({ focused }) => {
             return renderTabbarIcon({
@@ -89,8 +86,8 @@ const BottomNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Library"
-        component={CollectionScreen}
+        name="CollectionList"
+        component={CollectionNavigator}
         options={{
           tabBarLabel: "CollectionList",
           tabBarIcon: ({ focused }) => {
