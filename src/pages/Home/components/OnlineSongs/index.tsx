@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:12:28
- * @LastEditTime: 2021-04-26 22:33:16
+ * @LastEditTime: 2021-04-27 16:22:49
  * @LastEditors: Please set LastEditors
  * @Description: 在线歌单
  * @FilePath: /MusicProject/src/pages/Home/components/OnlineSongs/index.tsx
@@ -14,8 +14,9 @@ import { useNavigation } from "@react-navigation/core";
 import { useNetInfo } from "@react-native-community/netinfo";
 import HorizontalScrollView from "@/components/HorizontalScrollView/index";
 import Headline from "@/components/HeadLine/index";
-import { IPlayListItem } from "@/interface/index";
+import { ICollectionListItem } from "@/interface/index";
 import { IAppState } from "@/reducers/index";
+import { getSongByCollection } from "@/api/index";
 
 const OnlineSongsContainer = () => {
   const netInfo = useNetInfo(); // 当前网络状态信息
@@ -33,16 +34,10 @@ const OnlineSongsContainer = () => {
    * @param {any} playlist
    * @return {*}
    */
-  const handleNavigateToPlaylist = (playlist: IPlayListItem) => {
-    const playlistMetadata = {
-      id: "online-playlist--000002",
-      name: playlist.title,
-      owner: "Serenity",
-      cover: playlist.cover,
-    };
+  const handleNavigateToPlaylist = (playlist: ICollectionListItem) => {
     navigation.navigate("Playlist", {
-      playlistMetadata: playlistMetadata,
-      songs: playlist.children,
+      playlistMetadata: playlist,
+      requestApi: getSongByCollection,
     });
   };
   return (

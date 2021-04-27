@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 17:03:44
- * @LastEditTime: 2021-04-26 17:18:51
+ * @LastEditTime: 2021-04-27 12:44:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/router/HomeNavigator.tsx
@@ -82,10 +82,10 @@ const AppStack = () => {
         component={SongPlayListScreen}
         options={({ route }: { route: any }) => {
           const {
-            params: { playlistMetadata, songs },
+            params: { playlistMetadata, songs = [] },
           } = route;
           return {
-            headerTitle: playlistMetadata.name,
+            headerTitle: playlistMetadata.collection_name,
             headerRight: () => (
               <IconButton
                 icon="play-circle-outline"

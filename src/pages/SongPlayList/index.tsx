@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-27 11:41:14
+ * @LastEditTime: 2021-04-27 16:23:22
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
@@ -17,9 +17,9 @@ import SongContainer from "@/components/SongContainer/index";
 import DefaultImage from "@/components/DefaultImage";
 import Screen from "@/components/Screen";
 import EmptyPlaylist from "@/components/EmptyPlayList/index";
-import { IPlayListItem, ISongItem } from "@/interface/index";
+import { ICollectionListItem, ISongItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
-import { request } from "@/utils/fetch";
+import { request, IRequest } from "@/utils/fetch";
 
 interface IProps {
   route: any;
@@ -30,7 +30,13 @@ const SongsList = (props: IProps) => {
   const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
   const { route } = props;
-  const { playlistMetadata, requestApi } = route.params;
+  const {
+    playlistMetadata,
+    requestApi,
+  }: {
+    playlistMetadata: ICollectionListItem;
+    requestApi: IRequest;
+  } = route.params;
 
   /**
    * @description: 请求歌曲列表数据
@@ -41,13 +47,16 @@ const SongsList = (props: IProps) => {
     const { pageNumber = 0 } = params;
     return request(requestApi, {
       pageNumber: pageNumber,
+      collectionId: playlistMetadata.collection_id || -1,
     });
   };
 
   useEffect(() => {
+    setSongDatas([]);
     requestSongs({ pageNumber: 0 })
       ?.then((songRes: { msg: string; data: ISongItem[] }) => {
         const { data } = songRes;
+        console.log("songRes", songRes);
         setSongDatas((previous: ISongItem[]) => {
           return [...previous, ...data];
         });
@@ -82,9 +91,9 @@ const SongsList = (props: IProps) => {
           ListHeaderComponent={() => (
             <View style={{ margin: 12 }}>
               <View style={styles.coverContainer}>
-                {playlistMetadata.cover ? (
+                {playlistMetadata.collection_cover ? (
                   <FastImage
-                    source={{ uri: playlistMetadata.cover }}
+                    source={{ uri: playlistMetadata.collection_cover }}
                     style={styles.artCover}
                   />
                 ) : (
@@ -92,8 +101,8 @@ const SongsList = (props: IProps) => {
                 )}
               </View>
               <View style={styles.titleContainer}>
-                <Title>{playlistMetadata.name}</Title>
-                <Subheading>{`by ${playlistMetadata.owner}`}</Subheading>
+                <Title>{playlistMetadata.collection_name}</Title>
+                <Subheading>{`by ${playlistMetadata.user_name}`}</Subheading>
               </View>
               <View style={styles.buttonContainer}>
                 <Button mode="contained" onPress={handlePlayAll}>

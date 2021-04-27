@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-18 15:26:26
- * @LastEditTime: 2021-04-27 11:39:17
+ * @LastEditTime: 2021-04-27 16:21:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/interface/index.tsx
@@ -16,21 +16,13 @@ export interface ISongItem {
   song_play_count?: number;
 }
 
-export interface IPlayListItem {
-  id: string;
-  cover: string;
-  title: string;
-  artist?: string;
-  type?: string;
-  subtitle?: string;
-  genre: string;
-  children: ISongItem[];
-}
-
 export interface ICollectionListItem {
-  id: number;
-  name: string;
-  owner: string;
+  id?: number;
+  collection_id?: number;
+  collection_name?: string;
+  user_id?: string;
+  user_name?: string;
+  collection_cover?: string;
+  collection_like_count?: number;
   songs: ISongItem[];
-  cover?: string;
 }

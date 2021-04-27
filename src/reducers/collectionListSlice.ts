@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 14:18:32
- * @LastEditTime: 2021-04-26 22:27:33
+ * @LastEditTime: 2021-04-27 13:47:01
  * @LastEditors: Please set LastEditors
  * @Description: 自定义歌曲集合
  * @FilePath: /MusicProject/src/reducers/playlistSlice.ts
@@ -16,52 +16,58 @@ export type IInitialCollectionListState = {
 const initialState: IInitialCollectionListState = {
   systemCollections: [
     {
-      id: 3778678,
-      name: "音乐热歌榜",
-      owner: "System",
-      cover:
+      collection_id: 3778678,
+      collection_name: "音乐热歌榜",
+      user_id: 1,
+      user_name: "System",
+      collection_cover:
         "https://p2.music.126.net/GhhuF6Ep5Tq9IEvLsyCN7w==/18708190348409091.jpg",
       songs: [],
     },
     {
-      id: 3779629,
-      name: "音乐新歌榜",
-      owner: "System",
-      cover:
+      collection_id: 3779629,
+      collection_name: "音乐新歌榜",
+      user_id: 1,
+      user_name: "System",
+      collection_cover:
         "https://p1.music.126.net/N2HO5xfYEqyQ8q6oxCw8IQ==/18713687906568048.jpg",
       songs: [],
     },
     {
-      id: 19723756,
-      name: "音乐飙升榜",
-      owner: "System",
-      cover:
+      collection_id: 19723756,
+      collection_name: "音乐飙升榜",
+      user_id: 1,
+      user_name: "System",
+      collection_cover:
         "https://p2.music.126.net/DrRIg6CrgDfVLEph9SNh7w==/18696095720518497.jpg",
       songs: [],
     },
     {
-      id: 2147483647,
-      name: "抖音排行榜",
-      owner: "System",
-      cover:
+      collection_id: 2250011882,
+      collection_name: "抖音排行榜",
+      user_id: 1,
+      user_name: "System",
+      collection_cover:
         "https://p1.music.126.net/8sRm2fQNh_KZeWmJ1sRhQQ==/109951165611408950.jpg",
       songs: [],
     },
   ],
   userCollections: [
     {
-      id: 1,
-      name: "Default",
-      owner: "system",
-      cover:
+      collection_id: 1,
+      collection_name: "Default",
+      user_id: 1,
+      user_name: "Default",
+      collection_cover:
         "http://p3.music.126.net/FM_0Ewfb-9Fp0Hm9TeMZAA==/18806046882899500.jpg?param=200y200",
       songs: [],
     },
     {
-      id: 2,
-      name: "Test",
-      owner: "system",
-      cover:
+      collection_id: 2,
+      collection_name: "Test",
+      user_id: 1,
+      user_name: "Test",
+      collection_cover:
         "http://p3.music.126.net/FM_0Ewfb-9Fp0Hm9TeMZAA==/18806046882899500.jpg?param=200y200",
       songs: [],
     },
@@ -102,7 +108,7 @@ const collectionListSlice = createSlice({
     ) => {
       const { collectionListId, songData } = action.payload;
       state.userCollections.map((collectionList: ICollectionListItem) => {
-        if (collectionList.id === collectionListId) {
+        if (collectionList.collection_id === collectionListId) {
           collectionList.songs.push(songData);
         }
       });
@@ -120,8 +126,8 @@ const collectionListSlice = createSlice({
       const collectionId = action.payload.collectionId;
       const collectionName = action.payload.collectionName;
       state.userCollections.map((collection: ICollectionListItem) => {
-        if (collection.id === collectionId) {
-          collection.name = collectionName;
+        if (collection.collection_id === collectionId) {
+          collection.collection_name = collectionName;
         }
         return collection;
       });
@@ -138,7 +144,7 @@ const collectionListSlice = createSlice({
       const collectionId = action.payload.collectionId;
       state.userCollections = state.userCollections.filter(
         (collection: ICollectionListItem) => {
-          return collection.id !== collectionId;
+          return collection.collection_id !== collectionId;
         }
       );
     },

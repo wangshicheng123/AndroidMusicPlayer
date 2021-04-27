@@ -17,7 +17,7 @@ import SongContainer from "@/components/SongContainer/index";
 import DefaultImage from "@/components/DefaultImage";
 import Screen from "@/components/Screen";
 import EmptyPlaylist from "@/components/EmptyPlayList/index";
-import { IPlayListItem } from "@/interface/index";
+import { ICollectionListItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
 
 interface IProps {
@@ -76,7 +76,7 @@ const CollectionListSongs = (props: IProps) => {
             </View>
           )}
           data={songs}
-          renderItem={({ item }: { item: IPlayListItem }) => (
+          renderItem={({ item }: { item: ICollectionListItem }) => (
             <SongContainer songData={item} />
           )}
           ItemSeparatorComponent={() => <Divider inset />}

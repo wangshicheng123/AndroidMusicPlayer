@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import isEqual from "lodash/isEqual";
 
 import Song from "@/components/Song/index";
-import { IPlayListItem, ISongItem } from "@/interface/index";
+import { ISongItem } from "@/interface/index";
 import { IAppState } from "@/reducers/index";
 import { cacheLoadSong, downloadSong } from "@/reducers/songSlice";
 

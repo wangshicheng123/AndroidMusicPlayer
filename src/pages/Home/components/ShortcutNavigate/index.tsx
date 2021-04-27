@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:09:11
- * @LastEditTime: 2021-04-27 11:34:37
+ * @LastEditTime: 2021-04-27 16:24:22
  * @LastEditors: Please set LastEditors
  * @Description: 快捷操作
  * @FilePath: /MusicProject/src/pages/Home/components/ShortcutContainer/index.tsx
@@ -13,7 +13,8 @@ import { useNavigation } from "@react-navigation/core";
 import { Avatar, Caption } from "react-native-paper";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { IAppState } from "@/reducers/index";
-import { getMostPlaySongs } from "@/api/index";
+import { getMostPlaySongs, getFavSongByUser } from "@/api/index";
+import { ICollectionListItem } from "@/interface/index";
 
 const ShortCutContainer = () => {
   const navigation = useNavigation();
@@ -23,10 +24,15 @@ const ShortCutContainer = () => {
 
   const navigateToHistory = React.useMemo(
     () => () => {
-      const playlistMetadata = {
-        id: "user-playlist--000001",
-        name: "Recently Played Songs",
-        owner: "Serenity",
+      const playlistMetadata: ICollectionListItem = {
+        id: -3,
+        collection_id: -3,
+        collection_name: "Recently Played Songs",
+        user_id: "1",
+        user_name: "System",
+        collection_cover: "",
+        collection_like_count: 0,
+        songs: [],
       };
       navigation.navigate("Playlist", {
         playlistMetadata: playlistMetadata,
@@ -38,14 +44,19 @@ const ShortCutContainer = () => {
 
   const navigateToFavorite = React.useMemo(
     () => () => {
-      const playlistMetadata = {
-        id: "user-playlist--000002",
-        name: "Liked Songs",
-        owner: "Serenity",
+      const playlistMetadata: ICollectionListItem = {
+        id: -1,
+        collection_id: -1,
+        collection_name: "Liked Songs",
+        user_id: "1",
+        user_name: "System",
+        collection_cover: "",
+        collection_like_count: 0,
+        songs: [],
       };
       navigation.navigate("Playlist", {
         playlistMetadata: playlistMetadata,
-        songs: likingSongQueue,
+        requestApi: getFavSongByUser,
       });
     },
     [navigation, likingSongQueue]
@@ -53,10 +64,15 @@ const ShortCutContainer = () => {
 
   const navigateToMostPlayed = React.useMemo(
     () => () => {
-      const playlistMetadata = {
-        id: "user-playlist--000002",
-        name: "Most Played Songs",
-        owner: "Serenity",
+      const playlistMetadata: ICollectionListItem = {
+        id: -2,
+        collection_id: -2,
+        collection_name: "Most Played Songs",
+        user_id: "1",
+        user_name: "System",
+        collection_cover: "",
+        collection_like_count: 0,
+        songs: [],
       };
       navigation.navigate("Playlist", {
         playlistMetadata: playlistMetadata,

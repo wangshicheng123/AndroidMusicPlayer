@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:36:26
- * @LastEditTime: 2021-04-26 22:33:07
+ * @LastEditTime: 2021-04-27 13:33:29
  * @LastEditors: Please set LastEditors
  * @Description: 横向滚动组件
  * @FilePath: /MusicProject/src/components/HorizontalScrollVIew/index.tsx
@@ -44,10 +44,10 @@ const HorizontalScrollView = (props: IProps) => {
           style={[styles.item, containerStyle]}
           onPress={() => handleNavigateToPlaylist(item)}
         >
-          {item.cover ? (
+          {item.collection_cover ? (
             <FastImage
               source={{
-                uri: item.cover,
+                uri: item.collection_cover,
               }}
               style={[styles.photo, imageStyle]}
             />
@@ -56,7 +56,7 @@ const HorizontalScrollView = (props: IProps) => {
           )}
 
           <Text numberOfLines={2} style={styles.title}>
-            {item.name}
+            {item.collection_name}
           </Text>
         </TouchableOpacity>
       )}

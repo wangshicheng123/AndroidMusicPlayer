@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-25 12:15:50
- * @LastEditTime: 2021-04-27 11:23:43
+ * @LastEditTime: 2021-04-27 13:36:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/utils/fetch.ts
@@ -47,7 +47,6 @@ function getErrorMsgByStatusCode(msg: string, code: number) {
  * @return {Promise<T>} 状态码正常时返回响应本身，否则返回 reject 信息
  */
 function checkStatus(response: any) {
-  console.log("response", response);
   if (response.status >= 200 && response.status < 300) {
     return Promise.resolve(response);
   } else {
