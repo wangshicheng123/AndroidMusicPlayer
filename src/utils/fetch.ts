@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-25 12:15:50
- * @LastEditTime: 2021-04-26 18:53:26
+ * @LastEditTime: 2021-04-27 11:23:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/utils/fetch.ts
@@ -71,7 +71,6 @@ export const request = (requestApi: IRequest, requestParams: any = {}) => {
       .then((rps) => rps.json());
   }
   if (config.method === "POST") {
-    console.log(requestApi);
     return fetch(url, {
       method: "POST",
       headers: {
@@ -81,7 +80,9 @@ export const request = (requestApi: IRequest, requestParams: any = {}) => {
       body: JSON.stringify(requestParams),
     })
       .then(checkStatus)
-      .then((rps) => rps.json())
+      .then((rps) => {
+        return rps.json();
+      })
       .catch((error) => {
         console.error(error);
       });

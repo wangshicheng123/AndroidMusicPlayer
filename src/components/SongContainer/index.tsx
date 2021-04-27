@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:31:48
- * @LastEditTime: 2021-04-22 10:04:46
+ * @LastEditTime: 2021-04-27 11:41:42
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表中的item
  * @FilePath: /MusicProject/src/components/SongContainer/index.tsx
@@ -16,7 +16,7 @@ import { IAppState } from "@/reducers/index";
 import { cacheLoadSong, downloadSong } from "@/reducers/songSlice";
 
 interface IProps {
-  songData: IPlayListItem | ISongItem;
+  songData: ISongItem;
   goBack?: () => void;
 }
 

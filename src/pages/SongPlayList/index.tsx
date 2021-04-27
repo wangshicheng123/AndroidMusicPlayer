@@ -1,12 +1,12 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-19 22:55:08
+ * @LastEditTime: 2021-04-27 11:41:14
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import FastImage from "react-native-fast-image";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
@@ -17,18 +17,45 @@ import SongContainer from "@/components/SongContainer/index";
 import DefaultImage from "@/components/DefaultImage";
 import Screen from "@/components/Screen";
 import EmptyPlaylist from "@/components/EmptyPlayList/index";
-import { IPlayListItem } from "@/interface/index";
+import { IPlayListItem, ISongItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
+import { request } from "@/utils/fetch";
 
 interface IProps {
   route: any;
 }
 
 const SongsList = (props: IProps) => {
+  const [songDatas, setSongDatas] = useState<ISongItem[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
   const { route } = props;
-  const { playlistMetadata, songs } = route.params;
-  const [refreshing, setRefreshing] = useState(false);
+  const { playlistMetadata, requestApi } = route.params;
+
+  /**
+   * @description: 请求歌曲列表数据
+   * @param {*}
+   * @return {*}
+   */
+  const requestSongs = (params: { pageNumber: number }) => {
+    const { pageNumber = 0 } = params;
+    return request(requestApi, {
+      pageNumber: pageNumber,
+    });
+  };
+
+  useEffect(() => {
+    requestSongs({ pageNumber: 0 })
+      ?.then((songRes: { msg: string; data: ISongItem[] }) => {
+        const { data } = songRes;
+        setSongDatas((previous: ISongItem[]) => {
+          return [...previous, ...data];
+        });
+      })
+      ?.catch((error) => {
+        console.log(error);
+      });
+  }, [playlistMetadata]);
 
   /**
    * @description: 播放所有歌曲，添加到播放队列
@@ -37,7 +64,7 @@ const SongsList = (props: IProps) => {
    */
   const handlePlayAll = () => {
     /* 添加歌单到播放任务队列 */
-    dispatch(addToPlayingQueue(songs));
+    dispatch(addToPlayingQueue(songDatas));
     /* 执行当前任务队列中的第一首歌 */
     dispatch(excutePlayingQueue());
   };
@@ -48,7 +75,7 @@ const SongsList = (props: IProps) => {
 
   return (
     <Screen>
-      {isEmpty(songs) ? (
+      {isEmpty(songDatas) ? (
         <EmptyPlaylist />
       ) : (
         <FlatList
@@ -75,8 +102,8 @@ const SongsList = (props: IProps) => {
               </View>
             </View>
           )}
-          data={songs}
-          renderItem={({ item }: { item: IPlayListItem }) => (
+          data={songDatas}
+          renderItem={({ item }: { item: ISongItem }) => (
             <SongContainer songData={item} />
           )}
           ItemSeparatorComponent={() => <Divider inset />}

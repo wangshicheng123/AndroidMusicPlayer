@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:09:11
- * @LastEditTime: 2021-04-22 16:17:45
+ * @LastEditTime: 2021-04-27 11:34:37
  * @LastEditors: Please set LastEditors
  * @Description: 快捷操作
  * @FilePath: /MusicProject/src/pages/Home/components/ShortcutContainer/index.tsx
@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/core";
 import { Avatar, Caption } from "react-native-paper";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { IAppState } from "@/reducers/index";
+import { getMostPlaySongs } from "@/api/index";
 
 const ShortCutContainer = () => {
   const navigation = useNavigation();
@@ -59,7 +60,7 @@ const ShortCutContainer = () => {
       };
       navigation.navigate("Playlist", {
         playlistMetadata: playlistMetadata,
-        songs: [],
+        requestApi: getMostPlaySongs,
       });
     },
     [navigation]

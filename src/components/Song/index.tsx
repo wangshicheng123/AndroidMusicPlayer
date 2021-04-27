@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:32:38
- * @LastEditTime: 2021-04-22 09:28:16
+ * @LastEditTime: 2021-04-27 11:46:45
  * @LastEditors: Please set LastEditors
  * @Description: 音乐-item歌曲信息
  * @FilePath: /MusicProject/src/components/Track/index.tsx
@@ -12,17 +12,10 @@ import { StyleSheet, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import ActiveSongIcon from "../ActiveSongIcon/index";
 import DefaultImage from "../DefaultImage/index";
-
-interface SongProps {
-  title?: string;
-  album?: string;
-  artist?: string;
-  cover?: string;
-  type?: string;
-}
+import { ISongItem } from "@/interface/index";
 
 interface IProps {
-  songData: SongProps;
+  songData: ISongItem;
   active: boolean;
   handelSongPlay: () => void;
   handleSongDownload?: () => void;
@@ -35,12 +28,12 @@ const Song = React.memo(
     return (
       <View style={[styles.surface, { backgroundColor: colors.background }]}>
         <List.Item
-          title={songData.title}
-          description={songData.artist ? songData.artist : songData.album}
+          title={songData.song_title}
+          description={songData.song_artist}
           left={() =>
-            songData.cover ? (
+            songData.song_cover ? (
               <FastImage
-                source={{ uri: songData.cover }}
+                source={{ uri: songData.song_cover }}
                 style={styles.artwork}
               />
             ) : (
@@ -51,13 +44,11 @@ const Song = React.memo(
             active ? (
               <ActiveSongIcon style={styles.activeSongIconStyle} />
             ) : (
-              songData.type === "online" && (
-                <IconButton
-                  icon="download-outline"
-                  onPress={handleSongDownload}
-                  {...props}
-                />
-              )
+              <IconButton
+                icon="download-outline"
+                onPress={handleSongDownload}
+                {...props}
+              />
             )
           }
           onPress={() => handelSongPlay()}
