@@ -1,12 +1,12 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-24 19:07:27
+ * @LastEditTime: 2021-04-27 19:08:15
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import FastImage from "react-native-fast-image";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
@@ -17,18 +17,33 @@ import SongContainer from "@/components/SongContainer/index";
 import DefaultImage from "@/components/DefaultImage";
 import Screen from "@/components/Screen";
 import EmptyPlaylist from "@/components/EmptyPlayList/index";
-import { ICollectionListItem } from "@/interface/index";
+import { ICollectionListItem, ISongItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
+import { getSongByCollection } from "@/api/index";
+import { request } from "@/utils/fetch";
 
 interface IProps {
   route: any;
 }
 
 const CollectionListSongs = (props: IProps) => {
+  const [songs, setSongs] = useState<ISongItem[]>([]);
   const dispatch = useDispatch();
   const { route } = props;
-  const { collecetionListMetadata, songs } = route.params;
+  const {
+    collecetionListMetadata,
+  }: {
+    collecetionListMetadata: ICollectionListItem;
+  } = route.params;
   const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    request(getSongByCollection, {
+      collectionId: collecetionListMetadata.collection_id,
+    })?.then((songDatas) => {
+      setSongs(songDatas.data);
+    });
+  }, []);
 
   /**
    * @description: 播放所有歌曲，添加到播放队列
@@ -55,9 +70,9 @@ const CollectionListSongs = (props: IProps) => {
           ListHeaderComponent={() => (
             <View style={{ margin: 12 }}>
               <View style={styles.coverContainer}>
-                {collecetionListMetadata.cover ? (
+                {collecetionListMetadata.collection_cover ? (
                   <FastImage
-                    source={{ uri: collecetionListMetadata.cover }}
+                    source={{ uri: collecetionListMetadata.collection_cover }}
                     style={styles.artCover}
                   />
                 ) : (
@@ -65,8 +80,8 @@ const CollectionListSongs = (props: IProps) => {
                 )}
               </View>
               <View style={styles.titleContainer}>
-                <Title>{collecetionListMetadata.name}</Title>
-                <Subheading>{`by ${collecetionListMetadata.owner}`}</Subheading>
+                <Title>{collecetionListMetadata.collection_name}</Title>
+                <Subheading>{`by ${collecetionListMetadata.user_name}`}</Subheading>
               </View>
               <View style={styles.buttonContainer}>
                 <Button mode="contained" onPress={handlePlayAll}>
@@ -76,7 +91,7 @@ const CollectionListSongs = (props: IProps) => {
             </View>
           )}
           data={songs}
-          renderItem={({ item }: { item: ICollectionListItem }) => (
+          renderItem={({ item }: { item: ISongItem }) => (
             <SongContainer songData={item} />
           )}
           ItemSeparatorComponent={() => <Divider inset />}

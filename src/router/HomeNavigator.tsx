@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 17:03:44
- * @LastEditTime: 2021-04-27 12:44:35
+ * @LastEditTime: 2021-04-27 19:00:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/router/HomeNavigator.tsx
@@ -35,6 +35,8 @@ import HomeScreen from "@/pages/Home/index";
 import { getGreetingTime } from "@/utils/greeting";
 import SearchHeader from "@/components/SearchHeader/index";
 import CollectionListOptions from "@/components/CollectionListOptions/index";
+
+import { ICollectionListItem } from "@/interface/index";
 
 const Stack = createStackNavigator();
 const NativeStack = createNativeStackNavigator();
@@ -128,9 +130,11 @@ const AppStack = () => {
         name="CollectionListSongs"
         component={CollectionListSongsScreen}
         options={({ route, navigation }: { route: any; navigation: any }) => {
-          const { collecetionListMetadata } = route.params;
+          const {
+            collecetionListMetadata,
+          }: { collecetionListMetadata: ICollectionListItem } = route.params;
           return {
-            headerTitle: collecetionListMetadata.name,
+            headerTitle: collecetionListMetadata.collection_name,
             headerRight: () => (
               <CollectionListOptions route={route} navigation={navigation} />
             ),
