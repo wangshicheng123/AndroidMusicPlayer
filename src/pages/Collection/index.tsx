@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-24 11:03:32
- * @LastEditTime: 2021-04-27 17:37:40
+ * @LastEditTime: 2021-04-27 18:43:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Collection/components/Playlist/index.tsx
@@ -16,8 +16,8 @@ import Screen from "@/components/Screen/index";
 import Title from "@/components/Title/index";
 import CreateCollectionDialog from "./components/CreateCollection/index";
 import { IAppState } from "@/reducers/index";
-import { createCollectionList } from "@/reducers/collectionListSlice";
 import { ICollectionListItem } from "@/interface/index";
+import { createCollectionList } from "@/reducers/collectionListSlice";
 import { findCollection } from "@/api/index";
 import { request } from "@/utils/fetch";
 
@@ -34,7 +34,7 @@ const CollectionListScreen = () => {
   const { id: userId } = useSelector((state: IAppState) => state.user.userInfo);
 
   useEffect(() => {
-    fetchCollectionData();
+    handleFetchCollectionData();
   }, []);
 
   /**
@@ -42,12 +42,11 @@ const CollectionListScreen = () => {
    * @param {*}
    * @return {*}
    */
-  const fetchCollectionData = () => {
-    return request(findCollection, {
+  const handleFetchCollectionData = async () => {
+    const collectionDatas = await request(findCollection, {
       user_id: userId,
-    })?.then((collectionDatas) => {
-      dispatch(createCollectionList(collectionDatas.data));
     });
+    dispatch(createCollectionList(collectionDatas.data || []));
   };
 
   /**
@@ -87,7 +86,7 @@ const CollectionListScreen = () => {
    */
   const refreshCollectionList = async () => {
     setRefreshing(true);
-    await fetchCollectionData();
+    await handleFetchCollectionData();
     setRefreshing(false);
   };
 

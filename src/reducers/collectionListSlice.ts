@@ -1,14 +1,13 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 14:18:32
- * @LastEditTime: 2021-04-27 17:14:11
+ * @LastEditTime: 2021-04-27 18:46:44
  * @LastEditors: Please set LastEditors
  * @Description: 自定义歌曲集合
  * @FilePath: /MusicProject/src/reducers/playlistSlice.ts
  */
 import { createSlice } from "@reduxjs/toolkit";
 import { ICollectionListItem, ISongItem } from "@/interface/index";
-import { stat } from "react-native-fs";
 
 export type IInitialCollectionListState = {
   systemCollections: ICollectionListItem[];
@@ -70,7 +69,9 @@ const collectionListSlice = createSlice({
       action.payload.map((collection: ICollectionListItem) => {
         const isOwn = state.userCollections.some(
           (userCollection: ICollectionListItem) => {
-            return userCollection.collection_id === collection.collection_id;
+            return (
+              userCollection.collection_name === collection.collection_name
+            );
           }
         );
         !isOwn && state.userCollections.push(collection);
