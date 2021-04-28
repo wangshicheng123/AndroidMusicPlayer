@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-18 15:26:26
- * @LastEditTime: 2021-04-27 16:21:53
+ * @LastEditTime: 2021-04-28 09:01:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/interface/index.tsx
@@ -12,7 +12,7 @@ export interface ISongItem {
   song_title?: string;
   song_cover?: string;
   song_artist?: string;
-  song_id?: string;
+  song_id?: number;
   song_play_count?: number;
 }
 

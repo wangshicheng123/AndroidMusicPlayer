@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:19:55
- * @LastEditTime: 2021-04-24 15:55:24
+ * @LastEditTime: 2021-04-28 09:37:46
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放页面
  * @FilePath: /MusicProject/src/pages/Player/components/PlayerScreen/index.tsx
@@ -11,7 +11,6 @@ import { View, StyleSheet, Text } from "react-native";
 import { Caption, IconButton } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { includes } from "lodash";
 import CustomIcon from "@/components/CustomIcon/index";
 import { FavContainer } from "@/components/FavContainer/index";
 import RepeatContainer from "@/components/RepeatContainer/index";
@@ -36,9 +35,12 @@ const PlayerScreen = () => {
     navigation.goBack();
   };
 
-  const handleAddSongToCollectionList = (id: string) => {
+  const handleAddSongToCollectionList = (collectionId: number) => {
     dispatch(
-      addSongToCollectionList({ collectionListId: id, songData: songData })
+      addSongToCollectionList({
+        collectionListId: collectionId,
+        songData: songData,
+      })
     );
     setDialogVisible(false);
   };
@@ -70,7 +72,7 @@ const PlayerScreen = () => {
             style={styles.favContainerStyle}
           />
           <PlayerController songData={songData} />
-          {/* <RepeatContainer /> */}
+          <RepeatContainer />
           <View>
             <Text> </Text>
           </View>
@@ -85,22 +87,17 @@ const PlayerScreen = () => {
             />
             <Caption>Queue</Caption>
           </View>
-          {includes(
-            ["youtube", "online", "jiosaavn"],
-            songData.type?.toLowerCase()
-          ) && (
-            <View style={styles.extraIcon}>
-              <IconButton
-                style={styles.iconButtonStyle}
-                size={20}
-                icon={(props) => (
-                  <CustomIcon name="download-outline" {...props} />
-                )}
-                onPress={download}
-              />
-              <Caption>Download</Caption>
-            </View>
-          )}
+          <View style={styles.extraIcon}>
+            <IconButton
+              style={styles.iconButtonStyle}
+              size={20}
+              icon={(props) => (
+                <CustomIcon name="download-outline" {...props} />
+              )}
+              onPress={download}
+            />
+            <Caption>Download</Caption>
+          </View>
           <View style={styles.extraIcon}>
             <IconButton
               size={20}
@@ -135,14 +132,12 @@ const styles = StyleSheet.create({
   },
   playerToolbox: {
     flexDirection: "row",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "center",
     margin: 16,
   },
   favContainerStyle: {
-    width: 5,
-    marginLeft: 17,
-    // flex: 0.2,
+    flex: 1,
   },
   extraMenuContainer: {
     flexDirection: "row",

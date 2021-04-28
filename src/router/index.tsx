@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-08 09:24:31
- * @LastEditTime: 2021-04-27 17:29:05
+ * @LastEditTime: 2021-04-28 09:29:30
  * @LastEditors: Please set LastEditors
  * @Description: app路由集合
  * @FilePath: /MusicProject/src/router/index.ts
@@ -16,6 +16,7 @@ import { useTheme } from "react-native-paper";
 import { SafeAreaView, StyleSheet } from "react-native";
 
 /* 页面集合 */
+import PlayScreen from "@/pages/Player/index";
 import LaunchScreen from "@/pages/Launch/index";
 import IntroductionScreen from "@/pages/Introduction/index";
 
@@ -46,6 +47,13 @@ const AuthStack = () => {
       <NativeStack.Screen name="Intro" component={IntroductionScreen} />
       {/* APP正式内容 */}
       <NativeStack.Screen name="App" component={BottomNavigator} />
+      <NativeStack.Screen
+        name="Active"
+        component={PlayScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
     </NativeStack.Navigator>
   );
 };

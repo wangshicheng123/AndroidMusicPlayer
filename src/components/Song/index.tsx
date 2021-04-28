@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:32:38
- * @LastEditTime: 2021-04-27 11:46:45
+ * @LastEditTime: 2021-04-27 22:26:42
  * @LastEditors: Please set LastEditors
  * @Description: 音乐-item歌曲信息
  * @FilePath: /MusicProject/src/components/Track/index.tsx
@@ -17,46 +17,45 @@ import { ISongItem } from "@/interface/index";
 interface IProps {
   songData: ISongItem;
   active: boolean;
-  handelSongPlay: () => void;
+  handelSongPlay: (songId?: number) => void;
   handleSongDownload?: () => void;
 }
 
-const Song = React.memo(
-  ({ songData, active, handelSongPlay, handleSongDownload }: IProps) => {
-    const theme = useTheme();
-    const { colors } = theme;
-    return (
-      <View style={[styles.surface, { backgroundColor: colors.background }]}>
-        <List.Item
-          title={songData.song_title}
-          description={songData.song_artist}
-          left={() =>
-            songData.song_cover ? (
-              <FastImage
-                source={{ uri: songData.song_cover }}
-                style={styles.artwork}
-              />
-            ) : (
-              <DefaultImage style={styles.artwork} />
-            )
-          }
-          right={(props) =>
-            active ? (
-              <ActiveSongIcon style={styles.activeSongIconStyle} />
-            ) : (
-              <IconButton
-                icon="download-outline"
-                onPress={handleSongDownload}
-                {...props}
-              />
-            )
-          }
-          onPress={() => handelSongPlay()}
-        />
-      </View>
-    );
-  }
-);
+const Song = React.memo((props: IProps) => {
+  const { songData, active, handelSongPlay, handleSongDownload } = props;
+  const theme = useTheme();
+  const { colors } = theme;
+  return (
+    <View style={[styles.surface, { backgroundColor: colors.background }]}>
+      <List.Item
+        title={songData.song_title}
+        description={songData.song_artist}
+        left={() =>
+          songData.song_cover ? (
+            <FastImage
+              source={{ uri: songData.song_cover }}
+              style={styles.artwork}
+            />
+          ) : (
+            <DefaultImage style={styles.artwork} />
+          )
+        }
+        right={(props) =>
+          active ? (
+            <ActiveSongIcon style={styles.activeSongIconStyle} />
+          ) : (
+            <IconButton
+              icon="download-outline"
+              onPress={handleSongDownload}
+              {...props}
+            />
+          )
+        }
+        onPress={() => handelSongPlay(songData.song_id)}
+      />
+    </View>
+  );
+});
 
 const styles = StyleSheet.create({
   surface: {

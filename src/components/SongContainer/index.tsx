@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:31:48
- * @LastEditTime: 2021-04-27 11:41:42
+ * @LastEditTime: 2021-04-28 09:19:17
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲列表中的item
  * @FilePath: /MusicProject/src/components/SongContainer/index.tsx
@@ -30,8 +30,8 @@ const SongContainer = ({ songData, goBack }: IProps) => {
 
   useEffect(() => {
     /* 点击的歌曲是否是当前正在播放的歌曲 */
-    if (currentSong.id && songData.id) {
-      setActive(isEqual(currentSong.id, songData.id));
+    if (currentSong.song_id && songData.song_id) {
+      setActive(isEqual(currentSong.song_id, songData.song_id));
     }
   }, [currentSong, songData]);
 
@@ -52,7 +52,7 @@ const SongContainer = ({ songData, goBack }: IProps) => {
    * @param {*}
    * @return {*}
    */
-  const handelSongPlay = () => {
+  const handelSongPlay = (songId?: number) => {
     if (isActive) return;
     dispatch(cacheLoadSong({ songData: songData }));
     if (goBack) {

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-22 11:00:03
+ * @LastEditTime: 2021-04-28 09:22:13
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -14,6 +14,8 @@ import { checkFolderPath, download } from "@/utils/downloadSong";
 import { showNotify } from "./notifySlice";
 import { addToHistoryQueue } from "./queueSlice";
 import { ISongItem } from "@/interface/index";
+import { request } from "@/utils/fetch";
+import { playMusicOpenApi } from "@/api/index";
 
 type TPlayingStatus = "init" | "playing" | "paused";
 let subscription: EmitterSubscription;
@@ -41,11 +43,21 @@ export const cacheLoadSong = createAsyncThunk(
   "song/cacheLoadSong",
   async (params: ICacheLoadSong, thunkAPI) => {
     const { playingOnLoad = true, songData } = params;
-    const { path } = songData;
-    if (!path) return;
+    const { song_id } = songData;
+    if (!song_id) return;
 
     try {
-      await TrackPlayer.load(path);
+      const songPalyData = await request({
+        url: playMusicOpenApi + song_id,
+        config: {
+          method: "GET",
+        },
+      });
+      const song_path: string = songPalyData?.data[0]?.url || "";
+      if (!song_path) {
+        return;
+      }
+      await TrackPlayer.load(song_path);
       thunkAPI.dispatch(addToHistoryQueue([songData]));
       return {
         playingOnLoad: playingOnLoad,
@@ -66,8 +78,8 @@ export const downloadSong = createAsyncThunk(
   "song/downloadSong",
   async (params: { songData: ISongItem }, thunkAPI) => {
     const { songData } = params;
-    const { path, title } = songData;
-    if (!path) return;
+    const { song_id, song_title } = songData;
+    if (!song_id) return;
 
     try {
       const folderPath = `${RNFS.ExternalStorageDirectoryPath}/Music`;
@@ -75,9 +87,20 @@ export const downloadSong = createAsyncThunk(
       await checkFolderPath(folderPath);
 
       /* 自定义下载文件名称 */
-      const filePath = `${folderPath}/${title}.mp3`;
-      // console.log(filePath);
-      await download(path, filePath);
+      const filePath = `${folderPath}/${song_title}.mp3`;
+
+      /* 根据歌曲ID获取歌曲path */
+      const songPalyData = await request({
+        url: playMusicOpenApi + song_id,
+        config: {
+          method: "GET",
+        },
+      });
+      const song_path: string = songPalyData?.data[0]?.url || "";
+      if (!song_path) {
+        return;
+      }
+      await download(song_path, filePath);
       /* todo: 后期增加服务端的时候，这个下载的歌曲信息需要入库 */
       // songData.path = filePath;
       thunkAPI.dispatch(showNotify({ content: "下载成功" }));
@@ -97,9 +120,6 @@ export const initializeTrackPlayer = createAsyncThunk(
   "song/initializeTrackPlayer",
   async (params, thunkAPI) => {
     try {
-      // const {
-      //   song: { currentSong },
-      // }: any = thunkAPI.getState();
       /* 可以监听设备的前进后退事件 */
       subscription = DeviceEventEmitter.addListener("media", function (event) {
         if (event == "skip_to_next") {
@@ -145,7 +165,6 @@ export const skipToNext = createAsyncThunk(
   "song/skipToNext",
   async (params, thunkAPI) => {
     try {
-      // const currentPlayingSong = params.songData;
       const {
         queue: { playingQueue },
         song: { currentSong },
@@ -233,9 +252,11 @@ const songSlice = createSlice({
     builder.addCase(
       cacheLoadSong.fulfilled,
       (state: IInitialSongState, action: { type: string; payload: any }) => {
-        const {
-          payload: { playingOnLoad, songData },
-        } = action;
+        const { payload } = action;
+        if (!payload) {
+          return;
+        }
+        const { playingOnLoad, songData } = payload;
         state.currentSong = songData;
         /* 判断歌曲是否在加载时同时播放，然后更新播放状态 */
         if (playingOnLoad) {

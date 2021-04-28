@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:09:11
- * @LastEditTime: 2021-04-19 17:50:57
+ * @LastEditTime: 2021-04-27 22:29:57
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放条
  * @FilePath: /MusicProject/src/components/PlayerBar/index.tsx
@@ -33,7 +33,7 @@ const PlayerBar = (props: IProps) => {
     handelTogglePlayStatus,
     navigateToPlayer,
   } = props;
-  const { cover, artist, album, title } = songData;
+  const { song_cover, song_artist, song_title } = songData;
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -41,17 +41,17 @@ const PlayerBar = (props: IProps) => {
       onPress={navigateToPlayer}
     >
       <Surface style={styles.playBar}>
-        {cover ? (
-          <FastImage source={{ uri: cover }} style={styles.artwork} />
+        {song_cover ? (
+          <FastImage source={{ uri: song_cover }} style={styles.artwork} />
         ) : (
           <DefaultImage style={styles.artwork} />
         )}
         <View style={styles.textContainer}>
           <Text numberOfLines={1} style={styles.textStyle}>
-            {title}
+            {song_title}
           </Text>
           <Caption numberOfLines={1} style={styles.captionStyle}>
-            {artist || album}
+            {song_artist}
           </Caption>
         </View>
         <View style={styles.iconContainer}>

@@ -20,7 +20,6 @@ import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
 import { IAppState } from "@/reducers/index";
 
 /* 页面集合 */
-import PlayScreen from "@/pages/Player/index";
 import QueueScreen from "@/pages/Queue/index";
 import FindScreen from "@/pages/Find/index";
 import CollectionScreen from "@/pages/Collection/index";
@@ -118,13 +117,13 @@ const AppStack = () => {
           ),
         }}
       />
-      <NativeStack.Screen
+      {/* <NativeStack.Screen
         name="Active"
         component={PlayScreen}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
       <NativeStack.Screen name="Queue" component={QueueScreen} />
       <Stack.Screen
         name="CollectionListSongs"
