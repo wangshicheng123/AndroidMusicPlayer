@@ -1,74 +1,104 @@
 [
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Party.jpg",
-        "title": "Party",
-        "tags": "Party",
-        "colors": ["#fc4a1a", "#f7b733"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Workout.jpg",
-        "title": "Workout",
-        "tags": "Workout",
-         "colors": ["#4568DC", "#B06AB3"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Chill.jpg",
-        "title": "Chill",
-        "tags": "Soft",
-         "colors": ["#00F260", "#0575E6"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Classics.jpg",
-        "title": "Classics",
-        "tags": "Oldies",
-         "colors": ["#093028", "#237A57"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Devotional.jpg",
-        "title": "Devotional",
-        "tags": "Devotional",
-         "colors": ["#02AAB0", "#00CDAC"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Ghazals.jpg",
-        "title": "Ghazals",
-        "tags": " Ghazal ",
-         "colors": ["#667db6", "#0082c8", "#0082c8","#667db6"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Instrumental.jpg",
-        "title": "Instrumental",
-        "tags": "Instrumental",
-         "colors": ["#D31027", "#EA384D"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Live.jpg",
-        "title": "Live",
-        "tags": "Live ",
-         "colors": ["#5433FF", "#20BDFF", "#A5FECB"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Pop.jpg",
-        "title": "Pop",
-        "tags": "Pop",
-         "colors": ["#F00000", "#DC281E"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Remixes.jpg",
-        "title": "Remixes",
-        "tags": "Remixes",
-         "colors": ["#3a6186", "#89253e"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Rock.jpg",
-        "title": "Rock",
-        "tags": "Rock ",
-         "colors": ["#e65c00", "#F9D423"]
-    },
-    {
-        "image": "https://c.saavncdn.com/editorial/genrecharts_Sufi.jpg",
-        "title": "Sufi",
-        "tags": "Sufi",
-         "colors": ["#FBD3E9", "#BB377D"]
-    }
+  {
+    "image": "http://p2.music.126.net/G91csin09maPrNgqcUKnBQ==/109951165698553069.jpg?param=150y150",
+    "title": "爱听榜",
+    "colors": ["#fc4a1a", "#f7b733"],
+    "id": 5453912201
+  },
+  {
+    "image": "http://p2.music.126.net/EJyXfGYsiHxxxoCiTAz6Kg==/109951165611553137.jpg?param=150y150",
+    "title": "说唱榜",
+    "colors": ["#4568DC", "#B06AB3"],
+    "id": 991319590
+  },
+  {
+    "image": "http://p1.music.126.net/7XQ7j5GKsiWQ6hLMtjGGKQ==/109951165611553527.jpg?param=150y150",
+    "title": "古典榜",
+    "colors": ["#00F260", "#0575E6"],
+    "id": 71384707
+  },
+  {
+    "image": "http://p1.music.126.net/FUTBe-hYwYZ7kidXNz2f0g==/109951165611546880.jpg?param=150y150",
+    "title": "电音榜",
+    "colors": ["#093028", "#237A57"],
+    "id": 1978921795
+  },
+  {
+    "image": "http://p2.music.126.net/pAFaa_EVMj0ktkDo381dnw==/109951165611551680.jpg?param=150y150",
+    "title": "ACG榜",
+    "colors": ["#02AAB0", "#00CDAC"],
+    "id": 71385702
+  },
+  {
+    "image": "http://p2.music.126.net/v--zfW0Y0jbexl3CiALGlw==/109951165611550672.jpg?param=150y150",
+    "title": "韩语榜",
+    "colors": ["#667db6", "#0082c8", "#0082c8", "#667db6"],
+    "id": 745956260
+  },
+  {
+    "image": "http://p1.music.126.net/6la5fQwcd3YW6ZQHvTiZqw==/109951165611482698.jpg?param=150y150",
+    "title": "国电榜",
+    "colors": ["#D31027", "#EA384D"],
+    "id": 10520166
+  },
+  {
+    "image": "http://p1.music.126.net/fhAqiflLy3eU-ldmBQByrg==/109951165613082765.jpg?param=150y150",
+    "title": "UK排行榜",
+    "colors": ["#5433FF", "#20BDFF", "#A5FECB"],
+    "id": 180106
+  },
+  {
+    "image": "http://p2.music.126.net/rwRsVIJHQ68gglhA6TNEYA==/109951165611413732.jpg?param=150y150",
+    "title": "Billboard榜",
+    "colors": ["#F00000", "#DC281E"],
+    "id": 60198
+  },
+  {
+    "image": "http://p1.music.126.net/A61n94BjWAb-ql4xpwpYcg==/18613632348448741.jpg?param=150y150",
+    "title": "电子舞曲榜",
+    "colors": ["#3a6186", "#89253e"],
+    "id": 3812895
+  },
+  {
+    "image": "http://p1.music.126.net/5wDP78s43ydVTKt62C8OjQ==/109951165613100063.jpg?param=150y150",
+    "title": "KTV唛榜",
+    "colors": ["#e65c00", "#F9D423"],
+    "id": 21845217
+  },
+  {
+    "image": "http://p2.music.126.net/FJj695j75QLgmvr1NKsoZg==/109951165613098386.jpg?param=150y150",
+    "title": "iTunes榜",
+    "colors": ["#FBD3E9", "#BB377D"],
+    "id": 11641012
+  },
+  {
+    "image": "http://p1.music.126.net/SkGlKQ6acixthb77VlD9eQ==/109951164432300406.jpg?param=150y150",
+    "title": "ACG动画榜",
+    "colors": ["#fc4a1a", "#f7b733"],
+    "id": 3001835560
+  },
+  {
+    "image": "http://p1.music.126.net/hivOOHMwEmnn9s_6rgZwEQ==/109951164432303700.jpg?param=150y150",
+    "title": "ACG游戏榜",
+    "colors": ["#4568DC", "#B06AB3"],
+    "id": 3001795926
+  },
+  {
+    "image": "http://p1.music.126.net/sk_T3eQMwIOjkOPylZ1vLQ==/109951165611542373.jpg?param=150y150",
+    "title": "摇滚榜",
+    "colors": ["#00F260", "#0575E6"],
+    "id": 5059633707
+  },
+  {
+    "image": "http://p2.music.126.net/dAYiKqH9owbhiKy1_okqEw==/109951165611544270.jpg?param=150y150",
+    "title": "古风榜",
+    "colors": ["#093028", "#237A57"],
+    "id": 5059642708
+  },
+  {
+    "image": "http://p1.music.126.net/SMWYiPf7br4enzCNQeX2cw==/109951165611547181.jpg?param=150y150",
+    "title": "民谣榜",
+    "colors": ["#02AAB0", "#00CDAC"],
+    "id": 5059661515
+  }
 ]

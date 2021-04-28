@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 17:34:52
- * @LastEditTime: 2021-04-25 11:55:02
+ * @LastEditTime: 2021-04-28 22:12:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/Search/index.tsx
@@ -25,11 +25,11 @@ import Headline from "@/components/HeadLine/index";
 import Title from "@/components/Title/index";
 import { fetchSearchResult } from "@/reducers/searchSlice";
 
-interface GenreProps {
-  item: {
-    colors: [];
-    title: string;
-  };
+interface IGenreProps {
+  image: string;
+  title: string;
+  colors: [];
+  id: number;
 }
 
 const SearchScreen = () => {
@@ -60,7 +60,7 @@ const SearchScreen = () => {
    * @param {object} item
    * @return {*}
    */
-  const handleRenderItemPress = (item: { colors: []; title: string }) => {
+  const handleRenderItemPress = (item: IGenreProps) => {
     dispatch(fetchSearchResult({ searchText: "test" }));
     navigation.navigate("Filter", item);
   };
@@ -83,7 +83,7 @@ const SearchScreen = () => {
         ListHeaderComponent={() => (
           <Headline style={styles.headline}>All Moods & Genres</Headline>
         )}
-        renderItem={({ item }: GenreProps) => (
+        renderItem={({ item }: { item: any }) => (
           <TouchableOpacity
             style={styles.touchableOpacityStyle}
             onPress={() => handleRenderItemPress(item)}
@@ -121,7 +121,7 @@ const SearchScreen = () => {
                 { color: colors.placeholder },
               ]}
             >
-              Artists, songs or podcasts
+              Songs
             </Text>
           </Surface>
         </Pressable>

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:36:56
- * @LastEditTime: 2021-04-20 11:42:04
+ * @LastEditTime: 2021-04-28 12:01:23
  * @LastEditors: Please set LastEditors
  * @Description: 播放详情
  * @FilePath: /MusicProject/src/components/ActiveSongDetails/index.tsx
@@ -22,9 +22,9 @@ const ActiveSongDetails = (props: Props) => {
   return (
     <View>
       <View style={styles.centerContainer}>
-        {songData.cover ? (
+        {songData.song_cover ? (
           <FastImage
-            source={{ uri: songData.cover }}
+            source={{ uri: songData.song_cover }}
             style={[styles.artCover]}
             resizeMode="contain"
           />
@@ -34,11 +34,9 @@ const ActiveSongDetails = (props: Props) => {
       </View>
       <View style={styles.centerContainer}>
         <Text style={styles.titleStyle} numberOfLines={1}>
-          {songData.title}
+          {songData.song_title}
         </Text>
-        <Subheading numberOfLines={1}>
-          {songData.artist ? songData.artist : songData.album}
-        </Subheading>
+        <Subheading numberOfLines={1}>{songData.song_artist}</Subheading>
       </View>
     </View>
   );

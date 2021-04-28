@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 17:03:44
- * @LastEditTime: 2021-04-27 20:47:47
+ * @LastEditTime: 2021-04-28 17:50:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/router/HomeNavigator.tsx
@@ -24,7 +24,7 @@ import QueueScreen from "@/pages/Queue/index";
 import FindScreen from "@/pages/Find/index";
 import CollectionScreen from "@/pages/Collection/index";
 import CollectionListSongsScreen from "@/pages/CollectionListSongs/index";
-import FilterScreen from "@/pages/Search/components/Filter/index";
+import FilterScreen from "@/pages/Filter/index";
 import SearchScreen from "@/pages/Search/index";
 import SettingScreen from "@/pages/SettingScreen/index";
 import SongPlayListScreen from "@/pages/SongPlayList/index";
