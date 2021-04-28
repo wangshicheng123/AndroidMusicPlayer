@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-28 09:22:13
+ * @LastEditTime: 2021-04-28 11:36:31
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -15,7 +15,11 @@ import { showNotify } from "./notifySlice";
 import { addToHistoryQueue } from "./queueSlice";
 import { ISongItem } from "@/interface/index";
 import { request } from "@/utils/fetch";
-import { playMusicOpenApi } from "@/api/index";
+import {
+  playMusicOpenApi,
+  updateSongPlayCount,
+  addSongToHistory,
+} from "@/api/index";
 
 type TPlayingStatus = "init" | "playing" | "paused";
 let subscription: EmitterSubscription;
@@ -43,6 +47,11 @@ export const cacheLoadSong = createAsyncThunk(
   "song/cacheLoadSong",
   async (params: ICacheLoadSong, thunkAPI) => {
     const { playingOnLoad = true, songData } = params;
+    const {
+      user: {
+        userInfo: { id: userId },
+      },
+    }: any = thunkAPI.getState();
     const { song_id } = songData;
     if (!song_id) return;
 
@@ -62,6 +71,7 @@ export const cacheLoadSong = createAsyncThunk(
       return {
         playingOnLoad: playingOnLoad,
         songData: songData,
+        userId: userId,
       };
     } catch (error) {
       console.log(error);
@@ -198,6 +208,11 @@ export const skipToNext = createAsyncThunk(
   }
 );
 
+/**
+ * @description: 跳到前一首歌曲
+ * @param {*}
+ * @return {*}
+ */
 export const skipToPrevious = createAsyncThunk(
   "song/skipToPrevious",
   async (params, thunkAPI) => {
@@ -256,12 +271,20 @@ const songSlice = createSlice({
         if (!payload) {
           return;
         }
-        const { playingOnLoad, songData } = payload;
+        const { playingOnLoad, songData, userId } = payload;
         state.currentSong = songData;
         /* 判断歌曲是否在加载时同时播放，然后更新播放状态 */
         if (playingOnLoad) {
           TrackPlayer.play();
           state.playingStatus = "playing";
+          request(updateSongPlayCount, {
+            song_id: songData.song_id,
+            song_play_count: songData.song_play_count,
+          });
+          request(addSongToHistory, {
+            song_id: songData.song_id,
+            user_id: userId,
+          });
         } else {
           state.playingStatus = "paused";
         }

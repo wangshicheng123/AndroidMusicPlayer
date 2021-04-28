@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 12:09:11
- * @LastEditTime: 2021-04-27 16:24:22
+ * @LastEditTime: 2021-04-28 11:46:40
  * @LastEditors: Please set LastEditors
  * @Description: 快捷操作
  * @FilePath: /MusicProject/src/pages/Home/components/ShortcutContainer/index.tsx
@@ -13,7 +13,11 @@ import { useNavigation } from "@react-navigation/core";
 import { Avatar, Caption } from "react-native-paper";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { IAppState } from "@/reducers/index";
-import { getMostPlaySongs, getFavSongByUser } from "@/api/index";
+import {
+  getMostPlaySongs,
+  getFavSongByUser,
+  getSongFromHistoryByUser,
+} from "@/api/index";
 import { ICollectionListItem } from "@/interface/index";
 
 const ShortCutContainer = () => {
@@ -36,10 +40,10 @@ const ShortCutContainer = () => {
       };
       navigation.navigate("Playlist", {
         playlistMetadata: playlistMetadata,
-        songs: historyQueue,
+        requestApi: getSongFromHistoryByUser,
       });
     },
-    [navigation, historyQueue]
+    [navigation]
   );
 
   const navigateToFavorite = React.useMemo(
@@ -59,7 +63,7 @@ const ShortCutContainer = () => {
         requestApi: getFavSongByUser,
       });
     },
-    [navigation, likingSongQueue]
+    [navigation]
   );
 
   const navigateToMostPlayed = React.useMemo(

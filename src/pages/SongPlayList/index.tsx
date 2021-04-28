@@ -1,13 +1,13 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-27 16:23:22
+ * @LastEditTime: 2021-04-28 11:51:53
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
  */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FastImage from "react-native-fast-image";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import { Title, Button, Divider, Subheading } from "react-native-paper";
@@ -20,15 +20,13 @@ import EmptyPlaylist from "@/components/EmptyPlayList/index";
 import { ICollectionListItem, ISongItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
 import { request, IRequest } from "@/utils/fetch";
+import { IAppState } from "@/reducers/index";
 
 interface IProps {
   route: any;
 }
 
 const SongsList = (props: IProps) => {
-  const [songDatas, setSongDatas] = useState<ISongItem[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
-  const dispatch = useDispatch();
   const { route } = props;
   const {
     playlistMetadata,
@@ -37,6 +35,10 @@ const SongsList = (props: IProps) => {
     playlistMetadata: ICollectionListItem;
     requestApi: IRequest;
   } = route.params;
+  const [songDatas, setSongDatas] = useState<ISongItem[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const { id: userId } = useSelector((state: IAppState) => state.user.userInfo);
+  const dispatch = useDispatch();
 
   /**
    * @description: 请求歌曲列表数据
@@ -48,6 +50,7 @@ const SongsList = (props: IProps) => {
     return request(requestApi, {
       pageNumber: pageNumber,
       collectionId: playlistMetadata.collection_id || -1,
+      user_id: userId,
     });
   };
 
