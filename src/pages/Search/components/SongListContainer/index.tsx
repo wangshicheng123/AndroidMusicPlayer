@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 17:33:49
- * @LastEditTime: 2021-04-24 15:53:42
+ * @LastEditTime: 2021-04-28 10:08:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/SongListContainer/index.tsx
@@ -10,7 +10,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import SongList from "../SongsList/index";
 import { ISongItem } from "@/interface/index";
-import { addSongToCollectionList } from "@/reducers/collectionListSlice";
+// import { addSongToCollectionList } from "@/reducers/collectionListSlice";
 import { addToPlayingQueue } from "@/reducers/queueSlice";
 
 interface IProps {
@@ -30,13 +30,13 @@ export const SongListContainer = (props: IProps) => {
    * @param {ISongItem} song
    * @return {*}
    */
-  const addSongsToPlaylist = (collectionListId: string, song: ISongItem) => {
-    dispatch(
-      addSongToCollectionList({
-        collectionListId: collectionListId,
-        songData: song,
-      })
-    );
+  const addSongsToPlaylist = (song: ISongItem, collectionListId?: number) => {
+    // dispatch(
+    //   addSongToCollectionList({
+    //     collectionListId: collectionListId,
+    //     songData: song,
+    //   })
+    // );
   };
 
   /**

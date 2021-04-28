@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:40:21
- * @LastEditTime: 2021-04-26 22:28:39
+ * @LastEditTime: 2021-04-28 09:57:43
  * @LastEditors: Please set LastEditors
  * @Description: 收藏歌曲到歌集
  * @FilePath: /MusicProject/src/components/PlaylistDialog/index.tsx
@@ -16,7 +16,7 @@ import { IAppState } from "@/reducers/index";
 interface Props {
   visible: boolean;
   hideModal(): void;
-  addSongToCollectionList(id: number): void;
+  addSongToCollectionList(collectionId?: number): void;
 }
 
 const PlaylistDialog = (props: Props) => {
@@ -37,10 +37,10 @@ const PlaylistDialog = (props: Props) => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }: { item: ICollectionListItem }) => (
               <List.Item
-                title={item.name}
-                description={`by ${item.owner}`}
+                title={item.collection_name}
+                description={`by ${item.user_name}`}
                 left={(props) => <List.Icon {...props} icon="folder-outline" />}
-                onPress={() => addSongToCollectionList(item.id)}
+                onPress={() => addSongToCollectionList(item.collection_id)}
               />
             )}
           />

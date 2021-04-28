@@ -84,23 +84,23 @@ const collectionListSlice = createSlice({
     ) => {
       state.systemCollections.push(...action.payload);
     },
-    addSongToCollectionList: (
-      state: IInitialCollectionListState,
-      action: {
-        type: string;
-        payload: {
-          collectionListId: number;
-          songData: ISongItem;
-        };
-      }
-    ) => {
-      const { collectionListId, songData } = action.payload;
-      state.userCollections.map((collectionList: ICollectionListItem) => {
-        if (collectionList.collection_id === collectionListId) {
-          collectionList.songs.push(songData);
-        }
-      });
-    },
+    // addSongToCollectionList: (
+    //   state: IInitialCollectionListState,
+    //   action: {
+    //     type: string;
+    //     payload: {
+    //       collectionListId: number;
+    //       songData: ISongItem;
+    //     };
+    //   }
+    // ) => {
+    //   const { collectionListId, songData } = action.payload;
+    //   state.userCollections.map((collectionList: ICollectionListItem) => {
+    //     if (collectionList.collection_id === collectionListId) {
+    //       collectionList.songs.push(songData);
+    //     }
+    //   });
+    // },
     modifyCollectionListItem: (
       state: IInitialCollectionListState,
       action: {
@@ -143,7 +143,7 @@ const collectionListSlice = createSlice({
 
 export const {
   createCollectionList,
-  addSongToCollectionList,
+  // addSongToCollectionList,
   modifyCollectionListItem,
   deleteCollectionitem,
 } = collectionListSlice.actions;

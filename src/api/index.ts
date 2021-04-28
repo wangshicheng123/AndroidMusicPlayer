@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 18:14:11
- * @LastEditTime: 2021-04-28 09:44:37
+ * @LastEditTime: 2021-04-28 10:00:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/api/index.ts
@@ -51,6 +51,13 @@ export const insertFavSong: IRequest = {
 
 export const deleteFavSong: IRequest = {
   url: dev_api_prefix + "/song/deleteFav",
+  config: {
+    method: "POST",
+  },
+};
+
+export const addSongToCollection: IRequest = {
+  url: dev_api_prefix + "/song/addToCollection",
   config: {
     method: "POST",
   },

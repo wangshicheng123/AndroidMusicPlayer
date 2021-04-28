@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-22 17:43:59
- * @LastEditTime: 2021-04-24 10:22:00
+ * @LastEditTime: 2021-04-28 10:08:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/SongsList/index.tsx
@@ -16,7 +16,7 @@ interface IProps {
   songDatas: ISongItem[];
   title: string;
   cover: string;
-  addToCollectionList: (playlistId: string, song: ISongItem) => void;
+  addToCollectionList: (song: ISongItem, playlistId?: number) => void;
   addToQueue: (songs: ISongItem[]) => void;
   fetchData(): void;
 }
@@ -57,8 +57,8 @@ const SongList = (props: IProps) => {
    * @param {string} playlistId
    * @return {*}
    */
-  const addSongToCollectionList = (playlistId: string) => {
-    addToCollectionList(playlistId, song);
+  const addSongToCollectionList = (playlistId?: number) => {
+    addToCollectionList(song, playlistId);
     hideModal();
   };
 

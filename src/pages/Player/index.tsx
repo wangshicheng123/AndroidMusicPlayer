@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:19:55
- * @LastEditTime: 2021-04-28 09:37:46
+ * @LastEditTime: 2021-04-28 10:10:35
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放页面
  * @FilePath: /MusicProject/src/pages/Player/components/PlayerScreen/index.tsx
@@ -21,7 +21,8 @@ import ActiveSongDetails from "@/components/ActiveSongDetails/index";
 import PlaylistDialog from "@/components/PlaylistDialog/index";
 import { downloadSong } from "@/reducers/songSlice";
 import { IAppState } from "@/reducers/index";
-import { addSongToCollectionList } from "@/reducers/collectionListSlice";
+import { request } from "@/utils/fetch";
+import { addSongToCollection } from "@/api/index";
 
 const PlayerScreen = () => {
   const navigation = useNavigation();
@@ -31,20 +32,34 @@ const PlayerScreen = () => {
     (state: IAppState) => state.song
   );
 
+  /**
+   * @description: 关闭歌曲播放详情页面
+   * @param {*}
+   * @return {*}
+   */
   const handlePlayerClose = () => {
     navigation.goBack();
   };
 
-  const handleAddSongToCollectionList = (collectionId: number) => {
-    dispatch(
-      addSongToCollectionList({
-        collectionListId: collectionId,
-        songData: songData,
-      })
-    );
+  /**
+   * @description: 添加当前播放歌曲至指定歌集中
+   * @param {*} async
+   * @return {*}
+   */
+  const handleAddSongToCollectionList = async (collectionId: number) => {
+    const { song_id } = songData;
+    await request(addSongToCollection, {
+      collection_id: collectionId,
+      song_id: song_id,
+    });
     setDialogVisible(false);
   };
 
+  /**
+   * @description: 下载当前播放的歌曲
+   * @param {*}
+   * @return {*}
+   */
   const download = () => {
     dispatch(downloadSong({ songData: songData }));
     setDialogVisible(false);
