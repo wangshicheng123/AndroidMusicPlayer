@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-24 11:09:34
- * @LastEditTime: 2021-04-27 22:14:43
+ * @LastEditTime: 2021-04-29 15:53:49
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/components/PlaylistOptions/index.tsx
@@ -25,8 +25,8 @@ import {
   modifyCollectionListItem,
   deleteCollectionitem,
 } from "@/reducers/collectionListSlice";
-import { addToPlayingQueue } from "@/reducers/queueSlice";
-import { ICollectionListItem, ISongItem } from "@/interface/index";
+import { showNotify } from "@/reducers/notifySlice";
+import { ICollectionListItem } from "@/interface/index";
 import { request } from "@/utils/fetch";
 import { modifyCollection, deleteCollection } from "@/api/index";
 import { IAppState } from "@/reducers/index";
@@ -101,17 +101,21 @@ const CollectionListOptions = (props: IProps) => {
    */
   const handleDeleteCollection = async () => {
     const { collection_id } = collecetionListMetadata;
-    const deleteRes = await request(deleteCollection, {
+    await request(deleteCollection, {
       collection_id: collection_id,
       user_id: userId,
-    });
-    if (deleteRes) {
-      dispatch(
-        deleteCollectionitem({
-          collectionId: collection_id,
-        })
-      );
-    }
+    })
+      ?.then(() => {
+        dispatch(
+          deleteCollectionitem({
+            collectionId: collection_id,
+          })
+        );
+        dispatch(showNotify({ content: "修改成功" }));
+      })
+      .catch(() => {
+        dispatch(showNotify({ content: "修改失败" }));
+      });
     handleHideDeleteDialog();
     navigation.navigate("CollectionList");
   };
@@ -127,15 +131,19 @@ const CollectionListOptions = (props: IProps) => {
     const moidifyRes = await request(modifyCollection, {
       collection_id: collection_id,
       collection_name: collectionListName,
-    });
-    if (moidifyRes) {
-      dispatch(
-        modifyCollectionListItem({
-          collectionId: collection_id,
-          collectionName: collectionListName,
-        })
-      );
-    }
+    })
+      ?.then(() => {
+        dispatch(
+          modifyCollectionListItem({
+            collectionId: collection_id,
+            collectionName: collectionListName,
+          })
+        );
+        dispatch(showNotify({ content: "成功修改歌集名称" }));
+      })
+      .catch(() => {
+        dispatch(showNotify({ content: "修改歌集名称失败" }));
+      });
     closeBottomSheet();
     navigation.navigate("CollectionList");
   };

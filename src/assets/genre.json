@@ -1,5 +1,17 @@
 [
   {
+    "image": "http://p1.music.126.net/6la5fQwcd3YW6ZQHvTiZqw==/109951165611482698.jpg?param=150y150",
+    "title": "国电榜",
+    "colors": ["#D31027", "#EA384D"],
+    "id": 10520166
+  },
+  {
+    "image": "http://p1.music.126.net/FUTBe-hYwYZ7kidXNz2f0g==/109951165611546880.jpg?param=150y150",
+    "title": "电音榜",
+    "colors": ["#093028", "#237A57"],
+    "id": 1978921795
+  },
+  {
     "image": "http://p2.music.126.net/G91csin09maPrNgqcUKnBQ==/109951165698553069.jpg?param=150y150",
     "title": "爱听榜",
     "colors": ["#fc4a1a", "#f7b733"],
@@ -34,12 +46,6 @@
     "title": "韩语榜",
     "colors": ["#667db6", "#0082c8", "#0082c8", "#667db6"],
     "id": 745956260
-  },
-  {
-    "image": "http://p1.music.126.net/6la5fQwcd3YW6ZQHvTiZqw==/109951165611482698.jpg?param=150y150",
-    "title": "国电榜",
-    "colors": ["#D31027", "#EA384D"],
-    "id": 10520166
   },
   {
     "image": "http://p1.music.126.net/fhAqiflLy3eU-ldmBQByrg==/109951165613082765.jpg?param=150y150",

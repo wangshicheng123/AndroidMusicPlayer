@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-29 12:54:57
+ * @LastEditTime: 2021-04-29 13:08:27
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -62,10 +62,9 @@ export const cacheLoadSong = createAsyncThunk(
           method: "GET",
         },
       });
-      console.log("songPalyData", songPalyData);
       const song_path: string = songPalyData?.data[0]?.url || "";
       if (!song_path) {
-        thunkAPI.dispatch(showNotify({ content: "暂无播放源" }));
+        thunkAPI.dispatch(showNotify({ content: "付费歌曲，暂无播放源" }));
         return;
       }
       await TrackPlayer.load(song_path);
@@ -113,8 +112,7 @@ export const downloadSong = createAsyncThunk(
         return;
       }
       await download(song_path, filePath);
-      /* todo: 后期增加服务端的时候，这个下载的歌曲信息需要入库 */
-      // songData.path = filePath;
+      /* todo: 无播放源歌曲可以直接删除数据库中的原数据 */
       thunkAPI.dispatch(showNotify({ content: "下载成功" }));
     } catch (error) {
       console.log(error);

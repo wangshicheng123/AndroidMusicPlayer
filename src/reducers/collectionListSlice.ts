@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 14:18:32
- * @LastEditTime: 2021-04-27 21:32:51
+ * @LastEditTime: 2021-04-29 15:49:29
  * @LastEditors: Please set LastEditors
  * @Description: 自定义歌曲集合
  * @FilePath: /MusicProject/src/reducers/playlistSlice.ts
@@ -84,23 +84,6 @@ const collectionListSlice = createSlice({
     ) => {
       state.systemCollections.push(...action.payload);
     },
-    // addSongToCollectionList: (
-    //   state: IInitialCollectionListState,
-    //   action: {
-    //     type: string;
-    //     payload: {
-    //       collectionListId: number;
-    //       songData: ISongItem;
-    //     };
-    //   }
-    // ) => {
-    //   const { collectionListId, songData } = action.payload;
-    //   state.userCollections.map((collectionList: ICollectionListItem) => {
-    //     if (collectionList.collection_id === collectionListId) {
-    //       collectionList.songs.push(songData);
-    //     }
-    //   });
-    // },
     modifyCollectionListItem: (
       state: IInitialCollectionListState,
       action: {
@@ -143,7 +126,6 @@ const collectionListSlice = createSlice({
 
 export const {
   createCollectionList,
-  // addSongToCollectionList,
   modifyCollectionListItem,
   deleteCollectionitem,
 } = collectionListSlice.actions;

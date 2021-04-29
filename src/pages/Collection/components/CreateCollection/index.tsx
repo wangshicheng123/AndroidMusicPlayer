@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Portal, Dialog, TextInput, Button } from "react-native-paper";
 import { createCollectionList } from "@/reducers/collectionListSlice";
+import { showNotify } from "@/reducers/notifySlice";
 import { request } from "@/utils/fetch";
 import { createCollection, findCollection } from "@/api/index";
 import { IAppState } from "@/reducers/index";
@@ -43,6 +44,7 @@ const CreateCollection = (props: IProps) => {
     });
     /* 更新数据 */
     dispatch(createCollectionList(collectionDatas.data || []));
+    dispatch(showNotify({ content: "创建成功" }));
     hideDialog();
   };
 

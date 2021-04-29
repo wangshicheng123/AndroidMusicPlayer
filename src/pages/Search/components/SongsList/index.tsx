@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-22 17:43:59
- * @LastEditTime: 2021-04-29 12:59:34
+ * @LastEditTime: 2021-04-29 15:47:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/SongsList/index.tsx
@@ -15,6 +15,7 @@ import { ISongItem } from "@/interface/index";
 import { request } from "@/utils/fetch";
 import { addSongToCollection } from "@/api/index";
 import { addToPlayingQueue } from "@/reducers/queueSlice";
+import { showNotify } from "@/reducers/notifySlice";
 
 interface IProps {
   genreInfo: {
@@ -56,6 +57,7 @@ const SongList = (props: IProps) => {
    */
   const addSongsToQueue = (songs: ISongItem[]) => {
     dispatch(addToPlayingQueue(songs));
+    dispatch(showNotify({ content: "成功添加到播放队列" }));
   };
 
   /**
@@ -68,6 +70,8 @@ const SongList = (props: IProps) => {
     await request(addSongToCollection, {
       collection_id: collectionId,
       song_id: song_id,
+    })?.then(() => {
+      dispatch(showNotify({ content: "成功添加到歌集" }));
     });
     hideModal();
   };
