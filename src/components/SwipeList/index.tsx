@@ -1,43 +1,67 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 18:30:50
- * @LastEditTime: 2021-04-24 10:14:49
+ * @LastEditTime: 2021-04-29 10:58:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/components/SwipeList/index.tsx
  */
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Surface, IconButton, Divider } from "react-native-paper";
 import { View, StyleSheet, RefreshControl } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
+import EmptyPlaylist from "@/components/EmptyPlayList/index";
 
 import SongContainer from "../SongContainer/index";
 import ListSongHeader from "../ListSongHeader/index";
 import { ISongItem } from "@/interface/index";
+import { IAppState } from "@/reducers/index";
+import { fetchSearchDataById } from "@/reducers/searchSlice";
 
 interface IProps {
-  title: string;
-  cover: string;
-  songDatas: ISongItem[];
-  fetchData: () => void;
+  genreInfo: {
+    title: string;
+    cover: string;
+    id: number;
+  };
+
   showModal: (songData: ISongItem) => void;
   addToQueue: (songs: ISongItem[]) => void;
 }
 
 const SwipeList = (props: IProps) => {
-  const { title, cover, addToQueue, songDatas, showModal, fetchData } = props;
-  const [refreshing, setRefreshing] = useState(false);
+  const {
+    genreInfo: { title, cover, id },
+    addToQueue,
+    showModal,
+  } = props;
+  const dispatch = useDispatch();
+  const { songDatas, loading } = useSelector(
+    (state: IAppState) => state.search
+  );
+  const [page, setPage] = useState<number>(0);
 
   /**
    * @description: 刷新数据
-   * @param {*} async
+   * @param {*}
    * @return {*}
    */
-  const refreshData = async () => {
-    setRefreshing(true);
-    await fetchData();
-    setRefreshing(false);
+  const refreshData = () => {
+    dispatch(
+      fetchSearchDataById({
+        collectionId: id,
+        pageNumber: page,
+      })
+    );
+    setPage((previous: number) => {
+      return previous + 1;
+    });
   };
+
+  if (!songDatas.length) {
+    return <EmptyPlaylist />;
+  }
 
   return (
     <SwipeListView
@@ -57,7 +81,7 @@ const SwipeList = (props: IProps) => {
       )}
       refreshControl={
         <RefreshControl
-          refreshing={refreshing}
+          refreshing={loading}
           onRefresh={refreshData}
           colors={["#12c2e9", "#c471ed", "#f64f59"]}
         />

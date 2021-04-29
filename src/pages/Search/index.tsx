@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 17:34:52
- * @LastEditTime: 2021-04-28 22:12:09
+ * @LastEditTime: 2021-04-29 09:35:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/Search/index.tsx
@@ -13,7 +13,6 @@ import {
   Animated,
   Pressable,
 } from "react-native";
-import { useDispatch } from "react-redux";
 import { useTheme, Text, IconButton, Surface } from "react-native-paper";
 import LinearGradient from "react-native-linear-gradient";
 import { useScrollToTop, useNavigation } from "@react-navigation/native";
@@ -23,7 +22,6 @@ import Genre from "@/assets/genre.json";
 import Screen from "@/components/Screen/index";
 import Headline from "@/components/HeadLine/index";
 import Title from "@/components/Title/index";
-import { fetchSearchResult } from "@/reducers/searchSlice";
 
 interface IGenreProps {
   image: string;
@@ -34,7 +32,6 @@ interface IGenreProps {
 
 const SearchScreen = () => {
   const ref = useRef(null);
-  const dispatch = useDispatch();
   const { colors, roundness } = useTheme();
   const navigation = useNavigation();
   useScrollToTop(ref);
@@ -61,7 +58,6 @@ const SearchScreen = () => {
    * @return {*}
    */
   const handleRenderItemPress = (item: IGenreProps) => {
-    dispatch(fetchSearchResult({ searchText: "test" }));
     navigation.navigate("Filter", item);
   };
 

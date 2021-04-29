@@ -1,48 +1,37 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 17:32:29
- * @LastEditTime: 2021-04-28 17:49:57
+ * @LastEditTime: 2021-04-29 12:36:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/Filter/index.tsx
  */
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { SongListContainer } from "@/pages/Search/components/SongListContainer/index";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useRoute } from "@react-navigation/native";
+import SongList from "@/pages/Search/components/SongsList/index";
 import Screen from "@/components/Screen/index";
-import EmptyPlaylist from "@/components/EmptyPlayList/index";
-import { IAppState } from "@/reducers/index";
-import { fetchSearchResult } from "@/reducers/searchSlice";
+import { fetchSearchDataById } from "@/reducers/searchSlice";
 
 const FilterScreen = () => {
   const dispatch = useDispatch();
   const route = useRoute();
-  const { songDatas } = useSelector((state: IAppState) => state.search);
 
-  const { title: genreTitle, image: genreImg }: any = route.params;
+  const { title, image, id }: any = route.params;
 
-  /**
-   * @description: 根绝分类参数获取搜索数据
-   * @param {*} async
-   * @return {*}
-   */
-  const fetchData = async () => {
-    // dispatch(fetchSearchResult());
-  };
-
-  if (!songDatas.length) {
-    return <EmptyPlaylist />;
-  }
+  useEffect(() => {
+    const collectionId: number = id;
+    dispatch(
+      fetchSearchDataById({
+        collectionId: collectionId,
+        pageNumber: 0,
+      })
+    );
+  }, []);
 
   return (
     <Screen>
-      <SongListContainer
-        songDatas={songDatas}
-        fetchData={fetchData}
-        title={genreTitle}
-        cover={genreImg}
-      />
+      <SongList genreInfo={{ title: title, cover: image, id: id }} />
     </Screen>
   );
 };

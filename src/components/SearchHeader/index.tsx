@@ -11,7 +11,7 @@ import { Searchbar, useTheme } from "react-native-paper";
 import { Keyboard, View, ViewStyle, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import useDebounce from "../../hooks/useDebounce/index";
-import { fetchSearchResult } from "@/reducers/searchSlice";
+// import { fetchSearchResult } from "@/reducers/searchSlice";
 
 interface IProps {
   containerStyle?: ViewStyle;
@@ -28,7 +28,7 @@ const SearchHeader = (props: IProps) => {
   const searchText = useDebounce(inputValue, 2000);
 
   useEffect(() => {
-    dispatch(fetchSearchResult({ searchText: searchText }));
+    // dispatch(fetchSearchResult({ searchText: searchText }));
   }, [searchText]);
 
   /**
