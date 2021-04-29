@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 17:19:55
- * @LastEditTime: 2021-04-28 10:10:35
+ * @LastEditTime: 2021-04-29 19:21:07
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放页面
  * @FilePath: /MusicProject/src/pages/Player/components/PlayerScreen/index.tsx
@@ -23,6 +23,7 @@ import { downloadSong } from "@/reducers/songSlice";
 import { IAppState } from "@/reducers/index";
 import { request } from "@/utils/fetch";
 import { addSongToCollection } from "@/api/index";
+import { showNotify } from "@/reducers/notifySlice";
 
 const PlayerScreen = () => {
   const navigation = useNavigation();
@@ -51,6 +52,8 @@ const PlayerScreen = () => {
     await request(addSongToCollection, {
       collection_id: collectionId,
       song_id: song_id,
+    })?.then(() => {
+      dispatch(showNotify({ content: "添加完成" }));
     });
     setDialogVisible(false);
   };

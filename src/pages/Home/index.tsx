@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-13 17:03:23
- * @LastEditTime: 2021-04-22 15:37:25
+ * @LastEditTime: 2021-04-29 19:19:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Home/index.tsx
@@ -27,9 +27,9 @@ const Home = () => {
         <OnlineSongs />
         <Divider />
 
-        <View>
+        {/* <View>
           <Text>测试</Text>
-        </View>
+        </View> */}
       </ScrollView>
     </Screen>
   );
