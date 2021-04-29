@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-28 11:51:53
+ * @LastEditTime: 2021-04-29 18:07:59
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
@@ -35,28 +35,29 @@ const SongsList = (props: IProps) => {
     playlistMetadata: ICollectionListItem;
     requestApi: IRequest;
   } = route.params;
+  const [page, setPage] = useState<number>(0);
   const [songDatas, setSongDatas] = useState<ISongItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const { id: userId } = useSelector((state: IAppState) => state.user.userInfo);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setSongDatas([]);
+    requestSongDatas({ pageNumber: 0 });
+  }, [playlistMetadata]);
 
   /**
    * @description: 请求歌曲列表数据
    * @param {*}
    * @return {*}
    */
-  const requestSongs = (params: { pageNumber: number }) => {
+  const requestSongDatas = async (params: { pageNumber: number }) => {
     const { pageNumber = 0 } = params;
-    return request(requestApi, {
+    await request(requestApi, {
       pageNumber: pageNumber,
       collectionId: playlistMetadata.collection_id || -1,
       user_id: userId,
-    });
-  };
-
-  useEffect(() => {
-    setSongDatas([]);
-    requestSongs({ pageNumber: 0 })
+    })
       ?.then((songRes: { msg: string; data: ISongItem[] }) => {
         const { data } = songRes;
         console.log("songRes", songRes);
@@ -67,7 +68,7 @@ const SongsList = (props: IProps) => {
       ?.catch((error) => {
         console.log(error);
       });
-  }, [playlistMetadata]);
+  };
 
   /**
    * @description: 播放所有歌曲，添加到播放队列
@@ -81,8 +82,13 @@ const SongsList = (props: IProps) => {
     dispatch(excutePlayingQueue());
   };
 
-  const onRefresh = () => {
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await requestSongDatas({ pageNumber: page + 1 });
     setRefreshing(false);
+    setPage((previous) => {
+      return previous + 1;
+    });
   };
 
   return (
