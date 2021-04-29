@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-22 17:43:59
- * @LastEditTime: 2021-04-29 12:43:19
+ * @LastEditTime: 2021-04-29 12:59:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/pages/Search/components/SongsList/index.tsx
@@ -55,8 +55,7 @@ const SongList = (props: IProps) => {
    * @return {*}
    */
   const addSongsToQueue = (songs: ISongItem[]) => {
-    console.log("songs", songs);
-    // dispatch(addToPlayingQueue(songs));
+    dispatch(addToPlayingQueue(songs));
   };
 
   /**

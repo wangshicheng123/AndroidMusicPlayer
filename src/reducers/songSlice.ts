@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-28 11:36:31
+ * @LastEditTime: 2021-04-29 12:54:57
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -62,8 +62,10 @@ export const cacheLoadSong = createAsyncThunk(
           method: "GET",
         },
       });
+      console.log("songPalyData", songPalyData);
       const song_path: string = songPalyData?.data[0]?.url || "";
       if (!song_path) {
+        thunkAPI.dispatch(showNotify({ content: "暂无播放源" }));
         return;
       }
       await TrackPlayer.load(song_path);
