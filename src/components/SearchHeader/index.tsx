@@ -1,9 +1,9 @@
 /*
- * @Author: your name
+ * @Author: wangshicheng
  * @Date: 2021-04-23 12:14:26
- * @LastEditTime: 2021-04-24 10:57:46
+ * @LastEditTime: 2021-04-29 16:20:40
  * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Description: 搜索输入框组件
  * @FilePath: /MusicProject/src/components/SearchHeader/index.tsx
  */
 import React, { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import { Searchbar, useTheme } from "react-native-paper";
 import { Keyboard, View, ViewStyle, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import useDebounce from "../../hooks/useDebounce/index";
-// import { fetchSearchResult } from "@/reducers/searchSlice";
+import { searchSongByKeyword } from "@/reducers/searchSlice";
 
 interface IProps {
   containerStyle?: ViewStyle;
@@ -28,7 +28,7 @@ const SearchHeader = (props: IProps) => {
   const searchText = useDebounce(inputValue, 2000);
 
   useEffect(() => {
-    // dispatch(fetchSearchResult({ searchText: searchText }));
+    dispatch(searchSongByKeyword({ keyWord: searchText }));
   }, [searchText]);
 
   /**

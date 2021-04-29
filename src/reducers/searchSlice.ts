@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-23 11:40:55
- * @LastEditTime: 2021-04-29 10:56:58
+ * @LastEditTime: 2021-04-29 16:33:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/reducers/seachSlice.ts
@@ -9,7 +9,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ISongItem } from "@/interface/index";
 import { request } from "@/utils/fetch";
-import { getSongByCollection } from "@/api/index";
+import { getSongByCollection, getSongByKeyword } from "@/api/index";
 
 export interface IInitialSearchState {
   songDatas: ISongItem[];
@@ -30,6 +30,12 @@ interface IParams {
   collectionId?: number;
   pageNumber?: number;
 }
+
+/**
+ * @description: 根据歌曲分类搜索歌曲
+ * @param {*}
+ * @return {*}
+ */
 export const fetchSearchDataById = createAsyncThunk(
   "search/fetchSearchResult",
   async (params: IParams, thunkAPI) => {
@@ -42,6 +48,31 @@ export const fetchSearchDataById = createAsyncThunk(
     const searchRes = await request(getSongByCollection, {
       collectionId: collectionId,
       pageNumber: pageNumber,
+    });
+    const searchSongDatas: ISongItem[] = searchRes.data;
+    return searchSongDatas;
+  }
+);
+
+/**
+ * @description: 根据关键字搜索歌曲
+ * @param {*}
+ * @return {*}
+ */
+export const searchSongByKeyword = createAsyncThunk(
+  "search/searchSongByKeyword",
+  async (
+    params: {
+      keyWord?: string;
+    },
+    thunkAPI
+  ) => {
+    const { keyWord } = params;
+    thunkAPI.dispatch(changeSearchLoadingStatus(true));
+    /* 初次加载先把之前的搜索结果状态清除 */
+    thunkAPI.dispatch(clearSearchSongs());
+    const searchRes = await request(getSongByKeyword, {
+      keyWord: keyWord,
     });
     const searchSongDatas: ISongItem[] = searchRes.data;
     return searchSongDatas;
@@ -81,6 +112,26 @@ const searchSlice = createSlice({
     );
     builder.addCase(
       fetchSearchDataById.rejected,
+      (state: IInitialSearchState) => {
+        state.songDatas = [];
+        state.loading = false;
+      }
+    );
+    builder.addCase(
+      searchSongByKeyword.fulfilled,
+      (
+        state: IInitialSearchState,
+        action: {
+          type: string;
+          payload: ISongItem[];
+        }
+      ) => {
+        state.songDatas = [...action.payload, ...state.songDatas];
+        state.loading = false;
+      }
+    );
+    builder.addCase(
+      searchSongByKeyword.rejected,
       (state: IInitialSearchState) => {
         state.songDatas = [];
         state.loading = false;

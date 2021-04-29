@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-26 18:14:11
- * @LastEditTime: 2021-04-28 11:45:40
+ * @LastEditTime: 2021-04-29 16:19:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/api/index.ts
@@ -79,6 +79,13 @@ export const addSongToHistory: IRequest = {
 
 export const getSongFromHistoryByUser: IRequest = {
   url: dev_api_prefix + "/song/getHistory",
+  config: {
+    method: "POST",
+  },
+};
+
+export const getSongByKeyword: IRequest = {
+  url: dev_api_prefix + "/song/keyWord",
   config: {
     method: "POST",
   },
