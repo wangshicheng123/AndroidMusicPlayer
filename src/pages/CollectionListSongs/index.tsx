@@ -1,13 +1,13 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-29 18:30:20
+ * @LastEditTime: 2021-04-29 19:02:40
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
  */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FastImage from "react-native-fast-image";
 import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import { Title, Button, Divider, Subheading } from "react-native-paper";
@@ -20,44 +20,35 @@ import EmptyPlaylist from "@/components/EmptyPlayList/index";
 import { ICollectionListItem, ISongItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
 import { getSongByCollection } from "@/api/index";
-import { request } from "@/utils/fetch";
+import { fetchSearchDataById } from "@/reducers/searchSlice";
+import { IAppState } from "@/reducers/index";
 
 interface IProps {
   route: any;
 }
 
 const CollectionListSongs = (props: IProps) => {
-  const [page, setPage] = useState<number>(0);
-  const [songs, setSongs] = useState<ISongItem[]>([]);
-  const dispatch = useDispatch();
   const { route } = props;
   const {
     collecetionListMetadata,
   }: {
     collecetionListMetadata: ICollectionListItem;
   } = route.params;
-  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState<number>(0);
+  const { songDatas, loading } = useSelector(
+    (state: IAppState) => state.search
+  );
 
   useEffect(() => {
-    requestSongDatas({ pageNumber: 0 });
+    dispatch(
+      fetchSearchDataById({
+        requestApi: getSongByCollection,
+        pageNumber: 0,
+        collectionId: collecetionListMetadata.collection_id,
+      })
+    );
   }, []);
-
-  /**
-   * @description: 获取歌单音乐列表数据
-   * @param {*} async
-   * @return {*}
-   */
-  const requestSongDatas = async (params: { pageNumber: number }) => {
-    const { pageNumber } = params;
-    return request(getSongByCollection, {
-      collectionId: collecetionListMetadata.collection_id,
-      pageNumber: pageNumber,
-    })?.then((songDatas) => {
-      if (songDatas?.data?.length) {
-        setSongs(songDatas.data);
-      }
-    });
-  };
 
   /**
    * @description: 播放所有歌曲，添加到播放队列
@@ -66,7 +57,7 @@ const CollectionListSongs = (props: IProps) => {
    */
   const handlePlayAll = () => {
     /* 添加歌单到播放任务队列 */
-    dispatch(addToPlayingQueue(songs));
+    dispatch(addToPlayingQueue(songDatas));
     /* 执行当前任务队列中的第一首歌 */
     dispatch(excutePlayingQueue());
   };
@@ -77,9 +68,13 @@ const CollectionListSongs = (props: IProps) => {
    * @return {*}
    */
   const onRefresh = async () => {
-    setRefreshing(true);
-    await requestSongDatas({ pageNumber: page + 1 });
-    setRefreshing(false);
+    dispatch(
+      fetchSearchDataById({
+        requestApi: getSongByCollection,
+        pageNumber: page + 1,
+        collectionId: collecetionListMetadata.collection_id,
+      })
+    );
     setPage((previous) => {
       return previous + 1;
     });
@@ -87,7 +82,7 @@ const CollectionListSongs = (props: IProps) => {
 
   return (
     <Screen>
-      {isEmpty(songs) ? (
+      {isEmpty(songDatas) ? (
         <EmptyPlaylist />
       ) : (
         <FlatList
@@ -114,7 +109,7 @@ const CollectionListSongs = (props: IProps) => {
               </View>
             </View>
           )}
-          data={songs}
+          data={songDatas}
           renderItem={({ item }: { item: ISongItem }) => (
             <SongContainer songData={item} />
           )}
@@ -122,7 +117,7 @@ const CollectionListSongs = (props: IProps) => {
           keyExtractor={(item, index) => index.toString()}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={loading} onRefresh={onRefresh} />
           }
         />
       )}

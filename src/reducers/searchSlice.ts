@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-23 11:40:55
- * @LastEditTime: 2021-04-29 17:50:50
+ * @LastEditTime: 2021-04-29 19:09:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/reducers/seachSlice.ts
@@ -10,6 +10,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ISongItem } from "@/interface/index";
 import { request } from "@/utils/fetch";
 import { getSongByCollection, getSongByKeyword } from "@/api/index";
+import { IRequest } from "@/utils/fetch";
 
 export interface IInitialSearchState {
   songDatas: ISongItem[];
@@ -29,6 +30,8 @@ const initialSearchState: IInitialSearchState = {
 interface IParams {
   collectionId?: number;
   pageNumber?: number;
+  user_id?: string;
+  requestApi: IRequest;
 }
 
 /**
@@ -39,17 +42,19 @@ interface IParams {
 export const fetchSearchDataById = createAsyncThunk(
   "search/fetchSearchResult",
   async (params: IParams, thunkAPI) => {
-    const { collectionId, pageNumber } = params;
+    const { requestApi, collectionId, pageNumber, user_id } = params;
     thunkAPI.dispatch(changeSearchLoadingStatus(true));
     /* 初次加载先把之前的搜索结果状态清除 */
     if (!pageNumber) {
       thunkAPI.dispatch(clearSearchSongs());
     }
-    const searchRes = await request(getSongByCollection, {
+    const searchRes = await request(requestApi, {
       collectionId: collectionId,
       pageNumber: pageNumber,
+      user_id: user_id,
     });
     const searchSongDatas: ISongItem[] = searchRes.data;
+    console.log("searchSongDatas", searchSongDatas);
     return searchSongDatas;
   }
 );

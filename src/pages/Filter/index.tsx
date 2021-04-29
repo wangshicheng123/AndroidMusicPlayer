@@ -12,6 +12,7 @@ import { useRoute } from "@react-navigation/native";
 import SongList from "@/pages/Search/components/SongsList/index";
 import Screen from "@/components/Screen/index";
 import { fetchSearchDataById } from "@/reducers/searchSlice";
+import { getSongByCollection } from "@/api/index";
 
 const FilterScreen = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const FilterScreen = () => {
     const collectionId: number = id;
     dispatch(
       fetchSearchDataById({
+        requestApi: getSongByCollection,
         collectionId: collectionId,
         pageNumber: 0,
       })

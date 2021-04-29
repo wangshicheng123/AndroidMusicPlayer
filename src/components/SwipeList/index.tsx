@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 18:30:50
- * @LastEditTime: 2021-04-29 18:34:51
+ * @LastEditTime: 2021-04-29 18:51:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/components/SwipeList/index.tsx
@@ -18,6 +18,7 @@ import ListSongHeader from "../ListSongHeader/index";
 import { ISongItem } from "@/interface/index";
 import { IAppState } from "@/reducers/index";
 import { fetchSearchDataById } from "@/reducers/searchSlice";
+import { getSongByCollection } from "@/api/index";
 
 interface IProps {
   genreInfo: {
@@ -50,6 +51,7 @@ const SwipeList = (props: IProps) => {
   const refreshData = () => {
     dispatch(
       fetchSearchDataById({
+        requestApi: getSongByCollection,
         collectionId: id,
         pageNumber: page + 1,
       })

@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-29 18:39:24
+ * @LastEditTime: 2021-04-29 18:58:53
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
@@ -19,8 +19,9 @@ import Screen from "@/components/Screen";
 import EmptyPlaylist from "@/components/EmptyPlayList/index";
 import { ICollectionListItem, ISongItem } from "@/interface/index";
 import { addToPlayingQueue, excutePlayingQueue } from "@/reducers/queueSlice";
-import { request, IRequest } from "@/utils/fetch";
+import { IRequest } from "@/utils/fetch";
 import { IAppState } from "@/reducers/index";
+import { fetchSearchDataById } from "@/reducers/searchSlice";
 
 interface IProps {
   route: any;
@@ -36,38 +37,22 @@ const SongsList = (props: IProps) => {
     requestApi: IRequest;
   } = route.params;
   const [page, setPage] = useState<number>(0);
-  const [songDatas, setSongDatas] = useState<ISongItem[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
   const { id: userId } = useSelector((state: IAppState) => state.user.userInfo);
+  const { songDatas, loading } = useSelector(
+    (state: IAppState) => state.search
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setSongDatas([]);
-    requestSongDatas({ pageNumber: 0 });
-  }, [playlistMetadata]);
-
-  /**
-   * @description: 请求歌曲列表数据
-   * @param {*}
-   * @return {*}
-   */
-  const requestSongDatas = async (params: { pageNumber: number }) => {
-    const { pageNumber = 0 } = params;
-    await request(requestApi, {
-      pageNumber: pageNumber,
-      collectionId: playlistMetadata.collection_id || -1,
-      user_id: userId,
-    })
-      ?.then((songRes: { msg: string; data: ISongItem[] }) => {
-        const { data } = songRes;
-        setSongDatas((previous: ISongItem[]) => {
-          return [...previous, ...data];
-        });
+    dispatch(
+      fetchSearchDataById({
+        requestApi: requestApi,
+        pageNumber: 0,
+        collectionId: playlistMetadata.collection_id || -1,
+        user_id: userId,
       })
-      ?.catch((error) => {
-        console.log(error);
-      });
-  };
+    );
+  }, [playlistMetadata]);
 
   /**
    * @description: 播放所有歌曲，添加到播放队列
@@ -82,9 +67,14 @@ const SongsList = (props: IProps) => {
   };
 
   const onRefresh = async () => {
-    setRefreshing(true);
-    await requestSongDatas({ pageNumber: page + 1 });
-    setRefreshing(false);
+    dispatch(
+      fetchSearchDataById({
+        requestApi: requestApi,
+        pageNumber: page + 1,
+        collectionId: playlistMetadata.collection_id || -1,
+        user_id: userId,
+      })
+    );
     setPage((previous) => {
       return previous + 1;
     });
@@ -127,7 +117,7 @@ const SongsList = (props: IProps) => {
           keyExtractor={(item, index) => index.toString()}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl refreshing={loading} onRefresh={onRefresh} />
           }
         />
       )}
