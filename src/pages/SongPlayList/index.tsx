@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-29 18:07:59
+ * @LastEditTime: 2021-04-29 18:39:24
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
@@ -60,7 +60,6 @@ const SongsList = (props: IProps) => {
     })
       ?.then((songRes: { msg: string; data: ISongItem[] }) => {
         const { data } = songRes;
-        console.log("songRes", songRes);
         setSongDatas((previous: ISongItem[]) => {
           return [...previous, ...data];
         });
