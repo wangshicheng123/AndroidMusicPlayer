@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 18:35:24
- * @LastEditTime: 2021-04-29 13:08:27
+ * @LastEditTime: 2021-04-29 17:31:48
  * @LastEditors: Please set LastEditors
  * @Description: 歌曲的播放状态集合
  * @FilePath: /MusicProject/src/pages/SongPlayList/songSlice.ts
@@ -133,9 +133,44 @@ export const initializeTrackPlayer = createAsyncThunk(
       /* 可以监听设备的前进后退事件 */
       subscription = DeviceEventEmitter.addListener("media", function (event) {
         if (event == "skip_to_next") {
-          thunkAPI.dispatch(skipToNext());
+          const {
+            queue: { playingQueue },
+            config: { repeatStatus },
+            song: { currentSong },
+          }: any = thunkAPI.getState();
+
+          /* 不循环，直接暂停 */
+          if (repeatStatus === "repeat-off") {
+            thunkAPI.dispatch(pause());
+          }
+
+          /* 循环当前歌曲播放 */
+          if (repeatStatus === "repeat-one") {
+            thunkAPI.dispatch(cacheLoadSong({ songData: currentSong }));
+          }
+
+          /* 循环播放队列中所有歌曲 */
+          if (repeatStatus === "repeat-all") {
+            /* 如果播放队列中没有歌曲，或者如果队列中存在一首歌并且是当前播放歌曲， 则循环播放当前歌曲, */
+            if (
+              !playingQueue.length ||
+              (playingQueue.length === 1 &&
+                playingQueue[0].song_id === currentSong.song_id)
+            ) {
+              thunkAPI.dispatch(cacheLoadSong({ songData: currentSong }));
+            } else {
+              thunkAPI.dispatch(skipToNext());
+            }
+          }
         } else if (event == "skip_to_previous") {
-          thunkAPI.dispatch(skipToPrevious());
+          const {
+            queue: { playingQueue },
+          }: any = thunkAPI.getState();
+          if (playingQueue.length <= 1) {
+            thunkAPI.dispatch(pause());
+          } else {
+            thunkAPI.dispatch(skipToPrevious());
+          }
         } else if (event == "completed") {
           thunkAPI.dispatch(pause());
         } else {
