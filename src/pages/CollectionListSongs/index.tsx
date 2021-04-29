@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-18 15:17:59
- * @LastEditTime: 2021-04-29 12:41:10
+ * @LastEditTime: 2021-04-29 18:30:20
  * @LastEditors: Please set LastEditors
  * @Description: 音乐播放列表页面
  * @FilePath: /MusicProject/src/pages/SongPlayList/index.tsx
@@ -27,6 +27,7 @@ interface IProps {
 }
 
 const CollectionListSongs = (props: IProps) => {
+  const [page, setPage] = useState<number>(0);
   const [songs, setSongs] = useState<ISongItem[]>([]);
   const dispatch = useDispatch();
   const { route } = props;
@@ -38,12 +39,25 @@ const CollectionListSongs = (props: IProps) => {
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    request(getSongByCollection, {
-      collectionId: collecetionListMetadata.collection_id,
-    })?.then((songDatas) => {
-      setSongs(songDatas.data);
-    });
+    requestSongDatas({ pageNumber: 0 });
   }, []);
+
+  /**
+   * @description: 获取歌单音乐列表数据
+   * @param {*} async
+   * @return {*}
+   */
+  const requestSongDatas = async (params: { pageNumber: number }) => {
+    const { pageNumber } = params;
+    return request(getSongByCollection, {
+      collectionId: collecetionListMetadata.collection_id,
+      pageNumber: pageNumber,
+    })?.then((songDatas) => {
+      if (songDatas?.data?.length) {
+        setSongs(songDatas.data);
+      }
+    });
+  };
 
   /**
    * @description: 播放所有歌曲，添加到播放队列
@@ -57,8 +71,18 @@ const CollectionListSongs = (props: IProps) => {
     dispatch(excutePlayingQueue());
   };
 
-  const onRefresh = () => {
+  /**
+   * @description: 下拉刷新音乐列表数据
+   * @param {*} async
+   * @return {*}
+   */
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await requestSongDatas({ pageNumber: page + 1 });
     setRefreshing(false);
+    setPage((previous) => {
+      return previous + 1;
+    });
   };
 
   return (

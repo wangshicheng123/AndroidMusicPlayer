@@ -1,7 +1,7 @@
 /*
  * @Author: wangshicheng
  * @Date: 2021-04-22 18:30:50
- * @LastEditTime: 2021-04-29 18:12:46
+ * @LastEditTime: 2021-04-29 18:34:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /MusicProject/src/components/SwipeList/index.tsx
@@ -51,7 +51,7 @@ const SwipeList = (props: IProps) => {
     dispatch(
       fetchSearchDataById({
         collectionId: id,
-        pageNumber: page,
+        pageNumber: page + 1,
       })
     );
     setPage((previous: number) => {
